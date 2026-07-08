@@ -1,0 +1,1147 @@
+# V:DA Char summary and stats
+
+V:DA Char summary and stats - XP, Adventure Log
+
+SESSION LOG
+
+# of players
+
+O grupo recebeu a aparição e as cartas dos seus senhores para irem até Vienna, viajaram até lá e foram encaminhados pelos guardas do príncipe para uma determinada estalagem na qual vários outros vampiros estavam. Se alimentaram e dormiram.
+
+No segundo dia, cada um fez coisas diferentes até irem em direção da praça principal e na igreja de St Stephen onde havia um palco armado para queimar um pagão. Este pagão na verdade escapou virando névoa, deixando todos em panico e o grupo seguiu essa névoa.
+
+Seguindo a névoa entre os becos, foram supreendidos por um grupo Anda e teve combate. Antes do fim usaram Dominate no lider do grupo e concluíram que era apenas um chamariz para que outros ataques rolassem na cidade. Ao voltar para a estalagem, todos os vampiros estavam mortos e apenas Valquiria conseguiu se esconder junto do cavalo do Octavian. Vitas age isolado do grupo e após alvejar um vampiro Anda comete sua primeira diablerie.
+
+Se reagruparam na estalagem e enquanto decidiam o que fazer, foram abordados por um servo do Jurgen chamado Wilfred que os entregou cartas nomeadas. Nesta carta Jurgen os pede para irem até a Itália conseguir falar com os lords vampiros locais e pedir reforços para o contra ataque contra os Anda.  Após isso decidiram visitar o palacio Liechtenstein para tentar pegar outras pistas que pudessem estar por lá. Chegando no local encontraram Kasper, que os avisou que a região ainda não está segura e somente os carniçais estão por lá limpando todos os destroços.
+
+Entraram no castelo, encontraram dois mongois roubando documentos. Rolou porrada e conseguiram impedir que os Anda escapassem. Vitas comete a segunda e terceira diablerie em cima dos Anda. As cartas contavam dos assuntos do concílio e detalhava as agendas que cada príncipe visitante estava propondo em troca de suporte mútuo. Vladislav age isolado do grupo e após se alimentar de um carniçal, é supreendido por 2 Andas no meio do mato e se transforma em Zulo, um deles é diablerizado e o outro conseguiu escapar. Reforços Anda chegam ao castelo.
+
+Castelo Liechtenstein, Austria
+
+Vladislav chega a tempo de avisar dos reforços e o grupo tem tempo para preparar dentro dos muros do castelo uma emboscada para o grupo de 5 Anda que chegou a cavalo. Com uso de Animalismo, os Anda percebem a emboscada e engajam em um combate longo no qual conseguem a vitoria com a participação de Kaspar. Vladislav diableriza 2 e Vitas diableriza 3 Andas (entre eles o lider). Vitas é repreendido por Kaspar, resultando em Vitas e Vladislav matando Kaspar e o Vitas o diablerizou.
+
+Castelo Liechtenstein, Austria
+
+Ainda no castelo, Octavian partiu para fazer contato com Kaspar e contar tudo (menos a diablerie). Kaspar ofereceu e Octavian passar reportes semanais do que o grupo estava fazendo em nome de não condenar os diableristas imediatamente. O grupo parte para Graz, encontra o padre Theodor que os proveu um lugar para dormir e uma charrete dirigida pelo seu ghoul Arnold. Chegando em Veneza, exploraram a cidade e na praça de são marco visitaram a feira para adquirir algumas armas de prata. Encontraram alguém que os botaria em contato com Iacomo e o contato arrumeu convites para o baile que o Iacomo vai dar.
+
+Octavian e Owen foram à festa do Iacomo, onde conheceram Matteo seu braço direito. Oferecendo os próprios serviços como moeda para ganhar o apoio de Iacomo, ele menciona duas missões: eliminar Anatólio, o gárgula que causa distúrbios na cidade e ainda que sequestrem a princesa Helena, membra da corte de Jacopo (doge of Venice). Ao conseguirem um rastro do gárgulo, o grupo o segue até sua caverna sub aquática, onde Viktor consegue chegar e estabelecer um diálogo. Para que o gárgula abandone a cidade, ele aceita receber o direito de vingança sobre o padre Angelo e irá se juntar ao grupo para a ação.
+
+O grupo debate sobre as possíveis formas de se resolver as demandas do Iacomo. Se aproximaram do palácio e buscaram possíveis entradas. Owen usando dominação convenceu um dos guardas de abrir o portão, os deixando passar para o pátio interno do palácio do duque. Owen usou dominação em um cardeal que passava e descobriu a localização aproximada do Inquisidor e da princesa Helena. Ao final, ao perceber que estava sendo manipulado, o cardeal Danilo estende a mão com o anel da igreja e Owen, surtado, decepa os dedos do cardeal e leva o anel embora. Com outro truque de dominação manteve o cardeal catatônico por algum momento. Vitas chama todos os morcegos da região e os faz voar dentro do pátio interno apagando todas as tochas.
+
+Com a escuridão instalada e uma galera em panico, o grupo se deslocou até o segundo andar onde estava rolando a festa. Enquanto os guardas se aproximavam, Vitas convocou todos os ratos da região e os fez correr pelo pátio e salão de festas. Para identificar Helena, aos poucos foram isolando as suspeitas até que durante o movimento de pânico o gárgula Anatolio mergulha pela janela e sequestra a Helena, voando com ela até o seu esconderijo. O grupo se mescla com a multidão e com mais dominação do Owen conseguem sair do palácio. Se reencontram no esconderijo e interrogam Helena com dominação. Ela revela alguns segredos do Inquisidor como o fato dele curtir os  meninos do coral e que a noite vai dormir na ilha em frente ao palacio. Vitas fez uma leve espionagem e conseguiu identificar qual o horário usual e o barco que ele toma nesse trajeto. Anatolio se encarrega de sequestra-lo do barco e leva-lo até o esconderijo onde o grupo irá realizar um interrogatório.
+
+Encontraram Iacomo para entregar a princesa, abriram o jogo em relação ao Anatolio estar se juntando ao grupo e saíram de Veneza. Quando foram buscar seus cavalos/carruagem, foram emboscados por uma party de cruzados de Veneza que abertamente pediram para entregar Vitas. O combate foi vencido e todos recuperaram o sangue.
+
+Interrogaram o capitão e descobriram que a Igreja Ortodoxa e o Papa Cyril estão por trás dessa perseguição a Vitas. Octavian manda primeira carta X9 contando do sucesso nas missões do Iacomo e a chegada do Anatolio, sem dar muito mais detalhes. Seguiram viagem até Firenze e fizeram reconhecimento aéreo da cidade. Octavian usou o call center e conseguiu algumas referências para encontrar o Ludovico. Ao se aproximarem de uma feira noturna, Vitas conseguiu identificar uma mulher. Ao segui-la até uma area mais afastada, percereberam que é uma cainita que se apresenta como Genoveva (Capadocian). Inicialmente ela age de forma neutra pra conhecer o grupo e no final se revela Guelph e pergunta se gostariam de se juntar a ela e o seu grupo (Brujah,Lasombra,Setita) para depor Ludovico. E se fossem ficar do lado deles deveriam dormir no lugar apontado.
+
+Na mesma noite, o grupo decide voltar à busca do Ludovico. Anatolio sobrevoou a região, encontrou outro cainita se alimentando em uma igreja e questionou onde poderia encontrar o ludovico. Em uma área afastada da cidade acontecia uma reunião entre ele e outros cainitas. O grupo se aproximou no fim da reunião e se apresentaram. Ele pediu para acompanha-lo até sua residência e lá poderia fazer uma reunião mais longa e escutar o q tinham a dizer.
+
+Após longo debate sobre como deveriam se posicionar, decidiram que inicialmente não mencionariam a Genoveva e o ataque iminente. Dormiram nos territórios da Genoveva para mostrar que estavam ao lado dela. Houve menção de que poderiam esperar Ludovico sair com seus campeões da cidade para que ficasse fácil para Genoveva tomar controle, porém ela estava decidida que iria no dia seguinte. No início do próximo dia. foram ao encontro de Ludovico as pressas para avisar do ataque. Se deslocaram até o jardim atrás do palácio do Ludovico, onde Genoveva, Adela, Aurelia, Tomas e companhia estavam os esperando acompanhados de um exercito de undeads. Houve uma tentativa de diplomacia, mas o confronto será inevitável.
+
+Uma turba se aproximou do palacio do Ludovico, manipulados na hora certa para influenciar o ataque que acontecia. As defesas do palacio e Ludovico tiveram que focar em resolver esse problema enquanto nos jardins atrás do palacio a batalha tb começou. A vantagem numérica intimidou a coterie, mas um ataque coordenado na Genoveva conseguiu derruba-la e virar o combate a seu favor. O templario Tomas ainda sim consegue desferir golpes em Vitas até tacá-lo em torpor. A batalha estava vencida e Ludovico vem caminhando em direção a coterie acompanhado de guardas.
+
+Ludovico aprisiona os dois vampiros sobreviventes (Genoveva e Adela\[setita\]) e agradece a coterie pela ajuda fundamental na defesa. Ele os acolhe no Palacio, distribui alimento a todos e conversa sobre Salvatore, a espada e o livro que deverão ser recuperados de Monteriggioni. A cidade, guardada pelo Conde Henricus Germanus e sua coterie, é na verdade uma pequena fortaleza e abriga parte dos exércitos de Siena (uns 300 soldados armados, + a população que trabalha para manter a fortaleza dá uns mil). Os muros são relativamente altos e possuem em torno de 12 torres. A muralha norte da cidade não tem torres (já que há um barranco que deixa a invasão por esse canto mais difícil) e há constante patrulha em torno de todo o perímetro.
+
+O grupo invade cidade divido em duas partes: Owen e frangas entram a cavalo com o Dominate no contexto de ser um bispo da igreja, o restante entrou invisivel escalando a muralha menos guardada. Owen é acompanhado pelo guardas e recebido por um padreco qualquer, que recebe a papelada e confere tudo até chamar o padre Timoteo que é o lider religioso local. Vitas usa animalismo para invocar uma multidao de ratos, focados na taverna principal da fortaleza, causando certo panico e ultimamente um incendio. Esse caos atrai Salvatore que é acompanhado de uma figura guerreira feminina e liga o alerta da fortaleza colocando todos os guardas em prontidão para combater o fogo.
+
+Monteriggioni
+
+Enquanto Owen conversa com o padre Timoteo, o grupo se empenha em localizar Salvatore. Octavian se reforça com o ritual de baixar geração e vai sem invisibilidade ao encontro do Salvatore e consegue ludibria-lo usando dominate a segui-lo até a igreja. Ele reune alguns soldados para acompanha-lo na igreja, mas Octavian novamente usa dominate para que Salvatore entre na frente dos soldados, facilitando o ataque surpresa de Vladlislav que se supreende ao enfrentar Salvatore, que se revela ser setita. Enquanto Octavian e Vitas lidam com os dois guardas, Vladislav usa vicissitude para subjugar Salvatore. Eles limpam o local e levam o corpo do Salvatore para a salinha da igreja para iniciar o ritual para tirar o blood bond do Salvatore.
+
+Monteriggioni
+
+Octavian inicia o ritual em Salvatore e precisava de aproximadamente 2horas para completar. Vladislav e Vitas se entocam na igreja e em stealth matam duas patrulhas que estavam a procura de Salvatore. Mantiveram o controle até já nos momentos finais do ritual, quando dois vampiros apareceram (Nerea e Zeidan) e junto de varios soldados entraram na igreja e o combate começou. Vladislav e vitas derrubam vários soldados e ganham um tempo. O ritual se encerra em meio a tudo isso, Salvatore acorda, percebe a bagunça e puxa uma fuga. mas Nerea conseguiu se aproximar de Vladislav e desferiu dois golpes que o colocaram em torpor. Em fuga, o corpo de vladislav na forma de monstro é carregado. Enquanto isso, Owen termina de dominar o padre Timoteo e o coloca para procurar o livro. Seguindo o padre até a casa principal do Conde, ele usa dominate para passar dos guardas e dominar uma serviçal para guia-lo pela casa. Ela revela um salão trancado e o leva até lá. Owen quebra o cadeado e deixa a serviçal entrar na sua frente com a iluminação, mas ela pisa em uma armadilha e morre ali. Ele encontra a espada mágica, umas 10 flechas especiais e uma cota de malha superior. Então Owen segue para a livraria, onde Timoteo ainda revirava e estava acompanhado de Adolfo filho do conde (mas que era mortal). Owen também o manipula para uma busca sobre o imperio mongol, mas é Timoteo que acha um livro escondido que satisfazia a descrição. Owen escapa do palacio e é encontrado por Valkyria  que o poe no cavalo e bate em retirada pelo portao (que estava aberto pq uma tropa tinha acabado de sair). Valkyria segue os rastros do grupo até avista-los no rio.
+
+Monteriggioni
+
+O grupo se reencontra e conta as histórias enquanto seguem de barco para Florença. Lá, encontram uma recepção de Ludovico que os favorece partir em viagem na noite seguinte. Ludovico oferece contrato de vassalagem ao grupo, para que se tornem parte da corte (sem direito a terras ainda).
+
+Partem na viagem de volta a Vienna. Tudo vai bem no caminho até a subida pela parte final dos Alpes, onde a estrada se estreitava. Um grupo de bandidos derrubou uma arvore que interrompeu a passagem e cercou a carruagem. A coterie engaja os bandidos que afinal eram mortais e foram rapidamente despersos em panico após exporem os poderes vampíricos, e segue viagem. Em Graz, uma parada planejada, avistam fogo à distancia. Encontram o monastério do padre Theodor em chamas e nenhum sobrevivente, até avistarem alguns Anda que terminavam de matar os últimos sobreviventes. Rola porrada e Vitas é displicentemente abatido. O resto do grupo com a ajuda de Salvatore se encarrega do resto, com destaque para performance X-man de Octavian - que tb é protagonista de uma falha crítica no self control depois de sugar o sangue de 3 vampiros seguidamente que o deixa em frenesi ao ponto de cometer uma diablerie. Owen recupera alguns documentos da igreja local. Eles ignoram Arnold e Theodor e não tentam encontra-los fora da igreja.
+
+Chegando em Vienna, na estarada são interpelados por Klaus (com mesmas vestimentas e possível sucessor de Kaspar). Ele os recebe, mencionando que Vienna foi saqueada pelos mongois mortais (além dos Anda) e os leva ao esconderijo da fazenda onde os lideres cainitas estão no momento. Wilfred encontra o grupo e fala do conselho de guerra, uma reuniao q vai acontecer entre jurgen e seus 8 lideres. Na reunião, Jurgen revela o tamanho do exercito que todos trouxeram e os planos de revidar o ataque dos mongóis. Comenta do general Baksa (mortal) com seu exército de 5 mil, mais as tropas lideradas pelos vampire lords de menos de 2 mil, contra 15 mil mongois (80% a cavalo). Owen inscreve Vladislav para o torneio de justa no dia seguinte. O local será o castelo Spis na Slovakia e uma viagem de 4 dias até lá.
+
+Vladislav enfrenta seus oponentes no torneio de justa, conseguindo duas vitórias apertadas até chegar a final onde conseguiu vencer o campeão de Jurgen por uma vantagem mínima no desempate. Com os louros, partem em direção ao castelo. Para evitar maiores riscos, o grupo acompanha o exército e chega no castelo sem problemas. Lá, são alocados para lutar no flanco direito. Enfrentam mongóis mortais e não tem muitos problemas para abater uma primeira unidade. Avisatam Anatolio nos céus fazendo scout e devolvendo informação a Jurgen, que comanda o exército e toca a buzina para reposicionar as tropas vampiricas atrás dele. Ao se aproximar, o grupo percebe que há um grupo de Andas diretamente engajado com Jurgen e alguns de seus generais.
+
+O grupo engaja no combate com outros vampiros Anda bem no olho do furacão da batalha. Alguns golpes são desferidos mas a qualidade dos dois lados foi extendendo a batalha. As coisas esquentam quanto na unidade que batalhava ao lado, liderada por Iacomo, sofre uma baixa quando Matteo foi decepado por um general Anda. Para igualar, Vladislav consegue impalar um general Anda e abate-lo completamente. A batalha esquentava quando Anatolio apareceu para compartilhar notícias de que havia localizado Subutai dentro do castelo e que as ordens de Jurgen eram para que o grupo abandonasse esta batalha para ir até o Castelo e tentar eliminar Subutai o quanto antes.
+
+Spis Castle, Slovakia
+
+Após um debate o grupo acata os comandos de Jurgen e se destacam para ir até o Castelo. No caminho, Anatolio é atingido por uma flecha de fogo e cai em algum lugar dentro das muralhas do Castelo. O corvo familiar do Octavian faz um scout em torno do castelo e localiza Anatolio dentro do terceiro anel de muros. O grupo decide forçar entrada pelo portão principal, utiliza os poderes para entrar desapercebidos, encontram um vampiro dentro da torre do portão e este foge rapidamente em formato de névoa. Conseguem permanecer indetectados por tempo suficiente para que Vitas localize Anatolio e os ludibriasse os guardas para que carregassem o corpo até a torre do portão para tira-lo de lá. Em pouco tempo os alarmes tocam e quando reforços estavam chegando, o grupo consegue sair pelo portão e levar Anatolio até Octavian para acelerar sua cura agravada.
+
+Spis Castle, Slovakia
+
+Para cumprir o objetivo de localizar Subutai, o grupo segue do lado externo a procura de uma entrada. Após um período de investigação, localizam uma porta do outro lado, na base da montanha. Se infiltraram pelas escadarias, eliminaram alguns guardas e encontraram um salão repleto de barris de óleo. Se esgueiraram pelos andares intermediários do castelo (dentro da montanha), por diferentes caminhos e scouteando diferentes comodos.
+
+Spis Castle, Slovakia
+
+Continuaram a exploração até localizar um salão que dava acesso ao prédio principal do topo do castelo. Utilizando Animalismo, Vitas denunciou a posição do grupo. Ao som das pegadas de Subutai descendo as escadas com sua armadura pesada, uma névoa densa rapidamente encheu o ambiente, até brilharem olhos vermelhos que se revelaram 4 mongois vampire lords altamente picas. Após uma conversa, o combate se inicia. Os 4 inimigos praticamente não recebem nenhum ataque considerável mas já tinham danificado Owen e Vitas significativamente,
+
+Spis Castle, Slovakia
+
+A batalha contra Subutai e os 4 lords mongois se extende até o limite do alvorecer. Faltando poucos minutos para os primeiros raios atingirem o salão, a batalha não estava favorável até que Vladislav acerta um golpe forte o suficiente para tombar Subutai, arrancando parte da cabeça e capacete, revelando um pescoço mordido. Ele era nitidamente mais fraco que os demais vampiros, logo deduz-se que foi abraçado recentemente. Os lordes mongóis escapam em nevoa, e uma aparição guia o grupo até uma gruta atrás de uma porta escondida.
+
+Spis Castle, Slovakia
+
+Epilogo: Tomaram rumo de Vienna, reencontraram Jurgen e os demais sobreviventes. Jurgen estende as opções de contrato: (1) Oferta de Florença para serem da corte, (2) condado de Graz (igreja dos papeis do Owen), subservindo o Príncipe local, (3) Terras ao norte de Vienna com autonomia,  ? (nome do Crusader Kings). Parte do contrato era entrar em torpor com Jurgen até o próximo chamado)
+
+Prologo segunda temporada. Chegando no condado de Mikulov, investimentos que cada vampiro fariia com tempo, militar, mistico e etc , noticias da inquisicao
+
+Começando a segunda temporada, a coterie é convidada por Wilfred para visitar Vienna. O pequeno elísio juntou a coterie, Wilfred e seus asseclas Neferata, Klaus, além dos príncipes Iacomo e (quem é de florença?) e seus asseclas. Cobriu temas como Inquisição e Anarquistas (cainitas), até que foram interrompidos com notícia de ataques dentro do domínio - um vampiro da casa de Wilfred e alguns carniçais foram caçados e exterminados por um grupo de Inquisidores. A coterie sai imediatamente a cavalo para rastrear os inquisidores e lidar com eles
+
+Vitas com dificuldade no Animalismo não conseguiu rastrear o comboio de inquisidores que escapava em direção da Bulgaria. Havia uma outra força cainita também manipulando os animais da região, mas consegue achar a localização final em um monastério em Bélapátfalva na Hungria
+
+Belapatfalva, Hungria
+
+O grupo se aproxima do monastério nos stealth, até perceber que haviam duas ordens religiosas distintas: os Cistercianos (de roxo) e os papais romanos (de vermelho), iniciam o combate com alguns até que o alarme é tocado
+
+Belapatfalva, Hungria
+
+Enquanto grande parte dos religiosos escapava da abadia, terminam a batalha contra os paladinos e monges. Owen interroga o paladino e o mantém sob dominação. Lutz encontra cartas do Papa, livro da sociedade de leopoldo e livro taumaturgico. Observam um lobisomem que tinha sido capturado se libertar e partir para a floresta
+
+Belapatfalva, Hungria
+
+Após batalha dramática onde raios divinos partiram do cajado sagrado do Inquisidor, derrubando Octavian, o restante da coterie se aproxima e realiza a execução do Inquisidor que se revela também ser carniçal de algum vampiro e menciona o nome da Duquesa Shagraa
+
+Belapatfalva, Hungria
+
+Juntaram evidencias sobre o grupo de inquisidores e partiram pra Viena. No palacio de Wilfred
+
+São apresentados a Lotharius, contam tudo que viram inclusive mencionam o nome da Duquesa Shagraa. As acusações são recebidas e Karl Schrekt irá realizar uma investigação maior. Lotharius tem planos mais urgentes e pede pra buscar um artefato em Constantinopla pois há risco de cair em mão erradas
+
+Partiram de Viena de barco pelo Rio Danubio, fizeram uma parada em Belgrado no Mercado onde aprenderam a atirar com arcabuz, renovaram armamentos e deixaram um encomenda de armadura para Vlad
+
+Navegaram o Mar Negro, se aproximaram de Constantinopla e depois de serem abordados por um barco scout Otomano, Owen convence ocapitão a ceder uma bandeira otomana pra poderem navegar em paz
+
+Constantinople
+
+Procuraram o mercante de pergaminhos no bazaar, foram até a biblioteca dos esquecidos e conseguiram a informação de que a relíquia está  no hagia sophia e existem as 3 chaves
+
+Constantinople
+
+Exploram a cidade, pensam no plano de como obter as chaves, Se infiltram no Grand Palace e ativam uma armadilha de fogo
+
+Constantinople
+
+Invadem os aposentos do Imperador, eliminam e evaporam 2 guardas e conseguem rende-lo com uso de disciplinas para pegar sua chave, e conseguem fugir. Vão atrás do General Giovani e o encontram na mura-lha. Utilizando mascara de mil faces Vitas consegue enganar Giovani a lhe dar a chave, enquanto o bombardeio detona outra seção da muralha
+
+Constantinople
+
+Encerram a cena na muralha, pegam a chave, vão para o subterraneo , onde um grupo de mercenarios ghouls estava fazendo busca e matam todos com ajuda de Malaquias
+
+Constantinople
+
+Malaquias os encaminha para a Hagia Sophia e segue para procurar seus irmãos de sangue desaparecidos, a coterie encontra multidões de fieis fazendo missa e do lado de fora. Para causar caos na cidade, Vitas chamou milhoes de ratos enquanto Owen e Gabor influenciam alguns fanáticos a distribuirem notícias sobre o fim do mundo. A coterie aproveita o cenário caótico para entrar na área de fé verdadeira. O papa Atanasius dá sua prece enquanto Vitas, invisível, mira pacientemente esperando o momento certo para atacar
+
+Constantinople
+
+A flecha de Vitas foi desviada pela mão de Deus, mas o Patriarca foi atingido. Owen, Lutz e Gabor tentam encenar que ajudariam a atender aos ferimentos, mas logo Octavian começa a usar o caminho do sangue abertamente e causar estado de alarme dentro da igreja. Após eliminar alguns dos paladinos e monges, o restante dos guardas se acumulam na saída externa e no corredor de acesso a passagem protegida para o subterraneo
+
+Constantinople
+
+Eliminam os ultimos guardas antes de descer e vasculhar os andares inferiores. Até achar um elevador de cordas que leva até o subterraneo  e a porta da tumba. Usam as 3 chaves e se deparam com um grupo de cainitas guardando o artefato. Após argumentação de ambos os lados e falta de acordo, o combate é iminente
+
+Constantinople
+
+Na tumba do Patriarca, em combate árduo e com 2 falhas críticas no principal poder do boss,a coterie vence o embate, mata Mantas e se prepara para diablerizar o restante
+
+Constantinople
+
+Diablerizam os 3 que sobraram e ativam o artefato, Owen sai carregando o anel de ferro de 50 kg quente que dá dano. Veem a lua de sangue e partem pra procurar o barco. Acham um pedaço da muralha norte caída com um grupo de janissarios invadindo, enquanto o eclipse da Lua Sangrenta aguça seus poderes
+
+Constantinople
+
+Enquanto buscavam uma rota de saída da cidade de volta ao local do barco, enfrentaram o grupo de janissarios e então dois demonios aparecem de um lado, e um grupo de soldados da igreja vem do outro/. O anel esquenta na mão de Owen que o larga temporariamente
+
+Constantinople
+
+A pancadaria continuou na tentativa de escapar da cidade, além dos dois demonios que tinham aparecido e da tropa da igreja que se aproximava, outros dois grupos apareceram na cena para tentar se apropriar da argola 'tranca demonio': um grupo de assamitas aparentemente ligados aos Otomanos, e um grupo de vampiros de manto negro que não foi identificado. Acabou rolando uma porradaria pentagonal, meio q cada grupo por si dando porrada nos outro. Até que Anatolio apareceu nos céus localizando o grupo e guiando o barco que vcs vieram até a parte da muralha onde vcs tavam, daí Vlad e Salvatore ajudaram a resgatar a argola e vcs pra dentro do barco e meter o pé enquanto Constantinopla terminava de ser invadida pelos otomanos terminou no caminho de volta pra casa, pararam em Belgrado pra pegar a encomenda do Owen (armadura pro Vlad) e enquanto remam em direção a Vienna, ficou em aberto a discussão se vão devolver o artefato pro Lotharius como tinha sido combinado ou algo diferente
+
+Constantinople
+
+O grupo volta a Vienna e encontra Wilfred logo no cais, curioso se a missão havia sido bem sucedida e desejando ver o artefato com os proprios olhos. São levados imediatamente a um dos palácios de Wilfred onde outros cainitas do conselho os aguardavam. Em recepção com polpa, Lotharius pede e o grupo entrega a reliquia e são homenageados de multiplas formas, de brindes de sangue e aplausos. Anuncia-se que Condessa Unorna era a real traidora e Shaagra foi inocentada. As propriedades de Unorna passarão as ser do grupo caso consigam encontra-la, captura-la e deporta-la para o novo mundo.
+
+Após a reunião em Vienna, o grupo coletou informações para iniciar sua busca. A coterie discute as informações obtidas, bem como o nome dos suspeitos, com Vitas e decide que irá cassar a Condessa Unorna a partir de onde ela desapareceu, então segue em direção ao condado de Znojmo. Passam em Mikulov primeiro, encontram Valkyria e Dorotha, se reequipam e partem para Znojmo. Chegando lá, observam uma fortaleza maior e mais bem defendida. Porém, com os poderes de Owen conseguem entrar na parte murada da cidade se passando por bispo e se aproximar do centro da cidade.
+
+"A chegada ao Castelo de Znojmo numa noite de chuva foi marcada pelos latidos agressivos dos cães que acompanham a guarda do castelo. Enquanto Owen condicionava o barão (mortal) Vlastimil a lhe entregar o controle da cidade, Vlad resolve tirar um cochilo. Lutz e Octavian foram atraídos pelo cheiro de sangue trazido pelo vento e descobrem que os animais apresentam hábitos canibais. A suspeita os leva para os túneis subterrâneos do castelo, onde o canil foi encontrado com muitos animais que não são de deus. Após Octavian confirmar que os cães tinham traços de vitae cainita, um cão enorme revenant parte para cima de Owen e rasga um pedaço do antebraço e danifica sua armadura sérvia. Lutz paraliza a besta e Owen se vinga cortando-lhe a cabeça. O barão menciona que os cães são criados nos domínios de lord Janoušek - nome de um Tzimisce reconhecido como comparsa da condessa Unorna."
+
+Uma carta de Ludovico da Firenze chega até o grupo, avisando da eminente chegada de um cainita mercenário que foi enviado para ajudar a conter a rebelião anarquista. Ezio chega em Znojmo e é recebido por Gabor e Octavian. O grupo parte de carruagem e cavalos em direção de Bitov, onde as pistas dizem que ficam localizados os domínios de Janousek. No caminho, uma tempestade forte dificulta a jornada ao ponto de quebrar uma roda da carruagem enquanto atravessavam um rio. Enquanto o carniçal cocheiro faz os reparos, ouve-se latidos de cachorros. Ao procurar nos entornos, são avistados vários olhos vermelhos e um rosnado agressivo.
+
+Os cães revenants atacam enquanto a carruagem é consertada. Os vampiros se defendem, mas Gabor e Octavian saem machucados com a mordida agravada. A coterie segue um cão que fugia até uma trilha que leva a um acampamento. Ezio se esgueira até a torre de observação e incapacita o guarda em silêncio. Com ajuda do corvo do Octavian sobrevoa o acampamento e identifica diversos soldados e caes infernais e um capitão
+
+Chamaram atenção para o portão principal ao explodir um barril de pólvora, enquanto avançavam pelo topo do morro e se aproximaram da torre. Gabor escutou planos de abandonar o local e ir se juntar ao resto do exército, e sobre soltar os demais cães carnicais. A coterie age e ataca os líderes carnicais, Owen toma uma lançada no peito mas consegue garantir a segurança da entrada da torre. Ao subir as escadas, Ezio se depara com um vampiro se transformando em morcego e fugindo da cena.
+
+Após a fuga de Janousek, Isla, a vampira gangrel escocesa decide trair os anarquistas e ajudar o grupo a encontrar Unorna e os demais. Ela menciona que o plano de retirada seria em direção a cidade de Slavonice onde se encontra a Abadia que é domínio de Dorina (principal aliada de Unorna). Ainda na torre, os carniçais que restaram começam a atear fogo nos andares baixos. Isla dá uma amostra da sua nova lealdade a enfrentar os próprios carnicais com quem trabalhara até então. Após encerradas as ameaças, o grupo comunica suas tropas para que capturem a torre. Após passarem uma noite em Bitov, partem para Slavonice e encontram a Abadia. De dentro dela, ouvem canções tocadas no órgão da capela. Gabor reconhece as melodias da heresia cainita. Ao entrarem viram um monstro Vozhd no altar da igreja, ao lado da abadessa Dorina que decora o ambiente com sombras do abismo. Janousek também se revela. Após tentar convencer o grupo de que os anarquistas são um aliados mais interessante, até Ezio levantar a espada e desafia-la. O combate se inicia e o que parecia ser o Vozhd e um demonio multi braço, na verdade era Condessa Unorna usando Quimerismo
+
+Após ataques dos cães, Gabor fica muito avariado. Owen tenta queimar Dorina para que não se transforme, sem sucesso. Janousek não consegue inflingir dano e é seriamente atingido, partindo em fuga. Dorina ao perceber que estava em inferioridade, também tenta fugir. Após complicar a batalha para Octavian, Dorina é dominada por Gabor que a põe sob controle. Do lado de fora, Ezio e Owen vão a captura de Unorna. Isla luta com Janousek e inicia seu diablerie. Dorina fala palavras doces para convencer Ezio e Owen de que é legal e tem mais a oferecer do que ser capacho do Hardestad. No final, a carruagem é atacada e outras figuras escapam com os cavalos, deixando o Coxeiro pendurado na carruagem
+
+Após derrotar os anarquistas na igreja de Slavovice, a coterie capturou a condessa Unorna e a abadessa Dorina utilizando os poderes de Owen e Gabor para convence-las a se deixar levar de forma pacífica. Outros três aliados da condessa presentes na lista escapam e desaparecem.  Isla demonstra sua recém descoberta lealdade ao grupo com a diablerie de Janousek e os auxilia a levar as prisoneiras para seu julgamento em Viena, com a esperança de que seja absolvida após ter colaborado com a operação. 
+
+No caminho de volta, o grupo vai em direção ao seu novo e principal castelo de Znojmo e aproveita para visitar e direcionar diversas partes do território do Condado de Znojmo. Em conselho interno, os membros da casa elaboraram o plano de desenvolvimento do seus domínios e determinaram os investimentos que serão feitos no próximo século. O barão e os condes priorizaram seus esforços na expansão da religião, em modernização militar voltado a armas de fogo, em centros de ocultismo e arte, no apadrinhamento de Guttenberg e sua nova imprensa, investimento em vinículas, a criação de uma moeda própria com um novo banco em Bitov, além do estabelecimento da chantria Tremere de Znojmo e o criadouro de revenants gárgulas sob liderança de Octavian.
+
+Recuperados do desgaste da viagem e com os assuntos dos domínios em dia, a coterie parte novamente em viagem para Viena para a entrega dos prisoneiros e intitulação oficial para o título de Conde e Barões. Wilfred planejou um grande evento em seu palácio, que se encontra reformado e muito evoluído acompanhando o grande progresso do condado de Viena. A mistress Fanchon, figura prominente do clan Tremere e progenitora de Octavian, é uma das surpresas entre os diversos cainitas da nobreza presentes no evento. É esperado que Karl e Lotharius façam audiência aberta para conduzir a acusação contra os anarquistas e declaração de pena, porém há uma tensão perceptível no ar com a possibilidade de alguma reação dos líderes anarquistas.
+
+São iniciadas as deliberações dos acusadores contra as 3 acusadas. Karl lista as 4 acusações de quebra de tradição de diferentes formas. Dorina e Unorna são sentenciadas a prisão e depois serão enlaçadas com sangue da casa de Viena. Isla discursa para se proteger e com ajuda de Owen a se tornar responsavel e também pela mistress Fanchon que ignora os sinais de diablerie e cobrará essa dívida no futuro. Marco de Florença interage com Ezio e Gabor, deixando claro que há rixa entre os italianos da Camarila e os Lasombra do sul. Encerradas as formalidades e se preparar para retornar aos domínios, o grupo é surpreendido por guardas de Wilfred que retornavam feridos e contam que há grupos de anarquistas e inquisidores a solta. Indo para Znojmo, encontram outros guardas locais feridos. Ao chegar na entrada de Znojmo, percebem Dorotha, Palada e Valkyria fincados em estacas. Valkyria consegue ser tirada do torpor
+
+Valkyria enquanto se recupera compartilha que a cidade foi atacada por vampiros que revelaram seus poderes aos mortais enquanto os assasinava. Atacaram Paroquia, praça do comércio e por último tentaram invadir o castelo. Enquanto Owen e Octavian conduzem a carruagem em direção ao castelo, Ezio investiga a situação da igreja de Znojmo que está aparentemente funcionando normal para se recuperar do ataque e há um bispo realizando investigações lá. Isla faz trabalho de reconhecimento aéreo e percebe a movimentação em torno do castelo, inclusive um par de gargulas que o detectam.. O grupo se reune e parte em direção ao castelo, para observar Vlad, Vitas, Lutz  e Anatolio lidando com os vampiros invasores até que então a ameaça se encerra. Após comunicar os eventos a Lotharius e Wilfred, recebem tropas para re assegurar a região que se mantém livre de ameaças pelos próximos 19 anos. Tiveram tempo de desenvolver todos os investimentos e colher os resultados, até que um novo sonho acompanhado de uma nova carta de Lotharius os interrompe... alguma nova ameaça foi identificada e a coterie foi convocada para o serviço.
+
+Depois de 19 anos em paz melhorando seus domínios, uma carta de Lotharius em 1472 os ordena que voltem até Viena para que recebam uma nova missão em nome da aliança. Pelos crescentes temores gerados pela invasão dos otomanos e da sombra dos Assamitas por trás deles, o conselho de Hardestadt identificou certos aliados que poderiam virar o jogo. 
+
+Há um certo general, um dos poucos mortais dignos de interesse que, além de suas grandes conquistas militares e extrema brutalidade contra os otomanos, ficou famoso entre os cainitas pela sua sangrenta inquisição nas terras além da floresta onde trouxe a morte final para muitos cainitas em nome da igreja em fogueiras e estacas. 
+
+O príncipe Radu, um dos últimos Voivodes Tzimisce sobreviventes e aberto ao diálogo, tem um plano para recrutar este indivíduo e espera a visita da sua coterie no seu lar o castelo Bistritz. Seu enviado, o cainita Tiberius, é responsável por leva-los em segurança até o castelo. Uma semana de barco até Budapeste e mais 3 semanas a cavalo até chegar na Transylvania. 
+
+Na parada em Budapeste, o grupo explora a cidade para se alimentar e se apropria de 4 canhões húngaros e um conjunto de pistolas da tecnologia mais recente (wheellock) para levar em sua jornada.
+
+Enquanto se preparavam para partir das docas de Buda e viajar até o castelo do Conde Radu, uma carta de Vencel Rikard (príncipe da cidade) pede um favor ao grupo para que protejam uma figura peculiar (Lord Harvey) em sua jornada até a Transilvânia. 
+
+O cainita Tiberiu (npc aliado de Conde Radu) escolheu as estradas mais seguras, porém mais lentas. Após a primeira semana de jornada, um grupo de camponeses mortais revoltados bloqueou uma ponte. Apenas buscavam um certo indivíduo da nobreza e precisavam verificar o interior das carruagens. Lord Harvey percebe os humores raivosos e sugere cautela a Owen e Octavian, que dominam a mente dos camponeses. Com os ânimos controlados, retiram o bloqueio e os deixam prosseguir.
+
+O terreno adiante é nitidamente influenciado por Kupala, com claros sinais de corrupção no solo e vegetação. Na segunda semana, em uma vila miserável na serra que leva a Bistritz, uma jovem camponesa aborda a carruagem pedindo ajuda. Enquanto Owen decide capturá-la como carniçal e fazê-la se despedir de sua família, Lord Harvey tem terríveis visões de vampiros monstruosamente transformados e acorrentados em algum lugar desta floresta.
+
+Ao final da terceira semana, passam pela cidade de Bistritz e seguem para a fortaleza do Conde Radu em Tihuta Pass (foto). O conde, vestindo roupas nobres tradicionais dos Tzimisce de muitos séculos atrás, recebe o grupo amigavelmente e os encontrará na próxima noite para compartilhar mais dos seus planos para agregar o tal general mortal famoso por desafiar e derrotar o exército otomano.
+
+Após descanso no castelo do Conde Radu, o grupo tem uma audiência com o Conde para entender a situação local e descobrem que Vlad Tepes (son of the dragon, o conde Dracula), é alvo por conta não só de seu histórico de vitórias contra Otomanos e popularidade como líder, mas pelo fato de possuir conhecimento sobre o oculto e ser originado da família de revenants Basarab. Uns querem sua cabeça pela inquisição sangrenta que deu a morte final a muitos cainitas, outros o querem como vassalo e abraçá-lo para que tenha ainda mais poderes a fim de contra atacar os otomanos e reconquistar Constantinopla.
+
+Um grande Elysium foi convocado pelo príncipe Otto na cidade de Hermanstad (1 dia de viagem em passo acelerado) onde pelo menos 15 outros lordes estarão presentes e Dracula está entre os convidados. Espera-se que Duque Rustovich e o matuzalém Buscus estejam ativamente tentando recrutar Vlad. Radu pede ao grupo que se apresentem no evento e façam o que for necessário para convencer Dracula a ir presencialmente até o castelo em Bistritz e consolidá-lo como aliado da Camarilla. Até o retorno dessa missão, os anciões (tanto Ventrue e Tzimisce) irão tomar sua decisão conjunta sobre o futuro de Dracula para o bem da seita. 
+
+Viajando em alta velocidade com a carruagem negra de Tiberiu (aliado Gangrel), puxada por quatro cavalos negros revenants sobrenaturalmente fortes e velozes, o grupo parte em direção ao evento no castelo de Hermanstadt. Ao passar em um vilarejo em chamas no caminho, avistam a crucificação de vampiros em meio as chamas dos prédios e presenciam a perseguição que um cavaleiro e bispo inquisidores aparentemente sofriam por dois vampiros montados e um transformado em Zulo (vicissitude 4) - estes na verdade se revelaram Wights, ou vampiros sem alma que perderam totalmente o controle para a Besta. O bispo foi assassinado com uma lança de osso atravessada em seu peito, enquanto o cavaleiro mortal se juntou ao grupo para combater os wights que acabaram partidos em pedaços.
+
+Transylvania
+
+Ainda na vila de Slimnic, no caminho para o castelo do conde Otto na cidade de Hermanstadt (não confundir com o príncipe Hardestadt), o grupo encontrou e ajudou um grupo de inquisidores a combater os cainitas anarquistas que haviam invadido a cidade, iniciado diversos incêndios e se alimentado dos locais, com uma leve dose de convencimento de Octavian e Owen. 
+
+Os anarquistas se revelaram em meio a cidade em chamas, ao mesmo tempo que Vladislav, Anatólio e Vitas chegaram como reforços. Três anarquistas partiram para o confronto direto e Ezio inicia o combate incapacitando um deles (o Brujah antitribu) com um belo golpe de espada. Owen enfrentou os anarquistas Baali, Gárgula e Tzimisce, tendo ajuda de Anatólio e Vlad para derrotá-los. Na mesma cena, duas figuras aparecem das sombras e se revelaram Assamitas após acertar flechas envenenadas em Owen e acertar uma adaga em Octavian. Afugentadas, essas figuras voltaram para as sombras antes que pudessem ser abatidas e escaparam do mesmo destino dos seus ex-companheiros - derrotados e acorrentados para serem levados a julgamento.
+
+A cena se encerra com a coterie seguindo o caminho montanhoso e se aproximando do castelo de Otto. Há pouco tempo para se preparar e se apresentar no Elysium marcado para a noite seguinte, o evento terá a presença de líderes dos domínios da Transilvânia e outros anciões notáveis. Espera-se que cada um tenha seu próprio plano para o destino de Vlad Tepes e o grupo precisará superar esses desafios para garantir que ele se torne aliado.
+
+Transylvania
+
+Deixando para trás o vilarejo em chamas, seguiram caminho para o elysium que acontece no castelo de Hermanstadt (hoje chamada Sibiu). São recebidos por carniçais servos do príncipe Otto, que os levam por meio de um labirinto de corredores sombrios e portas ocultas até chegar ao hall principal. 
+O evento luxuoso juntou ao menos 15 cainitas e mais uma dezena de mortais candidatos a serem abraçados. Ao chegar no evento, Owen percebe que a tradicional saudação viking bárbara do norte talvez não fosse a melhor escolha para saudar o príncipe local no seu castelo e arranca risadas e olhares de desprezo. O grupo observa um clima nada agradável entre o Matuzalém Dominus (Ventrue) e sua presença opressora, se opondo ao Conde Rustovitch (Tzimisce) que tem o ainda mortal Vlad Tepes sob suas asas. Representantes de outros clãs estão no meio do salão e compartilharam suas perspectivas sobre a escalada das tensões.
+Em meio a discussões nada discretas sobre o futuro de Vlad, dois Tzimisce se enfrentam e saem na porrada. Ao mesmo tempo, a porta principal do hall é arrombada e um grupo de pelo menos 10 anarchs portando armas e tochas acesas invade o Elysium. Embora consigam assassinar um dos Tzimisce, os anarchs não são páreo para os anciões que estão presentes que intencionalmente exibem seus poderes mais peculiares para intimidar e derrotar os invasores.
+Em meio a cena sangrenta, Dominus solta uma gargalhada e fala que a Camarilla não precisa temer esses anarchs sangue ralos e se despede virando névoa e deixando o recinto. Enquanto os presentes reagem ao acontecido, um sinal de fumaça e gritos de fogo completam o cenário caótico e trazem a oportunidade que se esperava: em meio ao caos, Rustovitch deixa Vlad 'desprotegido' e a coterie o convence de segui-los para escapar e ir ao castelo do Conde Radu. Com ajuda de um carniçal, encontram um acesso ao labirinto de túneis subterrâneos que os levam até o vale mais abaixo.
+
+Transylvania
+
+Escapando do castelo em chamas pela floresta juntos de Vlad Tepes, Vitas localiza Tiberiu com ajuda dos lobos da região e percebem que é muito arriscado tentar voltar ao castelo em chamas e decidem partir. Harvey tem visões sinistras sobre uma figura maligna feita de carne e sangue. No caminho, Vlad pergunta sobre os benefícios do abraço e dos benefícios que vai ganhar se escolher Radu para ser seu progenitor. Owen não consegue penetrar na mente de Vlad.
+Retornam ao castelo de Bistritz e em uma rápida conversa Radu expõe que o destino de Vlad Tepes está decidido - ele irá ao encontro de Yorak (um grande matuzalém Tzimisce) e o encontro acontecerá no lar de Yorak, a Catedral de Carne, situada nas redondezas da cidade de Deva.
+No dia seguinte partem para lá. Em terras amaldiçoadas e em meio a muita lama, encontram um buraco que leva a uma caverna subterrânea. Logo na entrada , percebe-se que a caverna é preenchida de material orgânico, parecendo uma mistura de plantas com animais. Vlad Tepes demonstra grande entusiasmo e vai à frente do grupo. Um carniçal ligeiramente humanoide mas completamente desfigurado aparece para guiá-los até os níveis inferiores. Quanto mais profundo se vai, a textura das paredes e toda a construção da catedral vão se tornando cada vez mais animalescas, como uma costura de diversas partes de animais em um tecido contínuo que cobre o ambiente.
+Ao chegar no fundo, encontram Yorak em sua forma monstruosa suspenso e fisicamente conectado a Catedral. Ele recebe Vlad de braços abertos e inicia o que teria sido o seu abraço - porém, ao respingar sangue no chão, a Catedral age como um ser independente e fica em frenesi ao experimentar o sangue especial de Vlad, e então resolve não só impedir Yorak de abraçar Vlad, mas diablerizá-lo (Yorak) nesta oportunidade utilizando seus tentáculos. 
+Owen em um momento de desespero tenta reagir à investida da Catedral de Sangue, e tenta sem sucesso interromper o processo e acaba por se tornar alvo do grande poder da Catedral, que invadiu a mente de Owen para implantar uma profunda insanidade.A catedral reage com movimentos peristálticos e com uma grande quantidade de fluidos acaba expelindo a coterie na pressão, arremessando-os metros acima da terra, para fora da estrutura. Abatido, Owen apenas consegue murmurar 'Kupala...Kupala...Kupala'.  Vlad Tepes não é avistado e seu paradeiro é desconhecido, porém Vitas consegue localizar Tiberiu e a carruagem e pretendem abandonar o local o quanto antes.
+
+Transylvania
+
+Após o grupo encontrar Tiberiu e a carruagem na única estrada que corta a floresta, Isla fareja outro sobrevivente cuspido pela Catedral de Carne. Octavian despacha seu corvo místico e Vlad Tepes é avistado rastejando coberto de sangue e bile. Enquanto o Octavian o ajudava a se recuperar de seus ferimentos, Vlad revela que presenciou o ataque contra Yorak e supõe que a Catedral destruiu ou diablerizou o matusalém.Após o acontecimento traumatizante, Vlad diz que não irá mais aceitar que nenhum cainita decida quem irá abraçá-lo e que somente ele poderá tomar essa decisão daqui pra frente. Somente se aceitarem estas condições ele irá lutar a guerra contra os Otomanos e vencê-la com ajuda dos poderes das criaturas da noite.No caminho de volta ao castelo de Radu, são abordados por um grupo de soldados liderado por Roland e outros cainitas aliados de Rustovitch que buscavam Vlad Tepes depois do seu desaparecimento. Depois de Owen tentar resolver o impasse pelas vias diplomáticas, Vitas utiliza sua máscara de mil faces e toma aparência de Rustovitch para enganar e dissuadir Roland e seu bando de forma pacífica, evitando o que poderia ter sido uma batalha de proporções significativas.Finalmente o grupo chega e é acolhido no castelo. Radu fica perplexo com toda a história e parece incrédulo. Vlad Tepes vocaliza suas ambições e condições para colaboração. Todos parecem concordar em preservar Vlad das disputas e dá-lo segurança e tempo para planejar a contra ofensiva aos Otomanos livremente. O futuro Conde Dracula continuará sua busca por um cainita poderoso, honrado e digno para ser seu progenitor (ALO @BRUNAO)
+
+Transylvania
+
+Ao final da conversa com Radu e Vlad Tepes, ficou clara a prioridade de proteger Vlad de outros cainitas (sejam os liderados por Rustovitch ou quaisquer outros) que gostariam de abraçá-lo contra sua vontade. Permanecer na Transilvânia seria muito perigoso, e para alcançar o objetivo maior de conquistas uma grande vitória sobre os Otomanos, Vlad precisará buscar alianças em outros lugares da Europa e ficar fora do radar por um tempo.Para facilitar a longa viagem de volta a Znojmo, Radu os presenteia com a carruagem negra com os 4 cavalos bestiais revenants. Iniciam a jornada e descem os Cárpatos em direção oeste, passam por um território que ainda tem influência de Kupala e são surpreendidos ao se aproximarem de uma ponte de pedra que atravessa um rio. Em meio a uma névoa densa (ruço) e ao começar a cruzar a ponte com a carruagem, são avistados duas gárgulas sobrevoando e desaparecendo nas brumas. Todos ouvem um som explosivo de terremoto e observam uma grande rachadura no solo atrás da carruagem, e a única saída é seguir adiante: Owen acelera ao máximo a carruagem. No final da ponte, surgem quatro figuras (que apareceram no último episódio): Roland e seus aliados. Roland anuncia que só está aqui por Vlad e que inegociavelmente irá acompanhá-lo de volta a Rustovitch. Um dos aliados encapuzados evoca magia Koldunica (a antiga blood sorcery dos Tzimisce) para expandir as raízes das árvores de forma que cria uma barreira de madeira quase sólida no final da ponte. Em meio a constantes ataques das gárgulas, Owen acelera ainda mais a carruagem. O mago intensifica a magia e a barreira já tem 1 metro de altura. Owen acerta tiros de pistola, Isla destrói um dos gárgulas com dois golpes com suas garras da besta, Octavian faz exsanguinação taumatúrgica e Vitas acerta três flechadas certeiras no mago koldunico para, na última cena, tombá-lo e desconcentrá-lo de sua magia. A batalha ainda não acabou(termina com vitas tombando o mago koldunico e interrompendo a blood sorcery)
+
+Transylvania
+
+A batalha continua. Após a queda do mago koldúnico, as raízes que cobrem a ponte perdem a força e começam a recuar vagarosamente. Owen está em chamas após múltiplos ataques de fogo mágico vindos do Tremere antitribu e, para se salvar, resolve pular para o rio que corre sob a ponte. 
+
+Ezio assume as rédeas dos cavalos que puxam a carruagem enquanto avançam em direção ao final da ponte coberta pela lombada de raízes, consegue manter a carruagem inteira e sob controle durante o salto sobre os obstáculos, porém logo em seguida freia a carruagem para não largar Owen para trás.
+
+Roland (cria de Conde Rustovitch) se transforma em Depredador Quiróptero ataca a carruagem e a vira de lado com Harvey, Octavian e Vlad Tepes dentro. Uma nova leva de ataques de fogo termina por incendiar a carruagem, até que Harvey acerta duas flechadas e consegue incapacitar o Tremere antitribu e interromper seus ataques. Após abater o primeiro, Isla trava uma dura batalha com o segundo Gárgula no topo da carruagem e no final consegue derrotá-lo e mordê-lo. 
+
+Enquanto Harvey usa sua dementação para apaziguar o humor de Roland, Octavian é agarrado pela besta Tzimisce e utiliza sua taumaturgia para tocar e ferver o sangue da criatura, que literalmente cozinhou de dentro pra fora levando-o à morte final após o terceiro ataque. Ezio e Vlad Tepes duelam contra o cavaleiro couraçado Brujah, que após uma longa troca de golpes foi Ezio que consegue derrubar o adversário e cortar sua cabeça em um momento de raiva.
+
+No final, há apenas um sobrevivente entre os inimigos (o Tremere antitribu) e o corpo do Roland, filho do poderoso Duque Rustovitch, já começa a se desfazer em cinzas.
+
+Transylvania
+
+Owen é localizado e socorrido por Ezio e Isla. Octavian descobre que o último vampiro anarquista sobrevivente é um Tremere antitribu seguidor de Goratrix e o destrói, enquanto Isla termina a diablerie de um dos gárgulas. Realizam os reparos mínimos para continuar viajando com a carruagem e seguem em direção a Budapeste. De lá, o grupo pega um barco e vai pelo Danúbio acima em direção a Viena. Vlad Tepes está junto do grupo e Harvey decide seguir junto da coterie na viagem de volta.
+
+Os lordes locais Lotharius e Wilfred recebem os viajantes no luxuoso palácio de Viena e após cornetas e introduções formais, todos tem seus olhos atraídos por Vlad Tepes que faz um longo discurso quando questionado sobre suas intenções e planos para conquistar os objetivos militares contra os Otomanos. Lotharius então revela qual é a recompensa pelos serviços bem prestados: dois condados vizinhos de Znojmo chamados Jihlava e Prerov foram intitulados. Dados os problemas com a atual duquesa Shaagra que não tem se mostrado capaz de ordenar o domínio, este título de Duque da Morávia será oferecido caso a missão de obter uma grande vitória contra os otomanos seja cumprida.
+
+Para fortalecer o exército do amigo pessoal de Vlad, o rei Stefan da Moldávia, será necessário adquirir aliados poderosos como os reis cristãos da Polônia e da Hungria, e tentar também tratados com Veneza e do papa em Roma. Para começar, Vlad conta que há um evento importante no reino da Cracóvia onde o rei polonês Casimiro vai presenciar um evento tradicional de justa que acontece no solstício de inverno no pátio interno do castelo Wawel. A carruagem presenteada por Radu é consertada pelos artesãos de Viena. Antes de começarem a viagem, Vlad pede um duelo de espadas contra Owen e demonstra sua elevada esgrima ao aparar um golpe dado por Owen e acertá-lo em um contra-ataque certeiro.
+
+Informações de espiões revelam que há uma disputa também entre os líderes cainitas. Os anciões Tzimisce que lideravam esses domínios foram todos destruídos por bandos de anarquistas sedentos e resultou em um vácuo de poder que está sendo disputado por Lorde Marek, um Ventrue que tem importantes contatos na realeza local, contra Zara Slatikov, uma Tzimisce que luta para manter a hegemonia do clã nessa importante região. 
+
+Já é fim de dezembro de 1475 e o inverno é rigoroso no leste Europeu. Após um caminho lento e pacífico, chegam na próspera Cracóvia e encontram uma cidade rica, densamente povoada e muito bem defendida. Octavian utilizou seus poderes para conseguirem passar desapercebidos com sua carruagem pelos portões das muralhas externas e internas. Ao estacionarem e descerem da carruagem, percebem trabalhadores realizando a montagem da estrutura que será utilizada no torneio de justa que começará no dia seguinte. A visão auspiciosa de Harvey revela uma criatura oculta andando pelas sombras e enquanto o grupo procurava por sinais de cainitas, são surpreendidos por uma figura imponente de cabelos grisalhos que se apresenta como Lorde Marek.
+
+Transylvania
+
+Lorde Marek leva o grupo para um dos prédios próximos ao campo de justa e os apresenta a Justyna (harpia que tem grande influência na região). Justyna revela que Zara Slatikov é remanescente entre os líderes Tzimisce e que ela participará do torneio, assim como outros de sua coterie, determinados a vencer. Há expectativa de que os anarquistas possam interromper o evento para impedir a tomada de poder independente de quem seja. Vlad Tepes e Owen são inscritos no torneio representando a Transilvânia e Znojmo, respectivamente. Vitas sai para reconhecer os entornos do evento, e observa alguns dos servos curiosamente molhando o campo de justa de forma generosa.
+Na noite seguinte, o torneio começa sob leve nevasca. A presença do rei mortal Casimiro dá o tom do evento, cercado por outros membros da sua corte, líderes religiosos e por Marek e Justyna. Muitas tochas são acesas para garantir a iluminação. Um bobo da corte mantém todos entretidos e além de piadas, também faz a apresentação dos competidores. As poças no campo de justa se congelam e, para evitar desvantagem, Vlad Tepes martela pregos nos cascos dos cavalos e Owen, com ajuda de Vitas, faz o mesmo. Harvey observa uma acumulação de espíritos sombrios em torno do campo. 
+As justas começam e ambos Vlad Tepes (contra um cavaleiro hussar) e Owen (contra o cavaleiro Dobroslav) obtêm vitórias na primeira rodada. Na segunda rodada, o cavaleiro negro Jaroslaw surpreende e vence Vlad Tepes e o deixa nervoso, enquanto Owen enfrenta Zara Slatikov e vence a lider Tzimisce ao acertar sua lança dentro do capacete de Zara violentamente, retirando parte do seu couro cabeludo que acaba preso na ponta da lança de Owen, em uma cena que deixa a platéia chocada. 
+Antes da rodada derradeira, na qual Owen enfrentará Jaroslaw, uma densa névoa toma conta do ambiente. Atento, apenas Harvey percebe criaturas voadoras que possivelmente são Gárgulas em meio à bruma e também uma criatura escondida nas sombras que furtivamente adiciona mais água para congelar o caminho de Owen. Enquanto o bobo da corte faz seu espetáculo antes do confronto final, Harvey, Vitas e Octavian perseguem a criatura ofuscada até o casarão que fica atrás da arquibancada e são surpreendidos por uma segunda figura misteriosa que revela seu terceiro olho - tradicional poder dos Salubri, e sem avisos emana uma luz tão intensa quanto a do sol em uma rajada que, embora não tenha ferido Harvey por pouco, o coloca em frenesi. 
+O grupo abandona a casa imediatamente e retorna para tentar avisar Marek e Justyna da presença de inimigos, porém não conseguem atenção já que a rodada final está em andamento. Com placar apertado, Owen ganha o combate final e é agraciado pelo rei Casimiro, que aproveita o momento para conceder poderes maiores a Marek. Owen utiliza o momento para pedir suporte do reinado da Polônia e de seus cavaleiros alados para enfrentarem juntos a ameaça otomana na Valáquia e na Moldávia e é bem recebido.Marek e Justyna são avisados da presença de inimigos e decidem que Marek precisa ser levado às catacumbas para sua proteção e pedem que o grupo investiguem as redondezas e enfrentem, cautelosa e silenciosamente, quaisquer inimigos que se revelem.
+
+O ataque ao castelo Wawel se intensifica e uma densa névoa se acumula, dificultando a visibilidade das criaturas que sobrevoam e atacam as muralhas. Viktor Vladislav se junta a coterie enquanto prosseguem pelo portão interior em direção ao pátio interno, quando são confrontados por Zara e seu aliado Slawomir. Os guardas do castelo são dominados por Slawomir e ameaçam atacar o grupo. Marek e Justyna tentam argumentar, mas o conflito começa e todos são surpreendidos pelo ataque de gárgulas anarquistas que atacam todos os cainitas igualmente. Vitas usa suas garras bestiais para deixar Slawomir incapacitado, enquanto Owen e Viktor Vladislav derrotam Zara e a deixa desacordada. Vlad Tepes defende Marek e Justyna dos ataques dos gárgulas, e Isla aparece para destruir um deles.
+
+Ao menos 10 gárgulas aparecem no telhados do castelo e Viktor e Owen arrastam pelo chão Zara e Slawomir em direção a escada que desce para as catacumbas. A superioridade numérica dos gárgulas deixa o cenário complicado e Marek e Justyna são feridos e então evacuados para as catacumbas, enquanto Viktor Vladislav transformado em Zulo sustenta múltiplos ataques para dar espaço para a fuga. Owen desce primeiro sozinho e é então dominado por Slawomir que o força a carrega-lo sozinho à cripta. Uma figura maligna aparece manipulando uma peste mágica em suas mãos. Owen desfere golpes de machado e Octavian ferve o seu sangue, mas é Salvatore que aparece das sombras e transformado em cobra bestial morde a cabeça do inimigo que se desfaz em cinzas. A praga se espalha em Salvatore e Owen e apenas o fogo foi capaz de remover a infestação. Após alguns gárgulas serem pregados pelas balistas, Viktor recua e se destransforma e parte para encontrar o grupo nas catacumbas. Marek e Justyna são escoltados até a cripta que fica ao fim de uma longa escadaria e dão instruções para que o grupo mantenha a segurança do rei Casimiro.
+
+O grupo parte em busca do rei Casimiro, percorrendo os corredores internos do castelo Wawel em busca de pistas do paradeiro do rei. No terceiro andar do castelo encontram os aposentos reais vazios. Uma serva do castelo aparece em busca de uma criança perdida e, antes de Owen se alimentar, revela que o rei foi visto junto com o Arcebispo Jan indo em direção à catedral. Enquanto vão adiante na passagem que leva à catedral, Isla faz o scout na área como morcego e vê uma figura os seguindo - o mesmo Salubri avistado anteriormente. Protegendo o último portão que conecta o palácio a catedral, dois magos da praga Baali conjuram uma infinidade de insetos que dominam o ambiente e sobem pelas pernas da coterie, enquanto Harvey tem visão reveladora de que as figuras são na verdade ilusões e há também um espectro poderoso presente. A espada de Mantas, carregada por Vitas, acende com fogo roxo conforme se aproxima do espectro e com múltiplas estocadas Vitas consegue atingir o ser sobrenatural e paralisá-lo. Antes de serem consumidos pela praga e de derrotarem o espectro, vindo de dentro da catedral são avistados o Arcebispo acompanhado pelo Rei Casimiro. O arcebispo carrega um cajado com brilho mágico e a sensação de fé verdadeira toma o ambiente, ele afirma que o Rei Casimiro está em segurança com ele e não irá entregá-lo. As tentativas iniciais de dominação de Owen falham e ao fundo ouve-se o órgão tocando e um coral cantando músicas sacras e também barulho de passos metálicos estalando contra o chão de pedra da catedral.
+
+Quando o embate verbal se tornava mais tenso e um grande grupo de fiéis se acumulava,genera Marek e Justyna saem das sombras e caminham em direção ao arcebispo e o rei e os trata respeitosamente, até que Marek toma posse do corpo do Arcebispo para com ajuda de seus poderes de manipulação discursar falsamente e convencer a todos os morrtais presentes sobre como os cavaleiros rebeldes atacaram o castelo e que nenhum ser sobrenatural havia participado do evento. Ele dá um sermão para todos os fiéis e pede que foquem na recuperação rápida do castelo e na fidelidade de todos com o Rei Casimiro, que é abençoado e se retira do ambiente junto com o grupo. Vitas ajuda Justyna a levar o corpo desacordado de Marek até as catacumbas. Uma boa dose de dominação é empregada por Justyna para que o Rei Casimiro esqueça os eventos recentes e foque na preparação das tropas (2 mil winged hussars), ela assegura ao grupo que irá cumprir a promessa. Todos se alimentam e descansam no conforto provido por Marek, que está presente na noite seguinte e debate com Owen e Vlad Tepes quais as consequências da noite anterior e os próximos passos na missão contra os Otomanos. Vlad Tepes perde a paciência algumas vezes e demonstra insatisfação com a demasiada complicação das tramas políticas, para ele as 3 alianças principais são a Hungria (e o black army), o Papa (para dar autenticidade a cruzada) e Veneza (que já está em guerra contra os Otomanos). Justyna orienta que precisa haver paz entre Polônia e Hungria e entrega uma carta oficial de Casimiro para entregar em mãos a Mathias. É iniciada a jornada de volta para Znojmo. No caminho, Owen despacha pombos para se comunicar com outras lideranças Ventrue. Harvey descobre e se comunica com uma alma/espectro que tem interesse particular em histórias de viajantes.
+
+A viagem de volta a Znojmo foi repleta de discussões sobre os objetivos de conquistar mais alianças entre os reis mortais e qual estratégia a coterie deveria empenhar para maximizar o potencial de um exército cristão lutar junto e obter uma grande vitória contra os Otomanos. Harvey, Ezio e Vitas debateram as opções sobre como visitar e persuadir os líderes mortais da Hungria, Veneza, Roma ou até Kiev a enviarem tropas. No caminho, ficam sabendo do aumento das hostilidades do exército negro de Matthias Corvinus (rei mortal da Hungria) que está invandindo as terras da Bohemia e Moravia (incluindo Znojmo e todos os domínios da coterie).
+
+A carta de Casimiro da Polônia (escrita sob influência da harpia Justyna) está em posse do grupo e precisa ser entregue seguramente a Matthias Corvinus. O objetivo principal da carta é garantir o cessar fogo e paz temporária entre Polônia e Hungria, aliviando assim a pressão de guerras entre os reis mortais europeus para que juntos possam focar em Mehmed II e seus exércitos massivos. Ao espiarem o conteúdo da carta, descobrem uma segunda parte do acordo que propõe o fim da invasão de Matthias Corvinus na Moravia (Znojmo incluso) por meio da passagem do título de Rei da Bohemia para Matthias Corvinus, o que encerraria a invasão da Morávia (e os domínios da coterie ficariam em paz).
+
+Dado o risco sobre os próprios domínios, o grupo decide ir até a cidade de Buda para garantir que o rei Matthias receba a carta rapidamente e de alguma forma aceite os acordos propostos. Partem de barco pelo Danúbio até chegarem em Buda, relembrando os momentos que Harvey conheceu e se juntou ao grupo, e entram em contato com o príncipe cainita local Vencel Rikard. Após explicarem a carta e a missão, Vencel entende a situação e conta que Corvinus se consulta regularmente como uma visionária cainita chamada Erianthe, que lhe dá conselhos sobre assuntos importantes e influencia o destino de todo o reinado, e que ela está aprisionada no castelo de Buda. Para conseguir acesso à profeta, Vencel apresenta o seu espião Nosferatu, Vörös, que se diz capaz de levá-los em segurança até a cela onde ela se encontra - por uma bela quantia de ouro. 
+
+Vencel arca com os custos do espião, e o grupo é levado por Vörös até a cela de Erianthe. Invadem o castelo por passagens desconhecidas que levam à área de maior segurança do Castelo e se esgueiram pelas sombras para passar da grande quantidade de guardas que vigiam o lugar. Chegando lá, descobrem que Erianthe tem origem na Grécia e veio a Buda se refugiar da invasão dos Assamitas na região. Ela escuta a necessidade do grupo e detalha seu próprio preço para convencer Corvinus: ela deseja conhecimento oculto sobre Gehenna e uma ampola de vitae exótico. Vitas tem flash de suas memórias sobre a passagem em Constantinopla, os pergaminhos encontrados sobre sabedoria da Gehenna entre os Guardiões no subsolo da Hagia Sophia e do sangue que Octavian coletou após derrotarem os dois demônios que tentavam se apoderar da argola tranca-demônio. A sessão se encerra antes de se concluírem as negociações.
+
+As negociações com Erianthe se encerram e o acordo foi que a profetiza irá convencer Mathias a participar da cruzada contra os Otomanos ao lado de Stephen e assumir a coroa da Bohemia, o seu pagamento será entregando dois itens: o pergaminho sobre Gehenna e a via de sangue de demonio (ambos trazidos de Constantinopla). Interrompendo a cena, o ambiente foi dominado por sombras e pelos corredores da catacumba um grupo de vampiros avança e vozes graves com sotaque turco pedem que se rendam e entreguem a profetiza. Erianthe demonstra insatisfação com a invasão e some no ar. Após o grupo se negar a entregar a profetiza, Vörös é pego de surpresa com flechadas embebidas em ácido. Ezio demonstra bravura ao correr pra dentro das sombras e decepar um dos turco-assamitas e sofre ferimentos moderados, mas Vitas não tem a mesma sorte e cai após levar golpes de cimitarra ácida. Vörös socorre Vitas e o leva de volta a sala da profetiza, até que Viktor Vladslav e Owen se aproximam e terminam de derrotar os 4 inimigos. Com as sombras do abismo se recolhendo, resta apenas um dos inimigos em más condições.
+
+Sem receios, o último assamita sobrevivente é executado no Castelo de Buda. A profetiza Erianthe confirma que seguirá com sua parte do acordo e pede que mantenham distância para não atraírem mais problemas ao seu quintal. Após confirmar a aliança com os reinos da Polônia e Hungria, Vlad Tepes lembra o grupo que esse suporte militar não é suficiente para enfrentar os Otomanos ao lado do Rei Stephan da Moldavia. O apoio do Papa pode transformar isso em uma nova crusada para defender a fé. A coterie parte de Budapeste para Roma em uma viagem de aproximadamente um mes. As estradas agora mais seguras nesta região passam rápido e chegam aos entornos de Roma. Octavian obtém informação da capela local da região onde poderiam encontrar cainitas ligados ao príncipe da cidade. Em um ambiente de pilastras romanas antigas, canções profanas e tributo ao deus Baco, cainitas aparentemente da corte local se divertem com mortais sem se preocupar com a máscara ou a presença de visitantes. Quando alguns mortais tentam escapar, uma figura em manto vermelho aparece comandando um grupo de soldados que cerca o ambiente e começa a executar todos os mortais presentes. Mordekai, o pai de Owen, se apresenta ao filho e à coterie enquanto encerra a festa da corte dramaticamente, fala que para obterem apoio do Papa Sixtus IV precisarão ajudar a organizar a enfraquecida sociedade vampírica de Roma e os orienta uma localização segura em uma estadia local para se instalarem.
+
+Após se refugiarem na estadia nas redondezas do antigo forum romano, a noite começa mais cedo com a presença de uma tropa de soldados que acompanham Mordekai para acordar todos de surpresa. Ainda com os últimos raios de luz ao entardecer, o grupo faz uma caminhada com Mordekai até a borda do rio Tibre onde há um dos principais portos de Roma. 
+Entre multidões de comerciantes e viajantes de todas as partes, Mordekai aponta para o crescente escravagismo nas colônias europeias e as primeiras remessas de escravos que chegam para serem negociados em Roma, bem como a presença extensiva de comerciantes portugueses que possuem a maior parte da 'mercadoria' e o transporte para as colônias nas américas. Para obterem a ajuda do papa Sixtus IV, precisam remover o controle das operações da influência de um conde cainita Fermiano (Ventrue, mas não obediente dada a ausência de um príncipe forte) e passá-lo aos Estados Papais.Enquanto negociavam a compra de um escravo, um grupo de inquisidores patrulhava o local acompanhado de um mob de lunáticos. Aparentemente eles estão questionando os comerciantes e verificando se não há pagãos desacorrentados.
+
+Enquanto Owen apreciava mercadorias enquanto o grupo buscava informações sobre quem chefiava a operação de venda de escravos no porto, a procissão de inquisidores se aproxima e torna o ambiente hostil. Depois de dominar um dos vendedores, ele os aponta para a sede da guilda mercante da cidade e diz que lá poderão encontrar os grão-mestres que detém os direitos de comercialização. O suntuoso palácio de pedra de 3 andares é fortemente guardado e o grupo se infiltra sem alarde. No terceiro andar há um escritório onde duas figuras aparecem: Conde Albizzo V e seu conselheiro Tadeu. A conversa se inicia pacificamente e ao questionarem Albizzo sobre os contratos do porto, ele comprova com documentos que é o conde cainita da região e que não vai abrir mão do controle.
+
+Após as tratativas diplomáticas falharem, a violência começa mesmo após Albizzo pedir por um duelo honrado. Vladislav se transforma em Zulo, Owen dá uma machadada no pescoço do conde, Salvatore avança sobre o conselheiro Tadeu. Dois aliados de Albizzo se juntam ao combate, um gárgula fere Octavian gravemente  enquanto Isla o tentava proteger. Mesmo com ajuda dos guardas do palácio, os esforços dos vampiros rebeldes não são suficientes para impedir que a coterie vença o combate depois de Owen acertar um golpe flamejante no Lasombra. Vladislav aproveita o momento para diablerizar o conde Albizzo e Salvatore faz o mesmo com o conselheiro Tadeu. Os guardas remanescentes correm em pânico e o ambiente fica silencioso por um momento.
+
+Após o combate, o grupo rapidamente reúne os objetos de valor encontrados no recinto. Acham uma quantia relevante em ouro e um conjunto de cheques de outros bancos da região, bem como os contratos de comercialização de escravos e o documento que dava a Albizzo o direito de ser o Conde cainita da região.  Octavian localiza um livro que estava escondido com nomes de cainitas importantes da região e sua relação com Albizzo e a guilda mercantil, e Owen quase queima o livro deixando cair uma tocha. A coterie então debate como reportar os fatos a Mordekai e decide que os manchados pela diablerie não devem se revelar. Alguns momentos depois, Mordekai chega no local acompanhado Aristarco e Ponziano que são ligados ao príncipe cainita local. Ao ser questionado, Owen revela que a solução do plano foi a destruição do Conde Albizzo e seus comparsas.
+
+Isla rastreia o Gargula que escapou e se refugiou em algum lugar no Coliseu. O grupo explora os corredores internos do local em busca do fugitivo e são surpreendidos por bloodhounds famintos. Sombras do abismo lentamente enchem  o ambiente e o  último rastro do gárgula aponta a direção dos grandes portões de ferro que se encontram trancados.
+
+Nas catacumbas do Coliseu, Mordecai aparece cercado pelo Gargula, irmão Hugo, um Lasombra oculto que cobria o recinto com sombras sobrenaturais e o Gárgula que a coterie perseguia, ao seu lado são vistos um grupo de 6 blood hounds. Hardestad afirma que necessita destrui-los, já que estão claramente violando as regras sagradas (Vladislav e Salvatore diablerizaram recentemente), e então usa seu poder de dominação avançado para influenciar Owen para o seu lado, o submetendo a sua propria vontade. Vitas, Octavian, Isla e Salvatore lutam contra os oponentes e os vencem, abrindo uma brecha para Owen sair do poder do seu mestre e, em seguida, virar-se contra ele  e diablerizar Mordecai. Nesta nova situação, o grupo liderado por Owen se aproxima do papa, entrega o comando das operações de escravos antes dominada por Albizzo, e assim consegue assegurar o suporte do exército dos Estados Papais para auxiliarem a guerra contra os otomanos no leste europeu. Com o sucesso para angariar diversos aliados, a missão da coterie em parceria com Vlad Tepes deu certo e todos os reforços eventualmente se juntaram na Moldavia e juntos conseguiram emplacar grandes vitorias sobre o imperio Otomano, embora estes sucessos apenas tornavam o avanço mais lento ao invés de para-lo completamente.
+
+Anos depois, a convenção de Thorns em 1493 foi planejada para acabar com a revolta anarquista. Os grandes anciões decidem propor o Tratado e convida a coterie para participar do evento. Lá eles entendem a dinâmica de cada um dos clãs, o posicionamento político em torno das facções, e vivenciaram a tensas discussões durante os 3 dias dedicados a deliberação. Um grande episódio marca o pronunciamento final de Hardestad sobre o formato final do Tratado: o anarquita Myka Vykos em um gesto de resistencia arranca o proprio penis e o arremessa na face de Hardestad, que resiste a ameaça e mantém-se frio, preservando a essencia pacífica desse Elísio, impedindo que se torne uma batalha sangrenta. Ao final de muita discussão interna, a coterie decide aderir a Camarilla, assinando o tratado de Hardestadt. Com todo o assunto resolvido e agora sendo oficialmente parte da Camarila, a coterie decide entrar em sono prolongado...
+
+Sessão 1: A Tormenta no Horizonte e a Emboscada em Veneza
+Convocados por seus mestres, o recém-formado grupo se reuniu pelo Mediterrâneo a bordo do Diabolus Maris, o navio do Capitão Salazar. Partindo do Atlântico, o corsário Baali buscou primeiro o Setita Apophis/Manuel em Lisboa, navegou até a Sicília para receber o Inquisidor Lasombra Fiori, e finalmente ancorou no porto de Durrës, na Albânia, para embarcar o cirurgião Tzimisce Constantin. Durante as quatro semanas de travessia até a Itália, os monstros dividiram os porões do navio, ainda incertos do seu verdadeiro propósito, mas forjando lentamente a irmandade sombria necessárias para a guerra.
+
+Ao se infiltrarem na lagoa de Veneza, seguiram as instruções de suas cartas até o subsolo alagado da Igreja de San Zaccaria. Com águas pelos joelhos, encontraram Valerius, um ancião Lasombra que os oficializou na cruzada contra a Camarilla. Ele revelou o alvo: um grande galeão de suprimentos que chegaria àquela noite, carregado de armas e ouro para financiar dois grandes líderes da Torre de Marfim — o Príncipe Iacomo, de Veneza, e o Duque Ventrue Owen Ironheim, da Morávia. O bando irá saquear os recursos e abater todos a bordo, com Valerius prometendo se juntar a eles no massacre.
+
+Empregando uma tática naval, o bando hasteou uma bandeira roubada da guarda veneziana e usou a habilidade de Salazar para interceptar a rota do navio inimigo. Eles conseguiram atracar fingindo ser uma patrulha de inspeção, mas a tensão explodiu quando o líder da segurança, o experiente mercenário Brujah Ezio, percebeu o disfarce e reconheceu Salazar como um predador do Sabá. Quando as espadas foram sacadas e a fúria tomou conta: Constantin gastou sangue para assumir a gigantesca e letal Forma Horrenda (Zulo Shape), Fiori derreteu-se em sombras e invadiu o porão de cargas, e Apophis usou Ofuscação para sumir da vista de todos. O combate começou, deixando Salazar sozinho frente a frente com a brutalidade do guerreiro Brujah e seus soldados
+
+Sessão 2: A Queda de Ezio e o Batismo do Diabolus Maris
+O ataque ao galeão de suprimentos da Camarilla foi um espetáculo de terror e supremacia tática. Nos flancos do navio, Constantin invocou as proezas profanas da Vicissitude, assumindo a grotesca e temível Forma Zulo, cujos ossos expostos e força monstruosa despedaçaram a linha de mosqueteiros e espadachins que tentavam reagir. Protegendo o flanco e garantindo a segurança do Ancião Valerius, o Setita Apophis utilizou magistralmente sua Ofuscação, eliminando alvos silenciosamente. Valerius, poupando seu precioso sangue, dominou a mente dos guardas mortais sobreviventes com palavras de comando, forçando os defensores de Veneza a cravarem suas espadas uns nos outros.
+No convés principal, o duelo central foi travado entre o Capitão Salazar e o experiente comandante Brujah, Ezio. Salazar suportou cortes brutais do guerreiro da Torre de Marfim, mas canalizou o poder das profundezas com Daimonion, conjurando chamas infernais do abismo para queimar Ezio com dano agravado. Enquanto isso, Fiori abandonou sua forma mortal para se tornar o Avatar Tenebroso, gastando seu sangue para se converter em uma poça de sombras vivas indestrutível. Do seu corpo fluido e de um barril adjacente, Fiori invocou dezenas de tentáculos esmagadores (Braços de Ahriman) e moldou as sombras em uma ilusão aterrorizante de fogo abissal que consumia a embarcação. Em meio ao caos da magia sombria, uma falha crítica na manipulação das trevas fez com que um dos tentáculos agarrasse Salazar acidentalmente, mas o controle foi retomado a tempo de imobilizar Ezio impiedosamente.
+Com o Brujah de 9ª Geração imobilizado pelas sombras de Fiori e queimado pelo fogo negro, Salazar executou o golpe final. Perante o choque de mortais e imortais, o corsário Baali abriu as presas e cometeu a Diablerie, consumindo a alma de Ezio para roubar seu poder geracional, satisfazendo também seu defeito profano de Comedor de Carne ao arrancar-lhe o coração. Aterrorizados e com seus líderes mortos, os poucos soldados restantes renderam-se imediatamente ao grito impositivo de Valerius. O bando limpou a carnificina e preparou ambas as embarcações para zarpar furtivamente através dos canais e lagoas da cidade dos Doges.
+Navegando pela lagoa veneziana com o vento frio acariciando os rostos pálidos dos monstros vitoriosos, um sentimento de poder e união tomou conta do grupo. Fiori, compreendendo o peso do momento, convocou a matilha. Ele ergueu um cálice e propôs a Vaulderie — o rito sagrado do Sabá. Salazar, Constantin, Fiori, Apophis e Valerius derramaram seu sangue na taça, comungando do mesmo cálice para apagar antigas lealdades e forjar o Vinculum, o laço de irmandade inquebrável da Espada de Caim. Atracando em uma enseada oculta e descarregando a rica carga da Camarilla, a matilha se abrigou para o sono diurno, não mais como aliados de conveniência, mas como verdadeiros irmãos de sangue.
+
+Sob a névoa que abraçava a lagoa como uma mortalha, a matilha desembarcou no ancoradouro apodrecido, cercados pelo odor do sangue espalhado no convés. Lá, o Bispo Ignatius e o Templário Septemus, presenças de escuridão absoluta, os saudaram como a lâmina que cortou a garganta da arrogância da Camarilla, consagrando a matilha com títulos de poder dentro da seita. Salazar foi nomeado Ductus, o líder tático encarregado da sobrevivência e da fúria em batalha, enquanto Fiori foi ungido como Sacerdote, o guia espiritual responsável por manter a coesão e a fé daquelas feras unidas. A autoridade do Bispo, contudo, não tolera insolência. Quando o agora Ductus Salazar ousou uma proximidade desrespeitosa, sentiu o peso esmagador da Dominação; seu corpo traiu-o, forçando-o a ajoelhar-se e beijar o anel de Ignatius em um silêncio humilhante. Enquanto isso, Septemus e seus soldados famintos avançavam sobre os marinheiros mortais para saciar sua fome.
+Restaurada a ordem, Ignatius revelou a nova arma da matilha: Abdal el Farad, um "irmão verdadeiro" de tez ressequida e olhar enigmático, cujos sinais secretos trocados com o Bispo denunciam uma linhagem de assassinos Assamitas. Ele junta-se ao grupo sob uma sombra de mistério, trazendo habilidades que prometem ferir profundamente a Torre de Marfim em Veneza. O destino final é o massacre do Príncipe Iacomo, mas as muralhas de Veneza exigem mais do que espadas. A matilha recebeu a missão de penetrar nos pântanos pútridos de Veneto para encontrar o eremita Voivode Ilias, um mestre da carne e dos ossos. Com ele, devem aprender o ritual para erguer um Vozhd — uma abominação colossal tecida com os corpos de dezenas de humanos, destinada a ser o martelo que esmagará o palácio da Camarilla. No centro deste plano, Abdal aceitou o sangue do grupo com uma risada interna, ocultando o facto de que sua alma permanece livre e imune aos grilhões que agora tentam prender o resto da matilha. Manuel recebe um grimório de Ignatius, com um ritual que cria coragem contra o fogo.
+
+Sob a névoa fria da lagoa veneziana, a matilha do Sabá saciou sua sede e garantiu sua sobrevivência antes da longa jornada. Após ancorarem furtivamente nos arredores de Burano, Fiori e Salazar comandaram uma caçada cirúrgica e implacável, arrastando quinze almas aterrorizadas para os porões do Diabolus Maris para servirem como uma despensa viva de sangue. Através de um interrogatório impiedoso no convés inferior, a matilha extraiu de um ancião mortal a lenda de uma área amaldiçoada nos pântanos do Vêneto, famosa por desaparecimentos misteriosos e temida por todos. Com a rota traçada, Constantin serviu como batedor sob a luz da meia-lua, guiando a caravela até os limites de um manguezal denso e sombrio onde as águas rasas impediam o avanço do navio.
+Deixando o restante da tripulação para trás, Salazar, Fiori e Constantin adentraram a escuridão em um pequeno bote. A névoa logo engoliu a embarcação, e a corrupção do pântano revelou sua natureza hostil com o ataque de uma praga de mosquitos sobrenaturais famintos por vitae. Para sobreviver ao enxame, Fiori invocou seu poder máximo e se converteu em uma invulnerável poça de sombras abissais, enquanto Constantin manipulou os próprios ossos e músculos com Vicissitude para blindar sua carcaça. O Capitão Salazar, no entanto, viu-se sem defesas corporais semelhantes e sofreu a fúria da praga, sendo picado violentamente pelos insetos atraídos pelo seu potente sangue. A tortura só cessou quando alcançaram uma clareira silenciosa, onde uma voz ancestral e onipresente exigiu saber quem ousava invadir seu domínio.
+Das brumas emergiu o antigo feiticeiro Koldun, Voivode Ilias, ladeado por um aterrador cão Mastiff da família Revenant. Assumindo a vanguarda diplomática através de seu parentesco Tzimisce, Constantin revelou a missão dada pelos aliados do Sabá: construir um monstruoso Vozhd para aniquilar o Príncipe Iacomo e a presença da Camarilla em Veneza. Ilias concordou em realizar o antigo feitiço de animação, mas seu preço inicial foi sádico: um membro amputado de cada vampiro para sua coleção pessoal. Após uma negociação fria de Constantin, o ancião aceitou poupar as pernas e braços da matilha em troca de 10 pontos de suas próprias vitaes para abastecer a magia. O pacto profano foi selado: a matilha recuou de volta ao navio, onde Constantin precisará usar suas artes de moldar carne para costurar os quinze mortais cativos, preparando a abominação para que Ilias desça do pântano e desperte a derradeira arma de guerra do Sabá.
+
+Após Abdal avistar e ferir um Gárgula espião com sua adaga, Fiori rapidamente sacou sua pistola e disparou contra a criatura em fuga, mas foi o Capitão Salazar quem roubou a cena: assumiu o controle de um canhão do Diabolus Maris e obliterou o monstro em pleno ar com um tiro devastador. 💥 O que se seguiu foi um verdadeiro show de horrores do Sabá: Constantin usou seu grotesco artesanato da carne para descosturar as asas da fera, costurar seus olhos para que ficassem eternamente abertos e empalá-lo na proa do navio como um troféu macabro. Desperto do torpor, o monstro foi interrogado por Fiori via Dominação, revelando os segredos e as defesas do Príncipe Iacomo no Palácio Ca' d'Oro antes de ter sua alma devorada em uma brutal Diablerie. Para conter o pânico, a coterie precisou usar controle mental na tripulação mortal aterrorizada, forçando-os a "ficar felizes" com toda a carnificina. 🩸🏴‍☠️
+
+Cientes de que um cerco direto ao castelo inimigo seria suicídio, o conselho de guerra traçou uma estratégia política engenhosa. ♟️ Com o apoio do ancião Valerius, o grupo planeja massacrar os peões e rebanhos da Camarilla de forma calculada, poupando os territórios do Clã Giovanni com o objetivo de instigar e utilizar os necromantes como uma arma na luta para derrubar o Príncipe Iacomo! 🎭 Para executar esse caos, criarão um exército descartável de shovelheads (cabeças de pá) recém-Abraçados a partir de mortais sequestrados na costa. Para a infiltração, Valerius ainda revelou dois contatos cruciais da resistência clandestina: Lorenzo, um gárgula liberto, e Diácono, um Nosferatu conhecido como "rato d'água". Com a distração armada e o colossal monstro Vozhd prestes a despertar do ritual koldúnico, as peças estão no tabuleiro. O assalto definitivo do Sabá em Veneza começou! ⚔️🔥
+
+V:DA Char summary and stats - Combat tracker
+
+sangue consumido
+
+willpower max
+
+willpower atual
+
+cel, vicissitude 4
+
+dano recebido
+
+13 flechas pretas
+
+V:DA Char summary and stats - vinculum
+
+V:DA Char summary and stats - Gastos XP
+
+Ajustes após reforma
+
+Performance 1
+
+Potencia 3, Celeridade 3
+
+Sobrou na criação
+
+(diablerie) Pot 2, For 1
+
+Ajustes após reforma
+
+Politics 1, Survival 2, Etiqueta 2, Ocultismo 4
+
+Ajustes após reforma
+
+(diablerie) Vicissitude 1
+
+(diablerie) Visceratika 1, Fortitude 2
+
+1 ponto de body craft
+
+Ajustes após reforma
+
+Protean 5, Str 3
+
+(diablerie) For 3, Aus 1
+
+Total geral
+
+Ajustes após reforma
+
+Diablerie New disciplina = 5
+
+Path of the bone 1
+
+Diablerie Clan discipline = New rating x2
+
+Politics 1, Alertness 2, Ocultismo 4
+
+Diablerie NonClan discipline = New rating x3
+
+(Diablerie) Protean 1, Fortitude 1
+
+Ajustes após reforma
+
+Ath 3>4 = 6, Ath 4>5 = 8
+
+Celerity 1, Dominate 1
+
+Dex 4>5 = 16, Brawl 3>4 = 6, Brawl 4>5 = 8
+
+Dominate 2, Dominate 3
+
+Intimidation 1
+
+rituais Defense of the Sacred Haven  1heaven
+Ward 2heaven
+Animated Assistants 3heaven
+Dedicate the Haven 5
+
+Sta 1>2 = 4, For 1>2= 7, Sta 2>3 = 8, For 2>3 = 14,Cel 2>3 = 14
+
+Stealth 2, Athletics 1, Athletics 2
+
+Ajustes após reforma
+
+Brawl 3 Alertness 2 Alertness 3
+
+Dex 5, Courage 4, Self-control 5
+
+Firearms 2, Stealth 1, Ride 2, Brawl 1 e 2
+
+Fortitude 3
+
+Leadership 4, Subterfuge 3, Politics 1
+
+Teology 2, Celerity 1
+
+Diablerie for +1
+
+(diablerie) For 3, Pre 1
+
+(Diablerie) Fortitude 3
+
+(Diablerie) Protean 2, Fortitude 2, Auspex 1, Potencia 1
+
+(Diablerie) Protean 3
+
+Ajustes após reforma
+
+Athletics 2 Athetics 3
+
+Celerity 2, Potence 2, Potence 3
+
+Obfuscate 4
+
+(Diablerie) Protean 1, Fortitude 2
+
+Ajustes após reforma
+
+Etiquette 1, Etiquette 2
+
+Intelligence 3
+
+Brawl 3, Brawl 4
+
+Domination 1
+
+V:DA Char summary and stats - Diableries
+
+# of diableries
+
+diablerized
+
+player disciplines
+
+npc disciplines
+
+points gained /4
+
+discipline gained
+
+player generation
+
+npc generation
+
+generation gained
+
+Anda Warrior I
+
+Ani 2, Obf 3
+
+For 2, Pro 3
+
+fortitude +1
+
+Anda Warrior I
+
+Ani 2, Obf 3, For 1
+
+For 2, Pro 3
+
+Anda Warrior II
+
+Ani 2, Obf 3, For 1, Pro 1
+
+For 2, Pro 5, Pot 2
+
+Anda Warrior I
+
+Ani 2, Obf 3, For 1, Pro 1, Pot 1
+
+For 2, Pro 3
+
+Anda Warrior II
+
+Ani 2, Obf 3, For 1, Pro 1, Pot 1
+
+For 2, Pro 5, Pot 2
+
+Anda Warrior II
+
+Ani 2, Obf 3, For 1, Pro 2, Pot 1
+
+For 2, Pro 5, Pot 2
+
+fortitude +1
+
+Kaspar (Gangrel scout II)
+
+Ani 2, Obf 3, For 2, Pro 2, Pot 1
+
+Aus 3, For 2, Ani 3, Obf 1
+
+Anda Captain I
+
+Vic 4, For 2
+
+For 3, Pro 5, Cel 2, Pot 2
+
+Anda Warrior II
+
+For 2, Pro 5, Pot 2
+
+fortitude +2
+
+Anda Scout II
+
+Ani 2, Obf 4, For 2, Pro 2, Pot 1, Aus 1
+
+For 3, Pro 2, Pot 1, Ani 2
+
+Anda Warrior II
+
+Ani 2, Obf 4, For 2, Pro 2, Pot 1, Aus 1
+
+For 4, Pro 3, Pot 2
+
+fortitude +1
+
+Anda Warrior II
+
+Ani 2, Obf 4, For 3, Pro 3, Pot 1, Aus 1
+
+For 4, Pro 3, Pot 2
+
+Anda Scout II
+
+Tha 5, Cel 2, Dom 1
+
+For 3, Pro 2, Pot 1, Ani 2
+
+fortitude +1, protean +1
+
+Anda Captain II
+
+Ani 2, Obf 4, For 3, Pro 3, Pot 1, Aus 1
+
+For 4, Pro 5, Cel 2, Pot 3
+
+celerity +1
+
+Staurakius (Brujah Guardian II)
+
+Obt 3, Pot 1, Dom 2
+
+Pot 4, Cel 3, For 3, Pre 1
+
+Pot +1, For +1
+
+Angelus (Ventrue Guardian II)
+
+Ani 2, Obf 4, Pro 3, For 2, Pot 3, Aus 1, Cel 2
+
+Cel 4, Pot 3, For 3, Pre 2
+
+Damasus (Cappadocian Priest III)
+
+Nec 5, Cel 2, For 2
+
+Nec 5, Cel 3, For 3, Pot 3, Pre 2, Aus 2
+
+For +1, Aus +1
+
+Janousek (Anarch Tzimisce II)
+
+Pro 4, For 1, Ani 2, Cel 1, Pot 1
+
+Vic 5, For 3, Cel 2, Ani 3
+
+Bartolomej (Anarch Brujah II)
+
+Ani 2, Obf 4, Pro 3, For 2, Pot 3, Aus 1, Cel 2, Pre 1
+
+Cel 3, Pot 4, For 3, Pre 2
+
+Anarch Gargula
+
+Pro 5, For 1, Ani 2, Cel 1, Pot 1, Vic 1
+
+Pot 3, For 3, Vis 3, Pro 2, Fli 3
+
+For +1, Vis +1
+
+Conde Albizzo (Ventrue Roma)
+
+Vic 4, Pro 2, For 2, Cel 2, Pot 2
+
+Aus 1, Dom 5, For 5, Obf 2, Obt 1, Pot 3, Pre 3
+
+Dom +1, Pot +1
+
+Conselheiro Mateo (Giovanni)
+
+Pot 3, Ser 4, For 2, Nec 2, Cel 1
+
+Nec 5, Cel 2, For 4, Pot 1, Pre 1
+
+Mordecai (Venture 8)
+
+Dom 4, For 3, Pot 2, Cel 3
+
+Dom 6, Pre 5, For 4, Aus 2
+
+Dom+1, Pre +1
+
+Ezio (Brujah 9)
+
+Dai 3, Cel 1, Obf 1, Pre 1
+
+Pot 3, Cel 4, Pre 1, For 3
+
+Pot+1,For+1
+
+Gargoyle Scout
+
+Ten 5, Dom 1
+
+Pot 1, Fly 2, For 1
+
+V:DA Char summary and stats - Stash, Investimentos, Títulos
+
+Items do grupo
+
+Espada Mantas
+
+Brilha perto de undead, dá tracking se ferir, (+2A contra holy, shadow marker)
+
+Tomos de Thaumaturgy (Potestas Tempestatum 298)
+
+Possibilita avançar os estudos no caminho
+
+Scrolls of Wisdom on Gehenna
+
+Valor histórico, base para a heresia de Znojmo
+
+Tomos de necromancia (The Path of the Bone 278)
+
+Possibilita avançar os estudos no caminho
+
+Tomo de Revenants
+
+Um manuscrito que detalha como criar famílias revenant
+
+Rodada de investimentos #1 (desde o século 13 até o 15)
+
+Investimento (rolagem)
+
+Paladino (4)
+
++1 influencia (religiosa), +informações
+
+Capelão do condado de znojmo (titulo) e atua em nome dos interesses militares da igreja, Ajudar mortais (espiritual), Viagem a italia para visitar sua Senhora
+
++2 recurso, predio
+
+Carta de acordo inicial, Criação do rascunho do contrato final, (Velocidade baixa por causa da rolagem baixa), Qual o nome da moeda?,  Imóvel próximo ao castelo em área segura
+
+Estabelecer nova heresia (4)
+
+culto, 3 seguidores
+
+Apreende livros e artefatos da heresia cainita, Estabelece a heresia de Bitov (ou me da um nome aí e conta sobre o que é), 3 seguidores cainitas de sangue ralo. Resto da coterie vai seguir e ir no culto?
+
++mapa floresta, titulo
+
+Sheriff pra todos os condados (titulo), Mapear floresta por animais normais ou sobrenaturais e criar proprio bando com melhores especimes (cria matillha e estabelece um canil), Visita na Escócia
+
+Finanças e cemitério (6)
+
++1 recurso, predio
+
+Controle de todos os impostos recolhidos e invesitmentos do condado, Hospital com necrotério e cemitério
+
+Artistas (2)
+
+-1 recurso, predio, +1 influencia (arte), carniçal expert
+
+Utiliza contatos na Italia para importar um mestre renascentista, que vai criar um workshop para produção de obras de arte e ter aprendizes customizados para a Chantria ou qualquer outro  empreendimento
+
+Revenant gargula (0)
+
+Cria um laboratorio pra experimentação de Gárgulas, Longa pesquisa esbarra na falta de magia Koldunica e não há grande progresso na busca por orientação pois é um tópico proibido atualmente
+
+Chantria (4)
+
+-1 recurso, predio, +2 status com Tremere/Ventrue
+
+Owen viabiliza a construção inicial da Chantria, Adquirindo e confiscando ferramentas de pesquisa, livros e inclusive obras de arte para dar destaque ao local, Evento de inauguração teve presença de todos os aliados incluindo Lotharius, Karl, Fanchon e etc
+
+Evangelização (4)
+
++2 recurso, +1 influencia (religiao), religious mob
+
+Dominou e enlaçou os cabeças da igreja católica na região do condado e nos entornos (foi cauteloso na divisa com Viena, mas se aprofundou para a vizinhança na Czechia),  dominou também os tesoureiros, Elaborou novas estratégias de conversão de fieis e esquemas de indulgencias, Incitou extremistas que são uma pequena unidade militar (30 malucos)
+
+Firearms (3)
+
+-1 recurso, predio, carniçal expert
+
+Constroi um campo de treinamento, produção de pólvora e arcabuzes. Mantém um pelotão de 20, o líder do pelotão é carniçal - Tenente Barnabas
+
+Guttenberg (1)
+
+predio, carniçal expert
+
+Dificuldades no transporte de seus equipamentos atrasaram os planos, Com o envelhecimento e morte em 1468 (não teve como carniça-lo pq rolou mal) a prioridade foi apenas absorção do conhecimento por um aprendiz (esse sim carniçal) que precisará de mais tempo para estabelecer o processo e só então poder imprimir algo mais influente (no próximo ciclo de  investimento)
+
+Templos religioso (3)
+
++1 influencia (religiao)
+
+Constrói nova Igreja incluindo os padres, coroinhas e toda a estrutura alinhada ao Capelão de Znojmo, Atrai monges e escribas
+
+Vinicula (-1)
+
+Recebeu um belo plano de um agricultor falso, que deu o truque, levou o dinheiro e não entregou nenhuma colheita. Sumiu (pode ir caçar ele com uma side quest)
+
+Master spy (2)
+
+Contra espionagem, visibilidade do territorio
+
+Coordenar rede de espionagem, Monitorar o condado e os vizinhos diretos, Contra espionagem para defender os domínios
+
+Barracks (4)
+
+predio , -1 recurso, unidade militar
+
+Líder da guarda e do exército, Expansão do Barracks, Treinamento e recrutamento de soldados
+
+Rodada de investimentos #2 (desde o século 15 até o 16)
+
+Investimento (rolagem)
+
+Barão de Bitov
+
+Barão de Breclav
+
+Conde de Brno
+
+Capelão da Moravia
+
+Bispo da Moravia
+
+Sheriff da Moravia
+
+Conde de Znojmo
+
+Mestre espião da Moravia
+
+General da Moravia
+
+Mão do Conde
+
+Conde de Jihlava
+
+Barão de Mikulov
+
+Duque da Moravia
+
+Conde de Olomouc
+
+Conde de Opava
+
+Conde de Prerov
+
+Barão de Znojmo
+
+Regente da Chantria
+
+Unidade Militar
+
+Local / Base
+
+Descrição, Equipamento e Papel Tático
+
+Milícia Camponesa
+
+Infantaria leve sem treinamento. Convocados por lei marcial. Custo baixo de manutenção.
+
+Milícia Camponesa
+
+Semelhante à de Znojmo. Guardas de fronteira não profissionais.
+
+Milícia Camponesa
+
+Moradores locais e trabalhadores das novas obras de Gabor e Lutz.
+
+Milícia Camponesa
+
+Fiéis e camponeses em torno do novo templo construído por Owen.
+
+Infantaria (Soldiers)
+
+Soldados profissionais, bem equipados com espadas e escudos. Treinados pessoalmente por Vladislav.
+
+Cavalaria (Cavalry)
+
+Cavalaria média. Treinados e comandados por Vladislav. Focam em manobras de flanco.
+
+Arqueiros (Soldiers)
+
+Arqueiros profissionais. Treinados por Vladislav para atirar de muralhas.
+
+Monges Religiosos
+
+Znojmo/Breclav
+
+Fanáticos com armas e treinamento básico gerados pela evangelização de Owen. Camuflam-se na população.
+
+Mosqueteiros (Musketmen)
+
+Tropa de elite financiada por Owen, liderada pelo Tenente Barnabas (Carniçal). Usam os letais arcabuzes/mosquetes.
+
+Canhões Médios (Medium Cannon)
+
+Adquiridos pela coterie em Budapeste. Artilharia letal para quebrar formações e muralhas.
+
+Milícia Mineira
+
+Jihlava (Novo)
+
+Trabalhadores das minas de prata da região. Armados com picaretas pesadas e martelos. Excelentes para Sapping (Escavação de cercos).
+
+Alabardeiros Pesados
+
+Jihlava (Novo)
+
+Guardas profissionais que protegiam a prata de Shaagra. Usam Armadura de Placas e Alabardas.
+
+Besteiros (Crossbowmen)
+
+Jihlava (Novo)
+
+Infantaria de precisão que guarnece as montanhas. Balestras perfuram armaduras com facilidade.
+
+Milícia Ribeirinha
+
+Přerov (Novo)
+
+Camponeses acostumados a navegar e defender o rio. Infantaria leve.
+
+Cavalaria Leve (Hussars)
+
+Přerov (Novo)
+
+Batedores rápidos (Scouts) acostumados a patrulhar as fronteiras húngaras. Essenciais para negar o forrageio inimigo.
+
+Přerov (Novo)
+
+Caçadores locais convertidos em tropas de apoio à distância.
+
+Milícia Urbana
+
+Brno (Novo)
+
+O coração comercial da Morávia fornece a maior leva de homens. Razoavelmente equipados com lanças e escudos de madeira.
+
+Infantaria Pesada (Pikemen)
+
+Brno (Novo)
+
+Tropa regular do antigo governo. Especializados em formações de pique para deter cargas de cavalaria.
+
+Cavalaria Pesada (Knights)
+
+Brno (Novo)
+
+A elite da nobreza mortal moraviana. Cavaleiros com armadura pesada montados em Destriers. Servem como a vanguarda esmagadora.
+
+Canhões de Campo
+
+Brno (Novo)
+
+Artilharia deixada para trás pelos antigos regentes, agora a serviço de Owen e Vladislav.
+
+Milícia Urbana
+
+Olomouc (Novo)
+
+Recrutas da capital espiritual e histórica da região.
+
+Guardas Sagrados (Holy Guards)
+
+Olomouc (Novo)
+
+Soldados ligados diretamente à Igreja (e indiretamente a Ezio, como Capelão). Alta moral (dificuldade menor para testes de Coragem militar).
+
+Cavalaria Templária/Inquisitorial
+
+Olomouc (Novo)
+
+Cavaleiros da fé. Extremamente perigosos. Owen e Ezio precisarão de muita diplomacia e Dominate para mantê-los leais sem descobrirem a natureza da coterie.
+
+V:DA Char summary and stats - prompts
+
+a full body photograph of an middle aged evil blonde vampire called Sorin Markov, norse bishop with pale skin and dark runic tattoos in the face, 
+
+posing in a medieval landscape at night with full moon, 
+
+wearing a dark chainmail with catholic symbols covered by a monastic red religious robe,
+
+holding a cursed black bible and a curved dane axe, normal human fingers with rings with big gems,
+
+in the background there are european mountains with a large medieval castle from the middle dark ages, an evil landscape.
+
+the ground is a muddy battlefield with piles of bloody dead bodies, no grass,
+
+a high detail artwork by ted nasmith and greg rutkowski and boris vallejo, inspired gustav doré and hieronymus bosch,
+
+normal ears, high quality, detailed, high resolution, 
+
+horror, fantasy, terror, world of darkness
+
+text, watermark, bad fingers, weird fingers, jpg, bad quality, zoom,  
+
+wings, bats, 
+
+horn, horns, border, 
+
+long ears,spiked ears, pointy ears, elf ears,
+
+cropped, ((out of frame)), ugly, deformed, (blur),
+
+jeans
+
+V:DA Char summary and stats - Roteiro
+
+objetivo principal
+
+objetivos secundarios
+
+principais NPCs
+
+1-Queda de Constantinopla
+
+1-Inquisição
+
+1-Revisão de capítulo anterior, Recuo dos Mongóis, Julgamento de Jurgen (ele e o conselho dao perdao excepcional a diablerie, nunca mais tolera e tem q aderir a todas as tradiçoes inclusive mascara)
+2-Os vampiros locais continuam na caça livre, se não fizer nada vai ter emboscada da coteria anterior (1 brujah cavaleiro 2h nivel Vlad, +4)  
+3-Ataque de grupo inquisidor porrador (fé + inimigos do Vitas + novos inimigos do grupo)
+4-Limpeza da sujeira, manter mascara
+5-Boatos da invasores otomanos, nova invasao tao grande ou maior q a Mongolia
+
+Reunir novo grupo
+
+Botar fogo em alguem, conectar PCs
+
+Inquisidor X
+
+1-Queda de Constantinopla
+
+2-Reuniao em Vienna
+
+2-A reunião com os líderes. confirmar rumores da ameaça otomana
+3-Rebeldes (que acham que Jurgen deve agir mais rápido dessa vez senão vai ser pior q a invasão mongol
+4-Novas formas de violentar (arcabuz)
+
+introdução a NPCs
+
+armas de fogo
+
+Patricia, Zvi, Unorna
+
+1-Queda de Constantinopla
+
+3-A conexão entre anarquistas e inquisidores
+
+1-Identifica os inquisidores e os persegue até a Abadia 
+2-O extermínio dos Cistercianos e Inquisidores papais e aquisição de documentos
+3-Pedido de Jurgen (buscar o artefato, senão os anarquistas ou otomanos ficarão com ele e poderão liberar demônios contra Hardestad)
+
+Revelar o artefato de Constantinopla
+
+1-Queda de Constantinopla
+
+4-Penetrando o cerco
+
+1-O caminho até Constantinopla (barco)
+2-Se esgueirando pelo cerco, apresentação aos canhões
+3-O eclipse lunar
+
+Constantinopla
+
+https://whitewolf.fandom.com/wiki/Constantinople\_(WOD)
+
+1-Queda de Constantinopla
+
+5-O espírito escapa
+
+1-As névoas sombrias, o pânico generalizado
+2-A biblioteca (Library of the Forgotten)
+3-A batalha pelo artefato
+4-A fuga do espírito, walls breached
+5-Livro de presente pro LUTZ
+
+Recuperar o artefato
+
+Adquirir mais livros na biblioteca (sobre Kupala, sobre necromancia/thaumaturgia, sobre skills tipo academics e politics e
+
+2-O levante dos anarquistas
+
+3- Transilvania
+
+4-A formação da Camarilla
+
+1-Contato com Jurgen
+
+1- Como passaram os anos ate 1493
+
+2- A convenção dos espinhos
+
+1-Anúncio da fomação da aliança entre os lideres e a consolidação dos clans anarquistas
+
+V:DA Char summary and stats - Weapons
+
+V:DA Char summary and stats - House Rules
+
+customizado
+
+recuperar dano agravado
+
+recupera 1 por dia com sangue e descanso completo
+
+recupera1 por semana com descanso parcial
+
+a campanha é esticada em muitos dias/meses
+
+mortal usar stamina para soak damage
+
+não usa stamina, só armadura
+
+mortal soma stamina e armor igual vampiro, continua sem soakar agravado
+
+multiplo uso de disciplina com celeridade
+
+só pode fazer outro ataque, não pode segundo uso de disciplina no msm turno
+
+octavian pode mandar xmen duas vezes por turno
+
+só o octavian
+
+V:DA Char summary and stats - Sins
+
+PATH OF THE BEAST
+
+V:DA Char summary and stats - Summary
+
+Favorite weekdays
+
+COUNTUNIQUE de session
+
+AVERAGE de # of players
+
+COUNTUNIQUE de Localidade
+
+COUNTUNIQUE de session
+
+Belapatfalva, Hungria
+
+Castelo Liechtenstein, Austria
+
+Constantinople
+
+Monteriggioni
+
+Spis Castle, Slovakia
+
+Transylvania
+
+Total geral
+
+Total geral
+
+V:DA Char summary and stats - Sheets
+
+of the Beast 6
+
+Alertness 3
+
+Awareness 3
+
+Subterfuge 3
+
+Animal Ken 4
+
+Performance 3
+
+Academics 2
+
+Backgrounds
+
+Generation 3
+
+Conviction 3
+
+Disciplines
+
+Animalism 2
+
+Obfuscate 3
+
+Without a Trace 2
+
+Prestigious Sire 1
+
+Cast no Reflection 1
+
+Sire Resentment 1
+
+1 Discipline = 7
+
+6 Willpower = 6
+
+3 Abilities = 6
+
+3 Backgrounds = 3
+
