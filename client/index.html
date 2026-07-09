@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Storyteller App</title>
+    <link rel="stylesheet" href="style.css?v=3">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/5.3.1/fabric.min.js"></script>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <style>
+        /* Floating Button Styles */
+        .floating-button {
+          position: fixed;
+          bottom: 20px;
+          right: 20px;
+          background-color: #6366f1;
+          color: white;
+          border: none;
+          padding: 15px;
+          font-size: 16px;
+          cursor: pointer;
+          border-radius: 50%;
+          box-shadow: 0px 8px 16px rgba(0,0,0,0.5);
+          z-index: 1000;
+        }
+
+        /* Popup Panel Styles */
+        .popup-panel {
+          position: fixed;
+          bottom: 80px;
+          right: 20px;
+          background-color: rgba(15, 15, 19, 0.85);
+          backdrop-filter: blur(8px);
+          color: #e2e8f0;
+          border-radius: 8px;
+          border: 1px solid #3a1a1a;
+          padding: 20px;
+          width: 300px;
+          box-shadow: 0px 4px 16px rgba(0,0,0,0.8);
+          display: none;
+          z-index: 1000;
+        }
+        .popup-panel.active { display: block; }
+        
+        .panel-header {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-bottom: 15px;
+        }
+        .close-btn {
+          background: transparent;
+          border: none;
+          color: white;
+          font-size: 24px;
+          cursor: pointer;
+        }
+    </style>
+</head>
+<body class="dark-theme">
+    <!-- Floating RAG Rule Search -->
+    <button id="floating-rule-btn" class="floating-button">
+      📖
+    </button>
+    <div id="floating-rule-panel" class="popup-panel">
+      <div class="panel-header">
+        <h3 style="margin:0;">Rule Search</h3>
+        <button class="close-btn" id="close-rule-panel">&times;</button>
+      </div>
+      <div>
+        <input type="text" id="floating-rule-search" placeholder="Search rules..." style="width: 100%; padding: 0.5rem; background: #1a1a24; color: white; border: 1px solid #3b3b4f; border-radius: 4px;">
+        <button id="floating-rule-submit" style="width: 100%; margin-top: 0.5rem;">Search</button>
+        <div id="floating-rule-results" style="margin-top: 1rem; max-height: 200px; overflow-y: auto;"></div>
+      </div>
+    </div>
+
+    <div id="login-screen" class="container">
+        <h2>Storyteller App</h2>
+        <input type="text" id="username" placeholder="Username" required>
+        <input type="password" id="password" placeholder="Password" required>
+        <button id="login-btn">Login</button>
+        <button id="setup-btn">Setup Account</button>
+        <div style="margin: 1rem 0; text-align: center; color: #aaa;">OR</div>
+        <div id="g_id_onload"
+             data-client_id="538866350132-hl06n56jj2vinq3p31c60oq1bvbfk6mo.apps.googleusercontent.com"
+             data-context="signin"
+             data-ux_mode="popup"
+             data-callback="handleCredentialResponse"
+             data-auto_prompt="false">
+        </div>
+        <div class="g_id_signin"
+             data-type="standard"
+             data-shape="rectangular"
+             data-theme="filled_black"
+             data-text="signin_with"
+             data-size="large"
+             data-logo_alignment="left"
+             style="display: flex; justify-content: center; margin-top: 10px;">
+        </div>
+    </div>
+
+    <div id="dashboard-screen" class="hidden">
+        <header>
+            <span id="welcome-message"></span>
+            <button id="logout-btn">Logout</button>
+        </header>
+        
+        <aside class="sidebar">
+            <ul>
+                <li><a href="#dice-roller" class="sidebar-link" data-target="dice-roller">Dice</a></li>
+                <li><a href="#feed-area" class="sidebar-link" data-target="feed-area">Chat</a></li>
+                <li><a href="#character-panel" class="sidebar-link" data-target="character-panel">Character</a></li>
+                <li><a href="#combat-panel" class="sidebar-link" data-target="combat-panel">Combat</a></li>
+                <li><a href="#rules-panel" class="sidebar-link" data-target="rules-panel">Rules</a></li>
+                <li><a href="#sessions-panel" class="sidebar-link" data-target="sessions-panel">Sessions</a></li>
+                <li><a href="#vtt-panel" class="sidebar-link" data-target="vtt-panel">VTT</a></li>
+                <li><a href="#lore-panel" class="sidebar-link" data-target="lore-panel">Lore</a></li>
+                <li id="nav-st-dashboard" class="hidden"><a href="#st-dashboard-panel" class="sidebar-link" data-target="st-dashboard-panel" style="color: #a855f7;">ST Dashboard</a></li>
+            </ul>
+        </aside>
+
+        <main class="panel">
+            <section id="dice-roller">
+                <h3>Dice Roller</h3>
+                <input type="number" id="pool-size" placeholder="Pool Size" value="5" required>
+                <input type="number" id="difficulty" placeholder="Difficulty" value="6" required>
+                <button id="roll-btn">Roll</button>
+                <div id="dice-results" style="margin-top: 1.5rem; padding: 1rem; background: #1a1a1f; border: 1px solid #3a1a1a; border-radius: 8px;" class="hidden"></div>
+            </section>
+
+            <section id="feed-area" class="hidden">
+                <h3>Shared Event Feed</h3>
+                <div style="display: flex; gap: 1rem;">
+                    <!-- Connected Players List -->
+                    <div style="flex: 1; background: #1a1a1f; border: 1px solid #3a1a1a; border-radius: 8px; padding: 1rem; margin-bottom: 1rem;">
+                        <h4 style="margin-top: 0; margin-bottom: 1rem; color: #ff4d4f;">Connected Players</h4>
+                        <ul id="player-list" style="list-style: none; padding: 0; margin: 0;"></ul>
+                    </div>
+            
+                    <!-- Chat Messages -->
+                    <div style="flex: 2;">
+                        <div id="chat-messages" style="height: 300px; overflow-y: auto; background: #1a1a1f; border: 1px solid #3a1a1a; border-radius: 8px; padding: 1rem; margin-bottom: 1rem;"></div>
+                        <div style="display: flex; gap: 0.5rem;">
+                            <input type="text" id="chat-input" placeholder="Type a message..." style="flex: 1;">
+                            <button id="send-chat-btn">Send</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="character-panel" class="hidden">
+                <h3>Character Panel</h3>
+                <ul id="characters-list" style="cursor: pointer;"></ul>
+                <form id="create-character-form">
+                    <label for="char-name">Name:</label><input type="text" id="char-name" required>
+                    <label for="char-clan">Clan:</label><input type="text" id="char-clan" required>
+                    <label for="char-gen">Generation:</label><input type="number" id="char-gen" value="13" required>
+                    <button type="submit">Create Character</button>
+                </form>
+
+                
+                <div id="character-sheet" class="hidden" style="margin-top: 1rem;">
+                    <div class="v20-sheet">
+                        <h4>Twentieth Anniversary Edition - Vampire The Dark Ages</h4>
+                        
+                        <div class="v20-row">
+                            <div class="v20-col">
+                                <div class="v20-field"><label>Name:</label><input type="text" id="sheet-name"></div>
+                                <div class="v20-field"><label>Player:</label><input type="text" id="sheet-player" disabled></div>
+                                <div class="v20-field"><label>Chronicle:</label><input type="text" id="sheet-chronicle"></div>
+                            </div>
+                            <div class="v20-col">
+                                <div class="v20-field"><label>Nature:</label><input type="text" id="sheet-nature"></div>
+                                <div class="v20-field"><label>Demeanor:</label><input type="text" id="sheet-demeanor"></div>
+                                <div class="v20-field"><label>Concept:</label><input type="text" id="sheet-concept"></div>
+                            </div>
+                            <div class="v20-col">
+                                <div class="v20-field"><label>Clan:</label><input type="text" id="sheet-clan"></div>
+                                <div class="v20-field"><label>Sire:</label><input type="text" id="sheet-sire"></div>
+                                <div class="v20-field"><label>Generation:</label><input type="number" id="sheet-gen" value="13"></div>
+                            </div>
+                        </div>
+
+                        <h5>Attributes</h5>
+                        <div class="v20-row">
+                            <div class="v20-col">
+                                <h6 style="border:none; text-transform:none;">Physical</h6>
+                                <div class="v20-field"><label>Strength</label><div class="dot-rating" data-stat="attr-strength"><span class="dot" data-val="1">○</span><span class="dot" data-val="2">○</span><span class="dot" data-val="3">○</span><span class="dot" data-val="4">○</span><span class="dot" data-val="5">○</span></div></div>
+                                <div class="v20-field"><label>Dexterity</label><div class="dot-rating" data-stat="attr-dexterity"><span class="dot" data-val="1">○</span><span class="dot" data-val="2">○</span><span class="dot" data-val="3">○</span><span class="dot" data-val="4">○</span><span class="dot" data-val="5">○</span></div></div>
+                                <div class="v20-field"><label>Stamina</label><div class="dot-rating" data-stat="attr-stamina"><span class="dot" data-val="1">○</span><span class="dot" data-val="2">○</span><span class="dot" data-val="3">○</span><span class="dot" data-val="4">○</span><span class="dot" data-val="5">○</span></div></div>
+                            </div>
+                            <div class="v20-col">
+                                <h6 style="border:none; text-transform:none;">Social</h6>
+                                <div class="v20-field"><label>Charisma</label><div class="dot-rating" data-stat="attr-charisma"><span class="dot" data-val="1">○</span><span class="dot" data-val="2">○</span><span class="dot" data-val="3">○</span><span class="dot" data-val="4">○</span><span class="dot" data-val="5">○</span></div></div>
+                                <div class="v20-field"><label>Manipulation</label><div class="dot-rating" data-stat="attr-manipulation"><span class="dot" data-val="1">○</span><span class="dot" data-val="2">○</span><span class="dot" data-val="3">○</span><span class="dot" data-val="4">○</span><span class="dot" data-val="5">○</span></div></div>
+                                <div class="v20-field"><label>Appearance</label><div class="dot-rating" data-stat="attr-appearance"><span class="dot" data-val="1">○</span><span class="dot" data-val="2">○</span><span class="dot" data-val="3">○</span><span class="dot" data-val="4">○</span><span class="dot" data-val="5">○</span></div></div>
+                            </div>
+                            <div class="v20-col">
+                                <h6 style="border:none; text-transform:none;">Mental</h6>
+                                <div class="v20-field"><label>Perception</label><div class="dot-rating" data-stat="attr-perception"><span class="dot" data-val="1">○</span><span class="dot" data-val="2">○</span><span class="dot" data-val="3">○</span><span class="dot" data-val="4">○</span><span class="dot" data-val="5">○</span></div></div>
+                                <div class="v20-field"><label>Intelligence</label><div class="dot-rating" data-stat="attr-intelligence"><span class="dot" data-val="1">○</span><span class="dot" data-val="2">○</span><span class="dot" data-val="3">○</span><span class="dot" data-val="4">○</span><span class="dot" data-val="5">○</span></div></div>
+                                <div class="v20-field"><label>Wits</label><div class="dot-rating" data-stat="attr-wits"><span class="dot" data-val="1">○</span><span class="dot" data-val="2">○</span><span class="dot" data-val="3">○</span><span class="dot" data-val="4">○</span><span class="dot" data-val="5">○</span></div></div>
+                            </div>
+                        </div>
+
+                        <h5>Abilities</h5>
+                        <div class="v20-row">
+                            <div class="v20-col">
+                                <h6 style="border:none; text-transform:none;">Talents</h6>
+                                <div class="v20-field"><label>Alertness</label><div class="dot-rating" data-stat="talents-alertness"><span class="dot" data-val="1">○</span><span class="dot" data-val="2">○</span><span class="dot" data-val="3">○</span><span class="dot" data-val="4">○</span><span class="dot" data-val="5">○</span></div></div>
+<div class="v20-field"><label>Athletics</label><div class="dot-rating" data-stat="talents-athletics"><span class="dot" data-val="1">○</span><span class="dot" data-val="2">○</span><span class="dot" data-val="3">○</span><span class="dot" data-val="4">○</span><span class="dot" data-val="5">○</span></div></div>
+<div class="v20-field"><label>Awareness</label><div class="dot-rating" data-stat="talents-awareness"><span class="dot" data-val="1">○</span><span class="dot" data-val="2">○</span><span class="dot" data-val="3">○</span><span class="dot" data-val="4">○</span><span class="dot" data-val="5">○</span></div></div>
+<div class="v20-field"><label>Brawl</label><div class="dot-rating" data-stat="talents-brawl"><span class="dot" data-val="1">○</span><span class="dot" data-val="2">○</span><span class="dot" data-val="3">○</span><span class="dot" data-val="4">○</span><span class="dot" data-val="5">○</span></div></div>
+<div class="v20-field"><label>Empathy</label><div class="dot-rating" data-stat="talents-empathy"><span class="dot" data-val="1">○</span><span class="dot" data-val="2">○</span><span class="dot" data-val="3">○</span><span class="dot" data-val="4">○</span><span class="dot" data-val="5">○</span></div></div>
+<div class="v20-field"><label>Expression</label><div class="dot-rating" data-stat="talents-expression"><span class="dot" data-val="1">○</span><span class="dot" data-val="2">○</span><span class="dot" data-val="3">○</span><span class="dot" data-val="4">○</span><span class="dot" data-val="5">○</span></div></div>
+<div class="v20-field"><label>Intimidation</label><div class="dot-rating" data-stat="talents-intimidation"><span class="dot" data-val="1">○</span><span class="dot" data-val="2">○</span><span class="dot" data-val="3">○</span><span class="dot" data-val="4">○</span><span class="dot" data-val="5">○</span></div></div>
+<div class="v20-field"><label>Leadership</label><div class="dot-rating" data-stat="talents-leadership"><span class="dot" data-val="1">○</span><span class="dot" data-val="2">○</span><span class="dot" data-val="3">○</span><span class="dot" data-val="4">○</span><span class="dot" data-val="5">○</span></div></div>
+<div class="v20-field"><label>Legerdemain</label><div class="dot-rating" data-stat="talents-legerdemain"><span class="dot" data-val="1">○</span><span class="dot" data-val="2">○</span><span class="dot" data-val="3">○</span><span class="dot" data-val="4">○</span><span class="dot" data-val="5">○</span></div></div>
+<div class="v20-field"><label>Subterfuge</label><div class="dot-rating" data-stat="talents-subterfuge"><span class="dot" data-val="1">○</span><span class="dot" data-val="2">○</span><span class="dot" data-val="3">○</span><span class="dot" data-val="4">○</span><span class="dot" data-val="5">○</span></div></div>
+<div class="v20-field"><input type="text" placeholder="Custom" class="talents-custom-name" data-index="0"><div class="dot-rating" data-stat="talents-custom_0"><span class="dot" data-val="1">○</span><span class="dot" data-val="2">○</span><span class="dot" data-val="3">○</span><span class="dot" data-val="4">○</span><span class="dot" data-val="5">○</span></div></div>
+<div class="v20-field"><input type="text" placeholder="Custom" class="talents-custom-name" data-index="1"><div class="dot-rating" data-stat="talents-custom_1"><span class="dot" data-val="1">○</span><span class="dot" data-val="2">○</span><span class="dot" data-val="3">○</span><span class="dot" data-val="4">○</span><span class="dot" data-val="5">○</span></div></div>
+<div class="v20-field"><input type="text" placeholder="Custom" class="talents-custom-name" data-index="2"><div class="dot-rating" data-stat="talents-custom_2"><span class="dot" data-val="1">○</span><span class="dot" data-val="2">○</span><span class="dot" data-val="3">○</span><span class="dot" data-val="4">○</span><span class="dot" data-val="5">○</span></div></div>
+
+                            </div>
+                            <div class="v20-col">
+                                <h6 style="border:none; text-transform:none;">Skills</h6>
+                                <div class="v20-field"><label>Animal Ken</label><div class="dot-rating" data-stat="skills-animal_ken"><span class="dot" data-val="1">○</span><span class="dot" data-val="2">○</span><span class="dot" data-val="3">○</span><span class="dot" data-val="4">○</span><span class="dot" data-val="5">○</span></div></div>
+<div class="v20-field"><label>Archery</label><div class="dot-rating" data-stat="skills-archery"><span class="dot" data-val="1">○</span><span class="dot" data-val="2">○</span><span class="dot" data-val="3">○</span><span class="dot" data-val="4">○</span><span class="dot" data-val="5">○</span></div></div>
+<div class="v20-field"><label>Commerce</label><div class="dot-rating" data-stat="skills-commerce"><span class="dot" data-val="1">○</span><span class="dot" data-val="2">○</span><span class="dot" data-val="3">○</span><span class="dot" data-val="4">○</span><span class="dot" data-val="5">○</span></div></div>
+<div class="v20-field"><label>Crafts</label><div class="dot-rating" data-stat="skills-crafts"><span class="dot" data-val="1">○</span><span class="dot" data-val="2">○</span><span class="dot" data-val="3">○</span><span class="dot" data-val="4">○</span><span class="dot" data-val="5">○</span></div></div>
+<div class="v20-field"><label>Etiquette</label><div class="dot-rating" data-stat="skills-etiquette"><span class="dot" data-val="1">○</span><span class="dot" data-val="2">○</span><span class="dot" data-val="3">○</span><span class="dot" data-val="4">○</span><span class="dot" data-val="5">○</span></div></div>
+<div class="v20-field"><label>Melee</label><div class="dot-rating" data-stat="skills-melee"><span class="dot" data-val="1">○</span><span class="dot" data-val="2">○</span><span class="dot" data-val="3">○</span><span class="dot" data-val="4">○</span><span class="dot" data-val="5">○</span></div></div>
+<div class="v20-field"><label>Performance</label><div class="dot-rating" data-stat="skills-performance"><span class="dot" data-val="1">○</span><span class="dot" data-val="2">○</span><span class="dot" data-val="3">○</span><span class="dot" data-val="4">○</span><span class="dot" data-val="5">○</span></div></div>
+<div class="v20-field"><label>Ride</label><div class="dot-rating" data-stat="skills-ride"><span class="dot" data-val="1">○</span><span class="dot" data-val="2">○</span><span class="dot" data-val="3">○</span><span class="dot" data-val="4">○</span><span class="dot" data-val="5">○</span></div></div>
+<div class="v20-field"><label>Stealth</label><div class="dot-rating" data-stat="skills-stealth"><span class="dot" data-val="1">○</span><span class="dot" data-val="2">○</span><span class="dot" data-val="3">○</span><span class="dot" data-val="4">○</span><span class="dot" data-val="5">○</span></div></div>
+<div class="v20-field"><label>Survival</label><div class="dot-rating" data-stat="skills-survival"><span class="dot" data-val="1">○</span><span class="dot" data-val="2">○</span><span class="dot" data-val="3">○</span><span class="dot" data-val="4">○</span><span class="dot" data-val="5">○</span></div></div>
+<div class="v20-field"><input type="text" placeholder="Custom" class="skills-custom-name" data-index="0"><div class="dot-rating" data-stat="skills-custom_0"><span class="dot" data-val="1">○</span><span class="dot" data-val="2">○</span><span class="dot" data-val="3">○</span><span class="dot" data-val="4">○</span><span class="dot" data-val="5">○</span></div></div>
+<div class="v20-field"><input type="text" placeholder="Custom" class="skills-custom-name" data-index="1"><div class="dot-rating" data-stat="skills-custom_1"><span class="dot" data-val="1">○</span><span class="dot" data-val="2">○</span><span class="dot" data-val="3">○</span><span class="dot" data-val="4">○</span><span class="dot" data-val="5">○</span></div></div>
+<div class="v20-field"><input type="text" placeholder="Custom" class="skills-custom-name" data-index="2"><div class="dot-rating" data-stat="skills-custom_2"><span class="dot" data-val="1">○</span><span class="dot" data-val="2">○</span><span class="dot" data-val="3">○</span><span class="dot" data-val="4">○</span><span class="dot" data-val="5">○</span></div></div>
+
+                            </div>
+                            <div class="v20-col">
+                                <h6 style="border:none; text-transform:none;">Knowledges</h6>
+                                <div class="v20-field"><label>Academics</label><div class="dot-rating" data-stat="knowledges-academics"><span class="dot" data-val="1">○</span><span class="dot" data-val="2">○</span><span class="dot" data-val="3">○</span><span class="dot" data-val="4">○</span><span class="dot" data-val="5">○</span></div></div>
+<div class="v20-field"><label>Enigmas</label><div class="dot-rating" data-stat="knowledges-enigmas"><span class="dot" data-val="1">○</span><span class="dot" data-val="2">○</span><span class="dot" data-val="3">○</span><span class="dot" data-val="4">○</span><span class="dot" data-val="5">○</span></div></div>
+<div class="v20-field"><label>Hearth Wisdom</label><div class="dot-rating" data-stat="knowledges-hearth_wisdom"><span class="dot" data-val="1">○</span><span class="dot" data-val="2">○</span><span class="dot" data-val="3">○</span><span class="dot" data-val="4">○</span><span class="dot" data-val="5">○</span></div></div>
+<div class="v20-field"><label>Investigation</label><div class="dot-rating" data-stat="knowledges-investigation"><span class="dot" data-val="1">○</span><span class="dot" data-val="2">○</span><span class="dot" data-val="3">○</span><span class="dot" data-val="4">○</span><span class="dot" data-val="5">○</span></div></div>
+<div class="v20-field"><label>Law</label><div class="dot-rating" data-stat="knowledges-law"><span class="dot" data-val="1">○</span><span class="dot" data-val="2">○</span><span class="dot" data-val="3">○</span><span class="dot" data-val="4">○</span><span class="dot" data-val="5">○</span></div></div>
+<div class="v20-field"><label>Medicine</label><div class="dot-rating" data-stat="knowledges-medicine"><span class="dot" data-val="1">○</span><span class="dot" data-val="2">○</span><span class="dot" data-val="3">○</span><span class="dot" data-val="4">○</span><span class="dot" data-val="5">○</span></div></div>
+<div class="v20-field"><label>Occult</label><div class="dot-rating" data-stat="knowledges-occult"><span class="dot" data-val="1">○</span><span class="dot" data-val="2">○</span><span class="dot" data-val="3">○</span><span class="dot" data-val="4">○</span><span class="dot" data-val="5">○</span></div></div>
+<div class="v20-field"><label>Politics</label><div class="dot-rating" data-stat="knowledges-politics"><span class="dot" data-val="1">○</span><span class="dot" data-val="2">○</span><span class="dot" data-val="3">○</span><span class="dot" data-val="4">○</span><span class="dot" data-val="5">○</span></div></div>
+<div class="v20-field"><label>Seneschal</label><div class="dot-rating" data-stat="knowledges-seneschal"><span class="dot" data-val="1">○</span><span class="dot" data-val="2">○</span><span class="dot" data-val="3">○</span><span class="dot" data-val="4">○</span><span class="dot" data-val="5">○</span></div></div>
+<div class="v20-field"><label>Theology</label><div class="dot-rating" data-stat="knowledges-theology"><span class="dot" data-val="1">○</span><span class="dot" data-val="2">○</span><span class="dot" data-val="3">○</span><span class="dot" data-val="4">○</span><span class="dot" data-val="5">○</span></div></div>
+<div class="v20-field"><input type="text" placeholder="Custom" class="knowledges-custom-name" data-index="0"><div class="dot-rating" data-stat="knowledges-custom_0"><span class="dot" data-val="1">○</span><span class="dot" data-val="2">○</span><span class="dot" data-val="3">○</span><span class="dot" data-val="4">○</span><span class="dot" data-val="5">○</span></div></div>
+<div class="v20-field"><input type="text" placeholder="Custom" class="knowledges-custom-name" data-index="1"><div class="dot-rating" data-stat="knowledges-custom_1"><span class="dot" data-val="1">○</span><span class="dot" data-val="2">○</span><span class="dot" data-val="3">○</span><span class="dot" data-val="4">○</span><span class="dot" data-val="5">○</span></div></div>
+<div class="v20-field"><input type="text" placeholder="Custom" class="knowledges-custom-name" data-index="2"><div class="dot-rating" data-stat="knowledges-custom_2"><span class="dot" data-val="1">○</span><span class="dot" data-val="2">○</span><span class="dot" data-val="3">○</span><span class="dot" data-val="4">○</span><span class="dot" data-val="5">○</span></div></div>
+
+                            </div>
+                        </div>
+
+                        <h5>Advantages</h5>
+                        <div class="v20-row">
+                            <div class="v20-col">
+                                <h6 style="border:none; text-transform:none;">Disciplines</h6>
+                                <div class="v20-field"><input type="text" placeholder="Custom" class="disciplines-custom-name" data-index="0"><div class="dot-rating" data-stat="disciplines-custom_0"><span class="dot" data-val="1">○</span><span class="dot" data-val="2">○</span><span class="dot" data-val="3">○</span><span class="dot" data-val="4">○</span><span class="dot" data-val="5">○</span></div></div>
+<div class="v20-field"><input type="text" placeholder="Custom" class="disciplines-custom-name" data-index="1"><div class="dot-rating" data-stat="disciplines-custom_1"><span class="dot" data-val="1">○</span><span class="dot" data-val="2">○</span><span class="dot" data-val="3">○</span><span class="dot" data-val="4">○</span><span class="dot" data-val="5">○</span></div></div>
+<div class="v20-field"><input type="text" placeholder="Custom" class="disciplines-custom-name" data-index="2"><div class="dot-rating" data-stat="disciplines-custom_2"><span class="dot" data-val="1">○</span><span class="dot" data-val="2">○</span><span class="dot" data-val="3">○</span><span class="dot" data-val="4">○</span><span class="dot" data-val="5">○</span></div></div>
+<div class="v20-field"><input type="text" placeholder="Custom" class="disciplines-custom-name" data-index="3"><div class="dot-rating" data-stat="disciplines-custom_3"><span class="dot" data-val="1">○</span><span class="dot" data-val="2">○</span><span class="dot" data-val="3">○</span><span class="dot" data-val="4">○</span><span class="dot" data-val="5">○</span></div></div>
+<div class="v20-field"><input type="text" placeholder="Custom" class="disciplines-custom-name" data-index="4"><div class="dot-rating" data-stat="disciplines-custom_4"><span class="dot" data-val="1">○</span><span class="dot" data-val="2">○</span><span class="dot" data-val="3">○</span><span class="dot" data-val="4">○</span><span class="dot" data-val="5">○</span></div></div>
+<div class="v20-field"><input type="text" placeholder="Custom" class="disciplines-custom-name" data-index="5"><div class="dot-rating" data-stat="disciplines-custom_5"><span class="dot" data-val="1">○</span><span class="dot" data-val="2">○</span><span class="dot" data-val="3">○</span><span class="dot" data-val="4">○</span><span class="dot" data-val="5">○</span></div></div>
+
+                            </div>
+                            <div class="v20-col">
+                                <h6 style="border:none; text-transform:none;">Backgrounds</h6>
+                                <div class="v20-field"><input type="text" placeholder="Custom" class="backgrounds-custom-name" data-index="0"><div class="dot-rating" data-stat="backgrounds-custom_0"><span class="dot" data-val="1">○</span><span class="dot" data-val="2">○</span><span class="dot" data-val="3">○</span><span class="dot" data-val="4">○</span><span class="dot" data-val="5">○</span></div></div>
+<div class="v20-field"><input type="text" placeholder="Custom" class="backgrounds-custom-name" data-index="1"><div class="dot-rating" data-stat="backgrounds-custom_1"><span class="dot" data-val="1">○</span><span class="dot" data-val="2">○</span><span class="dot" data-val="3">○</span><span class="dot" data-val="4">○</span><span class="dot" data-val="5">○</span></div></div>
+<div class="v20-field"><input type="text" placeholder="Custom" class="backgrounds-custom-name" data-index="2"><div class="dot-rating" data-stat="backgrounds-custom_2"><span class="dot" data-val="1">○</span><span class="dot" data-val="2">○</span><span class="dot" data-val="3">○</span><span class="dot" data-val="4">○</span><span class="dot" data-val="5">○</span></div></div>
+<div class="v20-field"><input type="text" placeholder="Custom" class="backgrounds-custom-name" data-index="3"><div class="dot-rating" data-stat="backgrounds-custom_3"><span class="dot" data-val="1">○</span><span class="dot" data-val="2">○</span><span class="dot" data-val="3">○</span><span class="dot" data-val="4">○</span><span class="dot" data-val="5">○</span></div></div>
+<div class="v20-field"><input type="text" placeholder="Custom" class="backgrounds-custom-name" data-index="4"><div class="dot-rating" data-stat="backgrounds-custom_4"><span class="dot" data-val="1">○</span><span class="dot" data-val="2">○</span><span class="dot" data-val="3">○</span><span class="dot" data-val="4">○</span><span class="dot" data-val="5">○</span></div></div>
+<div class="v20-field"><input type="text" placeholder="Custom" class="backgrounds-custom-name" data-index="5"><div class="dot-rating" data-stat="backgrounds-custom_5"><span class="dot" data-val="1">○</span><span class="dot" data-val="2">○</span><span class="dot" data-val="3">○</span><span class="dot" data-val="4">○</span><span class="dot" data-val="5">○</span></div></div>
+
+                            </div>
+                            <div class="v20-col">
+                                <h6 style="border:none; text-transform:none;">Virtues</h6>
+                                <div class="v20-field"><label>Conscience</label><div class="dot-rating" data-stat="virtue-conscience"><span class="dot" data-val="1">○</span><span class="dot" data-val="2">○</span><span class="dot" data-val="3">○</span><span class="dot" data-val="4">○</span><span class="dot" data-val="5">○</span></div></div>
+                                <div class="v20-field"><label>Self-Control</label><div class="dot-rating" data-stat="virtue-self_control"><span class="dot" data-val="1">○</span><span class="dot" data-val="2">○</span><span class="dot" data-val="3">○</span><span class="dot" data-val="4">○</span><span class="dot" data-val="5">○</span></div></div>
+                                <div class="v20-field"><label>Courage</label><div class="dot-rating" data-stat="virtue-courage"><span class="dot" data-val="1">○</span><span class="dot" data-val="2">○</span><span class="dot" data-val="3">○</span><span class="dot" data-val="4">○</span><span class="dot" data-val="5">○</span></div></div>
+                            </div>
+                        </div>
+
+                        <div class="v20-row">
+                            <div class="v20-col">
+                                <h5>Other Traits</h5>
+                                <div class="v20-field"><input type="text" placeholder="Custom" class="other-custom-name" data-index="0"><div class="dot-rating" data-stat="other-custom_0"><span class="dot" data-val="1">○</span><span class="dot" data-val="2">○</span><span class="dot" data-val="3">○</span><span class="dot" data-val="4">○</span><span class="dot" data-val="5">○</span></div></div>
+<div class="v20-field"><input type="text" placeholder="Custom" class="other-custom-name" data-index="1"><div class="dot-rating" data-stat="other-custom_1"><span class="dot" data-val="1">○</span><span class="dot" data-val="2">○</span><span class="dot" data-val="3">○</span><span class="dot" data-val="4">○</span><span class="dot" data-val="5">○</span></div></div>
+<div class="v20-field"><input type="text" placeholder="Custom" class="other-custom-name" data-index="2"><div class="dot-rating" data-stat="other-custom_2"><span class="dot" data-val="1">○</span><span class="dot" data-val="2">○</span><span class="dot" data-val="3">○</span><span class="dot" data-val="4">○</span><span class="dot" data-val="5">○</span></div></div>
+<div class="v20-field"><input type="text" placeholder="Custom" class="other-custom-name" data-index="3"><div class="dot-rating" data-stat="other-custom_3"><span class="dot" data-val="1">○</span><span class="dot" data-val="2">○</span><span class="dot" data-val="3">○</span><span class="dot" data-val="4">○</span><span class="dot" data-val="5">○</span></div></div>
+<div class="v20-field"><input type="text" placeholder="Custom" class="other-custom-name" data-index="4"><div class="dot-rating" data-stat="other-custom_4"><span class="dot" data-val="1">○</span><span class="dot" data-val="2">○</span><span class="dot" data-val="3">○</span><span class="dot" data-val="4">○</span><span class="dot" data-val="5">○</span></div></div>
+<div class="v20-field"><input type="text" placeholder="Custom" class="other-custom-name" data-index="5"><div class="dot-rating" data-stat="other-custom_5"><span class="dot" data-val="1">○</span><span class="dot" data-val="2">○</span><span class="dot" data-val="3">○</span><span class="dot" data-val="4">○</span><span class="dot" data-val="5">○</span></div></div>
+
+                            </div>
+                            <div class="v20-col">
+                                <h5>Road</h5>
+                                <div class="v20-field"><label>Road:</label><input type="text" id="sheet-road"></div>
+                                <div style="text-align: center;"><div class="dot-rating" data-stat="road-rating"><span class="dot" data-val="1">○</span><span class="dot" data-val="2">○</span><span class="dot" data-val="3">○</span><span class="dot" data-val="4">○</span><span class="dot" data-val="5">○</span><span class="dot" data-val="6">○</span><span class="dot" data-val="7">○</span><span class="dot" data-val="8">○</span><span class="dot" data-val="9">○</span><span class="dot" data-val="10">○</span></div></div>
+                                <div class="v20-field" style="margin-top:10px;"><label>Aura:</label><input type="text" id="sheet-aura"></div>
+                                
+                                <h5>Willpower</h5>
+                                <div style="text-align: center;"><div class="dot-rating" data-stat="willpower-max"><span class="dot" data-val="1">○</span><span class="dot" data-val="2">○</span><span class="dot" data-val="3">○</span><span class="dot" data-val="4">○</span><span class="dot" data-val="5">○</span><span class="dot" data-val="6">○</span><span class="dot" data-val="7">○</span><span class="dot" data-val="8">○</span><span class="dot" data-val="9">○</span><span class="dot" data-val="10">○</span></div></div>
+                                <div class="v20-field" style="margin-top:10px;"><label>Current:</label><input type="number" id="willpower-current" style="border:1px solid #ccc;"></div>
+                                
+                                <h5>Blood Pool</h5>
+                                <div class="v20-field"><label>Points / Turn:</label><input type="number" id="blood-pool-pts"></div>
+                                <div class="v20-field"><label>Max Blood:</label><input type="number" id="blood-pool-max" value="10"></div>
+                                <div class="v20-field"><label>Current:</label><input type="number" id="blood-pool-current"></div>
+                            </div>
+                            <div class="v20-col">
+                                <h5>Health</h5>
+                                <div class="health-track">
+                                    <div class="health-level"><label>Bruised</label><input type="checkbox" id="hp-bruised"></div>
+                                    <div class="health-level"><label>Hurt</label><span>-1</span><input type="checkbox" id="hp-hurt"></div>
+                                    <div class="health-level"><label>Injured</label><span>-1</span><input type="checkbox" id="hp-injured"></div>
+                                    <div class="health-level"><label>Wounded</label><span>-2</span><input type="checkbox" id="hp-wounded"></div>
+                                    <div class="health-level"><label>Mauled</label><span>-2</span><input type="checkbox" id="hp-mauled"></div>
+                                    <div class="health-level"><label>Crippled</label><span>-5</span><input type="checkbox" id="hp-crippled"></div>
+                                    <div class="health-level"><label>Incapacitated</label><input type="checkbox" id="hp-incapacitated"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h5>Notes</h5>
+                        <div class="v20-row">
+                            <div class="v20-col"><label>Merits:</label><textarea id="sheet-merits" class="v20-textarea"></textarea></div>
+                            <div class="v20-col"><label>Flaws:</label><textarea id="sheet-flaws" class="v20-textarea"></textarea></div>
+                            <div class="v20-col"><label>Notes:</label><textarea id="sheet-notes" class="v20-textarea"></textarea></div>
+                        </div>
+
+                        <div style="text-align: center; margin-top: 20px;">
+                            <button id="save-character-sheet-btn" style="padding: 10px 20px; font-size: 1.1em; cursor: pointer;">Save Character</button>
+                            <button id="suggest-actions-btn" style="padding: 10px 20px; font-size: 1.1em; cursor: pointer; margin-left: 10px;">Suggest Actions</button>
+                            <button id="close-sheet-btn" style="padding: 10px 20px; font-size: 1.1em; cursor: pointer; margin-left: 10px;">Close</button>
+                        </div>
+                        <div id="suggested-actions" style="margin-top: 1rem; color: #555;"></div>
+                    </div>
+                </div>
+
+            </section>
+
+            <section id="combat-panel" class="hidden">
+                <h3>Combat Tracker</h3>
+                <div id="combat-state-info" style="margin-bottom: 1rem; color: #ff4d4f; font-weight: bold;">No active encounter.</div>
+                <ul id="combatants-list" style="margin-bottom: 1.5rem;"></ul>
+                <div id="combat-controls" class="hidden" style="margin-bottom: 1.5rem; display: flex; gap: 0.5rem;">
+                    <button id="next-turn-btn">Next Turn</button>
+                    <button id="end-combat-btn">End Combat</button>
+                </div>
+                <form id="add-combatant-form" style="max-width: 500px;">
+                    <h4 style="color: #ff4d4f;">Add Combatant</h4>
+                    <label for="comb-name">Name:</label><input type="text" id="comb-name" required>
+                    <label for="comb-init">Initiative (Dex + Wits + 1d10):</label><input type="number" id="comb-init" required>
+                    <button type="submit">Add to Combat</button>
+                </form>
+                <button id="start-combat-btn" style="margin-top: 1rem;">Start New Combat</button>
+            </section>
+
+            <section id="rules-panel" class="hidden">
+                <h3>Rules Panel</h3>
+                <input type="text" id="rules-query" placeholder="Search for rules...">
+                <button id="search-rules-btn">Search</button>
+                <div id="rules-results"></div>
+            </section>
+
+            <section id="sessions-panel" class="hidden">
+                <h3 id="sessions-heading">Sessions</h3>
+                <ul id="sessions-list"></ul>
+                <form id="create-session-form">
+                    <label for="sess-campaign-id">Campaign ID:</label><input type="number" id="sess-campaign-id" value="1" required>
+                    <label for="sess-number">Session Number:</label><input type="number" id="sess-number" value="1" required>
+                    <label for="sess-title">Title:</label><input type="text" id="sess-title" required>
+                    <label for="sess-log">Log:</label><textarea id="sess-log" required></textarea>
+                    <button type="submit">Create Session</button>
+                </form>
+            </section>
+
+            <section id="vtt-panel" class="hidden">
+                <h3>Virtual Tabletop</h3>
+                <div id="vtt-toolbar" style="margin-bottom: 0.5rem;">
+                    <button id="add-token-btn">Add Token</button>
+                    <button id="set-bg-btn" style="margin-left: 0.5rem;">Set Background</button>
+                </div>
+                <canvas id="vtt-canvas" width="800" height="600" style="border: 1px solid #3a1a1a; background: #1a1a1f;"></canvas>
+            </section>
+
+            <section id="lore-panel" class="hidden">
+                <h3>Storyteller Lore</h3>
+                <textarea id="lore-input" placeholder="Enter lore here..." style="width: 100%; height: 150px;"></textarea>
+                <button id="ingest-lore-btn" style="margin-top: 0.5rem;">Ingest Lore</button>
+            </section>
+
+            <section id="st-dashboard-panel" class="hidden">
+                <h3 style="color: #a855f7;">Storyteller Dashboard</h3>
+                <div style="background: #1a1a1f; padding: 1rem; border: 1px solid #3a1a1a; border-radius: 8px;">
+                    <h4>Character Tracker (XP, Status, Diablerie)</h4>
+                    <table id="st-character-table" style="width: 100%; text-align: left; margin-top: 1rem; border-collapse: collapse;">
+                        <thead>
+                            <tr style="border-bottom: 1px solid #3a1a1a;">
+                                <th style="padding: 0.5rem;">Name</th>
+                                <th style="padding: 0.5rem;">Total XP</th>
+                                <th style="padding: 0.5rem;">Spent XP</th>
+                                <th style="padding: 0.5rem;">Status/Notes</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Characters populated here -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

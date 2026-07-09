@@ -1,0 +1,10 @@
+You are an expert FastAPI developer. Modify `server/routers/auth_routes.py`.
+Output ONLY the fully modified python file.
+
+Requirements:
+- Change `import server.config as settings` to:
+```python
+from server.config import get_settings
+settings = get_settings()
+```
+- Keep all other lines of code exactly identical. Do not add any new logic or explanations. Do not use placeholders. Write the full file.

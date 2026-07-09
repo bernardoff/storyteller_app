@@ -1,0 +1,28 @@
+You are an expert Frontend Developer. Write the COMPLETE `client/index.html` for the Storyteller App.
+Output ONLY the HTML code inside a ```html block. Do not add explanations. Do not leave placeholder comments.
+
+Requirements:
+- MUST include `<link rel="stylesheet" href="style.css">` in the `<head>`.
+- MUST include `<body class="dark-theme">`.
+- Section 1: `<div id="login-screen" class="container">`
+  - Title: Storyteller App
+  - Inputs: `#username`, `#password`
+  - Buttons: `#login-btn` (Login), `#setup-btn` (Setup Account)
+- Section 2: `<div id="dashboard-screen" class="hidden">`
+  - Header: `#welcome-message` and `#logout-btn`
+  - Sidebar (`<aside class="sidebar">`): Navigation links for 'Dice', 'Chat', 'Character', 'Combat', 'Rules', 'Sessions'.
+    - Use `class="sidebar-link"` and `data-target` on each `<a>` tag:
+      `<li><a href="#dice-roller" class="sidebar-link" data-target="dice-roller">Dice</a></li>`
+      `<li><a href="#feed-area" class="sidebar-link" data-target="feed-area">Chat</a></li>`
+      `<li><a href="#character-panel" class="sidebar-link" data-target="character-panel">Character</a></li>`
+      `<li><a href="#combat-panel" class="sidebar-link" data-target="combat-panel">Combat</a></li>`
+      `<li><a href="#rules-panel" class="sidebar-link" data-target="rules-panel">Rules</a></li>`
+      `<li><a href="#sessions-panel" class="sidebar-link" data-target="sessions-panel">Sessions</a></li>`
+  - Main Panel (`<main class="panel">`):
+    - `<section id="dice-roller">` with pool size, difficulty, `#roll-btn`
+    - `<section id="feed-area" class="hidden">` (hide by default) with an empty `<ul>` for messages
+    - `<section id="character-panel" class="hidden">` with a list of characters (`#characters-list`) and a form to create one (`#create-character-form` with `#char-name`, `#char-clan`, `#char-gen`)
+    - `<section id="combat-panel" class="hidden">` with a list of combatants (`#combatants-list`), `#start-combat-btn`, `#next-turn-btn`
+    - `<section id="rules-panel" class="hidden">` with search input `#rules-query`, `#search-rules-btn`, and result list `#rules-results`
+    - `<section id="sessions-panel" class="hidden">` with list `#sessions-list` and a form to create a session log (`#create-session-form` with `#sess-campaign-id`, `#sess-number`, `#sess-title`, `#sess-log`), and a summarize button inside the list items.
+- MUST include `<script src="app.js"></script>` at the end of the body.

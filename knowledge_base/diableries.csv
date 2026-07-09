@@ -1,0 +1,26 @@
+player,# of diableries,diablerized,session,player disciplines,npc disciplines,difference,points gained /4,discipline gained,player generation,npc generation,generation gained
+vitas,1,Anda Warrior I ,3,"Ani 2, Obf 3","For 2, Pro 3",5,1,fortitude +1,9,11,0
+vitas,2,Anda Warrior I ,5,"Ani 2, Obf 3, For 1","For 2, Pro 3",4,1,protean +1,9,11,0
+vitas,3,Anda Warrior II,5,"Ani 2, Obf 3, For 1, Pro 1","For 2, Pro 5, Pot 2",6,1,potence +1 ,9,10,0
+vitas,4,Anda Warrior I ,6,"Ani 2, Obf 3, For 1, Pro 1, Pot 1","For 2, Pro 3",3,0,,9,11,0
+vitas,5,Anda Warrior II,6,"Ani 2, Obf 3, For 1, Pro 1, Pot 1","For 2, Pro 5, Pot 2",6,1,protean +1,9,10,0
+vitas,6,Anda Warrior II,6,"Ani 2, Obf 3, For 1, Pro 2, Pot 1","For 2, Pro 5, Pot 2",5,1,fortitude +1,9,10,0
+vitas,7,Kaspar (Gangrel scout II),6,"Ani 2, Obf 3, For 2, Pro 2, Pot 1","Aus 3, For 2, Ani 3, Obf 1",4,1,auspex +1,9,9,0
+vladislav,2,Anda Captain I,6,"Vic 4, For 2","For 3, Pro 5, Cel 2, Pot 2",11,2,protean +1,9,8,1
+vladislav,1,Anda Warrior II,6,Vic 4,"For 2, Pro 5, Pot 2",9,2,fortitude +2,9,10,0
+vitas,8,Anda Scout II,20,"Ani 2, Obf 4, For 2, Pro 2, Pot 1, Aus 1","For 3, Pro 2, Pot 1, Ani 2",1,0,,9,10,0
+vitas,9,Anda Warrior II,20,"Ani 2, Obf 4, For 2, Pro 2, Pot 1, Aus 1","For 4, Pro 3, Pot 2",4,1,fortitude +1,9,10,0
+vitas,10,Anda Warrior II,20,"Ani 2, Obf 4, For 3, Pro 3, Pot 1, Aus 1","For 4, Pro 3, Pot 2",2,0,,9,10,0
+octavian,1,Anda Scout II,20,"Tha 5, Cel 2, Dom 1","For 3, Pro 2, Pot 1, Ani 2",8,2,"fortitude +1, protean +1",9,10,0
+vitas,11,Anda Captain II,26,"Ani 2, Obf 4, For 3, Pro 3, Pot 1, Aus 1","For 4, Pro 5, Cel 2, Pot 3",7,1,celerity +1,9,8,1
+gabor,1,Staurakius (Brujah Guardian II),47,"Obt 3, Pot 1, Dom 2","Pot 4, Cel 3, For 3, Pre 1",10,2,"Pot +1, For +1",9,9,0
+vitas,12,Angelus (Ventrue Guardian II),47,"Ani 2, Obf 4, Pro 3, For 2, Pot 3, Aus 1, Cel 2","Cel 4, Pot 3, For 3, Pre 2",5,1,Pre +1,8,9,0
+lutz,1,Damasus (Cappadocian Priest III),47,"Nec 5, Cel 2, For 2","Nec 5, Cel 3, For 3, Pot 3, Pre 2, Aus 2",9,2,"For +1, Aus +1",9,8,1
+isla,1,Janousek (Anarch Tzimisce II),58,"Pro 4, For 1, Ani 2, Cel 1, Pot 1","Vic 5, For 3, Cel 2, Ani 3",4,1,Vic +1,9,9,0
+vitas,13,Bartolomej (Anarch Brujah II),63,"Ani 2, Obf 4, Pro 3, For 2, Pot 3, Aus 1, Cel 2, Pre 1","Cel 3, Pot 4, For 3, Pre 2",4,1,For +1,9,9,0
+isla,2,Anarch Gargula,70,"Pro 5, For 1, Ani 2, Cel 1, Pot 1, Vic 1","Pot 3, For 3, Vis 3, Pro 2, Fli 3",9,2,"For +1, Vis +1",9,11,0
+vladislav,3,Conde Albizzo (Ventrue Roma),82,"Vic 4, Pro 2, For 2, Cel 2, Pot 2","Aus 1, Dom 5, For 5, Obf 2, Obt 1, Pot 3, Pre 3",8,2,"Dom +1, Pot +1",8,7,1
+salvatore,1,Conselheiro Mateo (Giovanni),82,"Pot 3, Ser 4, For 2, Nec 2, Cel 1","Nec 5, Cel 2, For 4, Pot 1, Pre 1",7,1,For +1,9,8,1
+owen,1,Mordecai (Venture 8),85,"Dom 4, For 3, Pot 2, Cel 3","Dom 6, Pre 5, For 4, Aus 2",10,2,"Dom+1, Pre +1",9,8,1
+salazar,1,Ezio (Brujah 9),87,"Dai 3, Cel 1, Obf 1, Pre 1","Pot 3, Cel 4, Pre 1, For 3",9,2,"Pot+1,For+1",10,9,1
+fiori,1,Gargoyle Scout,90,"Ten 5, Dom 1","Pot 1, Fly 2, For 1",4,1,For+1,10,10,0

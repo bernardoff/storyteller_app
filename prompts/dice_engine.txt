@@ -1,0 +1,69 @@
+You are an expert Python developer. Output ONLY the Python code inside a single ```python code block. No explanations.
+Build `server/engines/dice_engine.py`
+
+Port the following dice engine. Keep ALL existing logic exactly the same (V20RollResult TypedDict, roll_v20 function with pool_size, difficulty, specialty, exploding 10s, botch detection). Add these new functions:
+- `def roll_initiative(dexterity: int, wits: int) -> dict` — Roll 1d10 + dexterity + wits, return {'roll': int, 'modifier': int, 'total': int}
+- `def contested_roll(pool1: int, pool2: int, difficulty: int = 6) -> dict` — Roll for both sides, return {'roller1': V20RollResult, 'roller2': V20RollResult, 'winner': 'roller1'|'roller2'|'tie'}
+- `def extended_roll(pool_size: int, difficulty: int, target_successes: int, max_rolls: int = 10) -> dict` — Keep rolling accumulating successes until target or max, return {'attempts': list[V20RollResult], 'total_successes': int, 'success': bool, 'rolls_used': int}
+- `def willpower_roll(willpower: int, difficulty: int = 6) -> V20RollResult` — Just calls roll_v20 with willpower as pool
+
+Do NOT import streamlit. Keep it pure Python with only `random` and `typing` imports.
+
+Reference code to port:
+import random
+from typing import TypedDict, List
+
+class V20RollResult(TypedDict):
+    rolls: List[int]
+    successes: int
+    is_botch: bool
+    result_label: str
+
+def roll_v20(pool_size: int, difficulty: int = 6, specialty: bool = False) -> V20RollResult:
+    if pool_size < 1:
+        return {"rolls": [], "successes": 0, "is_botch": False, "result_label": "Failure (No dice)"}
+
+    rolls = []
+    successes = 0
+    ones = 0
+
+    dice_to_roll = pool_size
+    while dice_to_roll > 0:
+        current_roll = [random.randint(1, 10) for _ in range(dice_to_roll)]
+        rolls.extend(current_roll)
+        
+        new_dice = 0
+        for die in current_roll:
+            if die >= difficulty:
+                successes += 1
+            if die == 1:
+                ones += 1
+            if specialty and die == 10:
+                new_dice += 1
+                
+        dice_to_roll = new_dice
+
+    net_successes = successes - ones
+    is_botch = net_successes < 0 and successes == 0
+    
+    if is_botch:
+        result_label = "Botch"
+    elif net_successes <= 0:
+        result_label = "Failure"
+    elif net_successes == 1:
+        result_label = "Marginal Success"
+    elif net_successes == 2:
+        result_label = "Moderate Success"
+    elif net_successes == 3:
+        result_label = "Complete Success"
+    elif net_successes == 4:
+        result_label = "Exceptional Success"
+    else:
+        result_label = "Phenomenal Success"
+
+    return {
+        "rolls": rolls,
+        "successes": net_successes,
+        "is_botch": is_botch,
+        "result_label": result_label
+    }

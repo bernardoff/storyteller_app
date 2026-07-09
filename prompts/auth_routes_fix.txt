@@ -1,0 +1,21 @@
+You are an expert FastAPI developer. Rewrite `server/routers/auth_routes.py`. Output ONLY python code.
+Use fully async SQLAlchemy 2.0.
+
+Requirements:
+- Imports:
+  `from fastapi import APIRouter, Depends, HTTPException, status`
+  `from fastapi.security import OAuth2PasswordRequestForm`
+  `from sqlalchemy.ext.asyncio import AsyncSession`
+  `from sqlalchemy import select, func`
+  `from pydantic import BaseModel, ConfigDict`
+  `from typing import List`
+  `from server.database import get_db, User, InviteCode`
+  `import server.auth as auth`
+  `import server.config as settings`
+- Fix `setup`: `result = await db.execute(select(func.count(User.id))); count = result.scalar()`. If `count > 0` raise error. 
+  To save: `db.add(user); await db.commit(); await db.refresh(user)`.
+- Fix `login`: `result = await db.execute(select(User).where(User.username == form_data.username)); user = result.scalars().first()`. If not user or not `auth.verify_password(form_data.password, user.password_hash)` (Note: use `password_hash`, not `hashed_password`), raise 401.
+- Fix `register`: `result = await db.execute(select(InviteCode).where(InviteCode.code == request.invite_code, InviteCode.used_by == None)); invite = result.scalars().first()`. If not invite, raise 401. Save user, `await db.commit(); await db.refresh(user)`. Then `invite.used_by = user.id; await db.commit()`. Note: User uses `password_hash`, not `hashed_password`.
+- Fix `create_invite`: `db.add(invite); await db.commit(); await db.refresh(invite)`.
+- Fix `read_players`: `result = await db.execute(select(User).where(User.role == 'player')); return result.scalars().all()`.
+- Use the provided Pydantic models from before.

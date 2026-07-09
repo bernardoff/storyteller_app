@@ -1,0 +1,10 @@
+You are an expert Python developer. Output ONLY the Python code inside a single ```python code block. No explanations.
+Build `server/routers/rules_routes.py`
+
+FastAPI router with prefix `/api/rules`, tag `rules`.
+
+Endpoints:
+- `GET /search` — Query param q: str, n_results: int = 3. Requires auth (get_current_user). Returns list of rule search results using search_rules.
+- `GET /search/text` — Same but returns plain text string using search_rules_text.
+
+Import from server.engines.rag_engine, server.auth (get_current_user).

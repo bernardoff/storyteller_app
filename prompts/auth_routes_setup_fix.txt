@@ -1,0 +1,36 @@
+You are an expert FastAPI developer. Modify `server/routers/auth_routes.py`.
+Output ONLY the fully modified python file.
+
+Requirements:
+1. Change `router = APIRouter()` to `router = APIRouter(prefix="/api/auth", tags=["auth"])`.
+2. Rewrite the `setup` function to accept `request: SetupRequest` and properly create the user from the request data, just like the original version but fully async:
+```python
+class SetupRequest(BaseModel):
+    username: str
+    password: str
+    display_name: str
+    setup_key: str
+
+@router.post("/setup")
+async def setup(request: SetupRequest, db: AsyncSession = Depends(get_db)):
+    result = await db.execute(select(func.count(User.id)))
+    count = result.scalar()
+    if count > 0:
+        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Setup already completed")
+    if request.setup_key != settings.SETUP_KEY:
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid setup key")
+    
+    user = User(
+        username=request.username, 
+        display_name=request.display_name, 
+        role="storyteller", 
+        password_hash=auth.get_password_hash(request.password)
+    )
+    db.add(user)
+    await db.commit()
+    await db.refresh(user)
+    
+    access_token = auth.create_access_token(data={"sub": user.username})
+    return {"access_token": access_token, "token_type": "bearer", "role": user.role, "display_name": user.display_name}
+```
+3. Keep ALL other functions exactly as they are currently (`login`, `register`, `create_invite`, `read_players`).

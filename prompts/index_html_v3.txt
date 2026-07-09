@@ -1,0 +1,19 @@
+You are an expert Frontend Developer. Write the COMPLETE `client/index.html` for the Storyteller App.
+Output ONLY the HTML code inside a ```html block.
+
+Requirements:
+- MUST include `<link rel="stylesheet" href="style.css">` in the `<head>`.
+- MUST include `<body class="dark-theme">`.
+- Section 1: `<div id="login-screen" class="container">`
+  - Title: Storyteller App
+  - Inputs: `#username`, `#password`
+  - Buttons: `#login-btn` (Login), `#setup-btn` (Setup Account)
+- Section 2: `<div id="dashboard-screen" class="hidden">`
+  - Header: `#welcome-message` and `#logout-btn`
+  - Sidebar (`<aside class="sidebar">`): Navigation links for 'Dice', 'Chat', 'Character', 'Combat'.
+  - Main Panel (`<main class="panel">`):
+    - `<section id="dice-roller">` with pool size, difficulty, and `#roll-btn`
+    - `<section id="feed-area">` with an empty `<ul>` for messages
+    - `<section id="character-panel" class="hidden">` with a list of characters and a form to create one (Name, Clan, Gen)
+    - `<section id="combat-panel" class="hidden">` with a list of combatants, `#start-combat-btn`, `#next-turn-btn`
+- MUST include `<script src="app.js"></script>` at the end of the body.

@@ -11,9 +11,6 @@ from google import genai
 from google.genai import types
 
 import character_manager
-import sys
-if 'rag_engine' in sys.modules:
-    del sys.modules['rag_engine']
 import rag_engine
 from dice_engine import roll_v20
 import state_manager
@@ -29,7 +26,7 @@ st.set_page_config(
 SYSTEM_INSTRUCTIONS = {
     "Combat Simulator": (
         "You are a V20 game engine and Storyteller. You fully manage combat. "
-        "Describe the scene, announce whose turn it is. For NPCs, decide their action, "
+        "Describe the scene, announce whose turn it is. For NPCs, you provide me with 3 of the best combat options that you could suggest for that player character sheet (look for his stats and discipline powers) and you let me choose one of the option to execute.  "
         "use the roll_v20 tool, and apply outcomes using apply_damage. For Players, "
         "calculate their dice pool and difficulty based on their action, ask the human "
         "Storyteller for the physical roll successes, OR if they type 'auto roll', use "

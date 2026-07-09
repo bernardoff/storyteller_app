@@ -1,0 +1,15 @@
+You are a FastAPI expert. Build `server/routers/combat_routes.py`. Output ONLY python code.
+Requirements:
+- Router prefix: `/api/combat`, tags: `["combat"]`
+- Endpoints:
+  - `POST /start` - Storyteller only. Start a new combat encounter.
+  - `POST /{id}/next` - Storyteller only. Advance to next turn.
+  - `GET /{id}` - Get current combat state.
+- Imports:
+  - `from fastapi import APIRouter, Depends, HTTPException`
+  - `from sqlalchemy.ext.asyncio import AsyncSession`
+  - `from sqlalchemy import select`
+  - `from server.database import get_db, CombatEncounter`
+  - `from server.auth import get_current_user`
+  - `from server.routers.auth_routes import require_storyteller`
+- Use AsyncSession for DB operations.

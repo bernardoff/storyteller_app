@@ -1,0 +1,10 @@
+You are an expert FastAPI developer. Modify `server/auth.py`.
+Output ONLY the fully modified python file.
+
+Requirements:
+- Change the `CryptContext` scheme from `bcrypt` to `pbkdf2_sha256`.
+  Specifically, change:
+  `pwd_context = CryptContext(schemes=['bcrypt'], deprecated='auto')`
+  to:
+  `pwd_context = CryptContext(schemes=['pbkdf2_sha256'], deprecated='auto')`
+- Keep all other lines of code exactly identical. Do not add explanations. Do not use placeholders. Write the full file.

@@ -1,0 +1,71 @@
+Player,Aventura,XP,Compra,,,,,,Character,xp spent,xp earned,remaining
+Apophis,85,1,,,,,,,,0,,
+Constantin,85,1,,,,,,,Apophis,1,12,11
+Ezio,63,-24,Ajustes após reforma,,,,,,Constantin,11,18,7
+Ezio,63,3,Performance 1,,,,,,Ezio,5,26,21
+Ezio,63,30,"Potencia 3, Celeridade 3",,,,,,Fiori,11,18,7
+Ezio,63,-4,Sobrou na criação,,,,,,Gabor,4,52,48
+Fiori,85,1,,,,,,,Harvey,-24,16,40
+Gabor,47,9,"(diablerie) Pot 2, For 1",,,,,,Isla,25,36,11
+Gabor,63,-24,Ajustes após reforma,,,,,,Lutz,12,37,25
+Gabor,37,19,"Politics 1, Survival 2, Etiqueta 2, Ocultismo 4",,,,,,Malandro,1,#N/A,#N/A
+Harvey,63,-24,Ajustes após reforma,,,,,,Octavian,151,161,10
+Isla,58,5,(diablerie) Vicissitude 1,,,,,,Owen,134,149,15
+Isla,70,7,"(diablerie) Visceratika 1, Fortitude 2",,,,,,Salazar,1,18,17
+Isla,,,1 ponto de body craft,,,,,,Salvatore,0,14,14
+Isla,63,-24,Ajustes após reforma,,,,,,Vitas,105,117,12
+Isla,69,37,"Protean 5, Str 3",,,,,,Vladislav,60,82,22
+Lutz,47,11,"(diablerie) For 3, Aus 1",,,,,,Total geral,497,#N/A,#N/A
+Lutz,63,-24,Ajustes após reforma,,,,,,,,,
+Lutz,37,3,Firearms 1,,,,,,Diablerie New disciplina = 5,,,
+Lutz,51,7,Path of the bone 1,,,,,,Diablerie Clan discipline = New rating x2,,,
+Lutz,37,15,"Politics 1, Alertness 2, Ocultismo 4",,,,,,Diablerie NonClan discipline = New rating x3,,,
+Malandro,85,1,,,,,,,,,,
+Octavian,21,10,"(Diablerie) Protean 1, Fortitude 1",,,,,,,,,
+Octavian,63,-24,Ajustes após reforma,,,,,,,,,
+Octavian,83,14,"Ath 3>4 = 6, Ath 4>5 = 8",,,,,,,,,
+Octavian,12,20,"Celerity 1, Dominate 1",,,,,,,,,
+Octavian,19,14,Celerity 2,,,,,,,,,
+Octavian,83,30,"Dex 4>5 = 16, Brawl 3>4 = 6, Brawl 4>5 = 8",,,,,,,,,
+Octavian,51,0,"Dominate 2, Dominate 3",,,,,,,,,
+Octavian,12,2,Flaw,,,,,,,,,
+Octavian,37,3,Intimidation 1,,,,,,,,,
+Octavian,51,24,"rituais Defense of the Sacred Haven  1heaven
+Ward 2heaven
+Animated Assistants 3heaven
+Dedicate the Haven 5",,,,,,,,,
+Octavian,83,47,"Sta 1>2 = 4, For 1>2= 7, Sta 2>3 = 8, For 2>3 = 14,Cel 2>3 = 14",,,,,,,,,
+Octavian,37,11,"Stealth 2, Athletics 1, Athletics 2",,,,,,,,,
+Owen,63,-24,Ajustes após reforma,,,,,,,,,
+Owen,30,4,Archery 2,,,,,,,,,
+Owen,68,16,Brawl 3 Alertness 2 Alertness 3,,,,,,,,,
+Owen,30,21,Celerity 3,,,,,,,,,
+Owen,54,38,"Dex 5, Courage 4, Self-control 5",,,,,,,,,
+Owen,37,3,Firearms 1,,,,,,,,,
+Owen,62,18,"Firearms 2, Stealth 1, Ride 2, Brawl 1 e 2",,,,,,,,,
+Owen,15,15,Fortitude 3,,,,,,,,,
+Owen,79,17,"Leadership 4, Subterfuge 3, Politics 1",,,,,,,,,
+Owen,9,12,Strenght 3,,,,,,,,,
+Owen,19,14,"Teology 2, Celerity 1",,,,,,,,,
+Salazar,85,1,,,,,,,,,,
+Salvatore,,,Diablerie for +1,,,,,,,,,
+Vitas,47,14,"(diablerie) For 3, Pre 1",,,,,,,,,
+Vitas,63,9,(Diablerie) Fortitude 3,,,,,,,,,
+Vitas,7,22,"(Diablerie) Protean 2, Fortitude 2, Auspex 1, Potencia 1",,,,,,,,,
+Vitas,21,9,(Diablerie) Protean 3,,,,,,,,,
+Vitas,63,-24,Ajustes após reforma,,,,,,,,,
+Vitas,68,10,Athletics 2 Athetics 3,,,,,,,,,
+Vitas,12,6,Brawl 3,,,,,,,,,
+Vitas,43,39,"Celerity 2, Potence 2, Potence 3",,,,,,,,,
+Vitas,20,20,Obfuscate 4,,,,,,,,,
+Vladislav,6,11,"(Diablerie) Protean 1, Fortitude 2",,,,,,,,,
+Vladislav,63,-24,Ajustes após reforma,,,,,,,,,
+Vladislav,19,14,Celerity 2,,,,,,,,,
+Vladislav,30,12,Charisma 3,,,,,,,,,
+Vladislav,,,diablerie,,,,,,,,,
+Vladislav,71,7,"Etiquette 1, Etiquette 2",,,,,,,,,
+Vladislav,30,12,Intelligence 3,,,,,,,,,
+Vladislav,30,14,Potence 2,,,,,,,,,
+Vladislav,20,14,Protean 2,,,,,,,,,
+Constantin,89,10,"Brawl 3, Brawl 4",,,,,,,,,
+Fiori,89,10,Domination 1,,,,,,,,,

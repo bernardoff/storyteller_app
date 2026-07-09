@@ -1,0 +1,109 @@
+You are an expert Python developer. Output ONLY the Python code inside a single ```python code block. No explanations.
+Build `server/database.py` with SQLAlchemy 2.0 async.
+
+Imports needed:
+from datetime import datetime
+from typing import Optional
+from sqlalchemy import String, Text, ForeignKey, Boolean, Integer, Float, func
+from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
+from sqlalchemy.ext.asyncio import create_async_engine, async_sessionmaker, AsyncSession
+from server.config import get_settings
+
+class Base(DeclarativeBase):
+    pass
+
+Tables (all use __tablename__):
+
+**User** (__tablename__ = 'users'):
+- id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
+- username: Mapped[str] = mapped_column(String(50), unique=True)
+- display_name: Mapped[str] = mapped_column(String(100))
+- password_hash: Mapped[str] = mapped_column(String(255))
+- role: Mapped[str] = mapped_column(String(20), default='player')
+- credits_remaining: Mapped[int] = mapped_column(default=5)
+- credits_total_used: Mapped[int] = mapped_column(default=0)
+- created_at: Mapped[datetime] = mapped_column(default=func.now())
+- is_active: Mapped[bool] = mapped_column(default=True)
+
+**InviteCode** (__tablename__ = 'invite_codes'):
+- id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
+- code: Mapped[str] = mapped_column(String(20), unique=True)
+- created_by: Mapped[int] = mapped_column(ForeignKey('users.id'))
+- used_by: Mapped[Optional[int]] = mapped_column(ForeignKey('users.id'), nullable=True, default=None)
+- created_at: Mapped[datetime] = mapped_column(default=func.now())
+- used_at: Mapped[Optional[datetime]] = mapped_column(nullable=True, default=None)
+
+**Character** (__tablename__ = 'characters'):
+- id: primary key
+- user_id: ForeignKey('users.id')
+- name: String(100)
+- clan: Optional[str], String(50)
+- generation: Optional[int]
+- nature, demeanor, road: Optional[str], String(50) each
+- road_rating: Optional[int]
+- physical_strength, physical_dexterity, physical_stamina: int, default 1
+- social_charisma, social_manipulation, social_appearance: int, default 1
+- mental_perception, mental_intelligence, mental_wits: int, default 1
+- abilities_json, disciplines_json, backgrounds_json: Optional[str], Text
+- virtues_conscience, virtues_self_control, virtues_courage: int, default 1
+- willpower_max, willpower_current: int, default 1
+- blood_pool_max, blood_pool_current: int, default 10
+- health_levels_json, merits_flaws_json: Optional[str], Text
+- experience_total, experience_spent: int, default 0
+- notes: Optional[str], Text
+- is_npc: bool, default False
+- is_locked: bool, default False
+- campaign_era: Optional[str], String(20)
+- created_at: datetime, default func.now()
+- updated_at: Optional[datetime], nullable=True, onupdate=func.now()
+
+**Campaign** (__tablename__ = 'campaigns'):
+- id, name (String 200), description (Text, nullable), current_era (String 20, nullable), current_in_game_date (String 50, nullable), created_at
+
+**SessionLog** (__tablename__ = 'session_logs'):
+- id, campaign_id (FK campaigns.id), session_number (int), title (String 200, nullable), in_game_date (String 50, nullable), location (String 200, nullable), summary (Text, nullable), detailed_log (Text, nullable), key_events_json (Text, nullable), npcs_encountered_json (Text, nullable), items_acquired_json (Text, nullable), played_at (datetime, nullable), created_at
+
+**CombatEncounter** (__tablename__ = 'combat_encounters'):
+- id, campaign_id (FK campaigns.id), session_id (FK session_logs.id, nullable), name (String 200), is_active (bool, True), current_turn_index (int, 0), round_number (int, 1), combatants_json (Text, nullable), combat_log_json (Text, nullable), created_at
+
+**DiceRoll** (__tablename__ = 'dice_rolls'):
+- id, user_id (FK users.id), campaign_id (FK campaigns.id, nullable), pool_size (int), difficulty (int), specialty (bool), rolls_json (Text), successes (int), is_botch (bool), result_label (String 50), context (String 200, nullable), rolled_at (datetime, default func.now())
+
+**TokenUsage** (__tablename__ = 'token_usage'):
+- id, user_id (FK users.id), provider (String 20), input_tokens (int, default 0), output_tokens (int, default 0), credits_cost (Float, default 0.0), purpose (String 100), created_at
+
+**Image** (__tablename__ = 'images'):
+- id, user_id (FK users.id), campaign_id (FK campaigns.id, nullable), filename (String 255), prompt (Text), provider (String 20), credits_cost (Float, default 0.0), tags_json (Text, nullable), shared (bool, True), created_at
+
+After all table definitions, add:
+
+_engine = None
+_session_factory = None
+
+def _get_engine():
+    global _engine
+    if _engine is None:
+        settings = get_settings()
+        _engine = create_async_engine(settings.DATABASE_URL, echo=False)
+    return _engine
+
+def _get_session_factory():
+    global _session_factory
+    if _session_factory is None:
+        _session_factory = async_sessionmaker(_get_engine(), expire_on_commit=False)
+    return _session_factory
+
+async def init_db():
+    engine = _get_engine()
+    async with engine.begin() as conn:
+        await conn.run_sync(Base.metadata.create_all)
+
+async def get_db():
+    session_factory = _get_session_factory()
+    async with session_factory() as session:
+        try:
+            yield session
+            await session.commit()
+        except Exception:
+            await session.rollback()
+            raise

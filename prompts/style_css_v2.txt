@@ -1,0 +1,22 @@
+You are an expert Frontend CSS Developer. Write a premium, stunning Dark Gothic (Vampire: The Dark Ages theme) stylesheet for `client/style.css`.
+Output ONLY the CSS code inside a ```css block.
+
+Requirements:
+- Font: Use Google Fonts like 'Outfit' or 'Cinzel' or fallback to Serif/Sans-serif.
+- Color Palette:
+  - Background: Very dark grays/blacks (`#0c0c0e`, `#121214`)
+  - Accent Color: Blood Red / Crimson (`#8b0000`, `#e60000`)
+  - Text Color: Crisp white (`#ffffff`) and muted gray for details (`#8e8e93`)
+- Elements to Style:
+  1. `body`: dark background, centered login card, but full-width layout for dashboard.
+  2. `#login-screen`: centered card (`display: flex; flex-direction: column; gap: 1rem; padding: 3rem; background: #1a1a1f; border-radius: 12px; border: 1px solid #3a1a1a; box-shadow: 0 10px 30px rgba(0,0,0,0.5); width: 350px;`)
+  3. `#dashboard-screen`: dashboard wrapper using flexbox (`display: flex; height: 100vh; width: 100vw;`)
+  4. `header`: dashboard top header (`display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; background: #141416; border-bottom: 1px solid #3a1a1a; width: 100%; position: absolute; top:0; left:0; height: 60px;`)
+  5. `.sidebar`: sidebar navigation on the left (`width: 250px; background: #141416; border-right: 1px solid #3a1a1a; padding: 80px 1.5rem 1.5rem 1.5rem; display: flex; flex-direction: column; gap: 2rem;`)
+  6. `.sidebar nav ul`: reset list style. Links should be blocks with crimson hovers (`color: #fff; text-decoration: none; padding: 0.75rem 1rem; border-radius: 6px; display: block; transition: all 0.3s;`) and hover state (`background: rgba(139,0,0,0.2); border-left: 3px solid #8b0000; color: #ff4d4f;`)
+  7. `.panel`: main content area on the right (`flex: 1; padding: 80px 2rem 2rem 2rem; overflow-y: auto; background: #0c0c0e;`)
+  8. `button`: gothic style buttons (`background: #8b0000; color: #fff; border: none; border-radius: 4px; padding: 0.75rem 1.5rem; cursor: pointer; font-weight: bold; transition: all 0.3s;`) with hover (`background: #e60000; box-shadow: 0 0 10px rgba(230,0,0,0.5);`)
+  9. `input`: dark inputs (`background: #1a1a1f; border: 1px solid #3a3a3f; color: #fff; padding: 0.75rem; border-radius: 4px; transition: border 0.3s;`) with focus (`border-color: #8b0000; outline: none;`)
+  10. Forms, lists, sections should have neat spacing. Section headers should be uppercase serif.
+
+Write a complete, highly polished, premium stylesheet. Do not leave placeholder comments.

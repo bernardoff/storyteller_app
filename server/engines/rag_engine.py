@@ -1,0 +1,161 @@
+import os
+import chromadb
+from logging import getLogger
+from server.config import get_settings
+
+_logger = getLogger(__name__)
+_chroma_client = None
+settings = get_settings()
+
+def get_chroma_client():
+    global _chroma_client
+    if _chroma_client is None:
+        _chroma_client = chromadb.PersistentClient(path=settings.CHROMA_DB_PATH)
+    return _chroma_client
+
+class OllamaEmbeddingFunction(chromadb.utils.embedding_functions.EmbeddingFunction):
+    def __init__(self, url, model):
+        self.url = url
+        self.model = model
+
+    def __call__(self, texts):
+        import urllib.request
+        import json
+        embeddings = []
+        for text in texts:
+            data = {"model": self.model, "prompt": text}
+            req = urllib.request.Request(
+                self.url,
+                data=json.dumps(data).encode(),
+                headers={'Content-Type': 'application/json'}
+            )
+            try:
+                with urllib.request.urlopen(req) as response:
+                    res_data = json.load(response)
+                    embeddings.append(res_data.get("embedding", []))
+            except Exception as e:
+                embeddings.append([])
+        return embeddings
+
+def initialize_knowledge_base(rules_dir: str):
+    client = get_chroma_client()
+    collection_name = "rules"
+    
+    embedding_function = OllamaEmbeddingFunction(
+        url=settings.OLLAMA_BASE_URL + '/api/embeddings',
+        model=settings.OLLAMA_EMBED_MODEL
+    )
+    
+    if collection_name not in [c.name for c in client.list_collections()]:
+        collection = client.create_collection(name=collection_name, embedding_function=embedding_function)
+        
+        mega_batch_size = 800
+        def process_file(file_path):
+            try:
+                with open(file_path, 'r', encoding='utf-8') as file:
+                    content = file.read()
+                    chunks = [content[i:i + mega_batch_size] for i in range(0, len(content), mega_batch_size)]
+                    return [(chunk, os.path.basename(file_path)) for chunk in chunks]
+            except Exception:
+                return []
+
+        if os.path.exists(rules_dir):
+            files = [os.path.join(rules_dir, f) for f in os.listdir(rules_dir) if f.endswith('.md')]
+            from concurrent.futures import ThreadPoolExecutor
+            with ThreadPoolExecutor(max_workers=8) as executor:
+                results = list(executor.map(process_file, files))
+
+            documents = []
+            ids = []
+            for file_results in results:
+                for chunk, source in file_results:
+                    documents.append(chunk)
+                    ids.append(f"id_{len(documents)}")
+
+            if documents:
+                collection.add(ids=ids, documents=documents)
+
+def search_rules(query: str, n_results=3):
+    client = get_chroma_client()
+    collection_name = "rules"
+    
+    embedding_function = OllamaEmbeddingFunction(
+        url=settings.OLLAMA_BASE_URL + '/api/embeddings',
+        model=settings.OLLAMA_EMBED_MODEL
+    )
+    
+    collection = client.get_collection(name=collection_name, embedding_function=embedding_function)
+    
+    results = collection.query(
+        query_texts=[query],
+        n_results=n_results
+    )
+    
+    formatted_results = []
+    if results and 'documents' in results and results['documents']:
+        docs = results['documents'][0]
+        metas = results['metadatas'][0] if (results.get('metadatas') and results['metadatas']) else None
+        distances = results['distances'][0] if (results.get('distances') and results['distances']) else None
+        ids = results['ids'][0]
+        
+        for i, doc in enumerate(docs):
+            dist = distances[i] if distances else 0.0
+            # Source file can be derived from ID or metadata
+            source = f"Chunk {ids[i]}"
+            formatted_results.append({'text': doc, 'source': source, 'distance': dist})
+            
+    return formatted_results
+
+def search_rules_text(query: str, n_results=3) -> str:
+    results = search_rules(query, n_results)
+    return '\n'.join([f"Text: {r['text']}, Source: {r['source']}, Distance: {r['distance']}" for r in results])
+
+def ingest_lore_text(text: str):
+    client = get_chroma_client()
+    collection_name = "lore"
+    
+    embedding_function = OllamaEmbeddingFunction(
+        url=settings.OLLAMA_BASE_URL + '/api/embeddings',
+        model=settings.OLLAMA_EMBED_MODEL
+    )
+    
+    if collection_name not in [c.name for c in client.list_collections()]:
+        collection = client.create_collection(name=collection_name, embedding_function=embedding_function)
+    else:
+        collection = client.get_collection(name=collection_name, embedding_function=embedding_function)
+    
+    chunk_size = 800
+    chunks = [text[i:i+chunk_size] for i in range(0, len(text), chunk_size)]
+    
+    # Get current count to append unique IDs
+    existing_count = collection.count()
+    ids = [f'lore_{existing_count + i}' for i in range(len(chunks))]
+    
+    if chunks:
+        collection.add(documents=chunks, ids=ids)
+
+def search_lore(query: str, n_results=3):
+    client = get_chroma_client()
+    
+    embedding_function = OllamaEmbeddingFunction(
+        url=settings.OLLAMA_BASE_URL + '/api/embeddings',
+        model=settings.OLLAMA_EMBED_MODEL
+    )
+    
+    collection = client.get_collection(name="lore", embedding_function=embedding_function)
+    
+    results = collection.query(
+        query_texts=[query],
+        n_results=n_results
+    )
+    
+    formatted_results = []
+    if results and 'documents' in results and results['documents']:
+        docs = results['documents'][0]
+        distances = results['distances'][0] if (results.get('distances') and results['distances']) else None
+        
+        for i, doc in enumerate(docs):
+            dist = distances[i] if distances else 0.0
+            formatted_results.append({'text': doc, 'distance': dist})
+            
+    return formatted_results

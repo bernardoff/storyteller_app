@@ -1,0 +1,14 @@
+You are an expert Python developer. Output ONLY the Python code inside a single ```python code block. No explanations.
+Build `server/engines/rag_engine.py`
+
+Create a module-level singleton pattern using a module variable `_chroma_client = None`
+`get_chroma_client()` should create chromadb.PersistentClient on first call, store in `_chroma_client`, return it
+Keep the OllamaEmbeddingFunction with url from settings (`settings.OLLAMA_BASE_URL + '/api/embeddings'`) and model (`settings.OLLAMA_EMBED_MODEL`)
+Keep `initialize_knowledge_base(rules_dir: str)` with chunking and batching logic (mega_batch_size=10000, batch_size=100, ThreadPoolExecutor max_workers=8). Read all md files in rules_dir.
+Modify `search_rules(query: str, n_results=3)` to return a list of dicts: `[{'text': str, 'source': str, 'distance': float}, ...]`
+  - The source should be extracted from the document ID pattern (e.g. id_N maps to chunk index which came from a specific file)
+  - Include distances from the query results
+Add `search_rules_text(query: str, n_results=3) -> str` that returns the joined text format.
+Use logging.getLogger(__name__) for logs instead of print.
+
+Imports: chromadb, os, logging, concurrent.futures, server.config.get_settings

@@ -1,0 +1,29 @@
+You are an expert FastAPI developer. Modify `server/routers/combat_routes.py`.
+Output ONLY the fully modified python file.
+
+Requirements:
+- Router prefix is `/api/combat`, tag is `combat`.
+- Use async SQLAlchemy 2.0.
+- Handle database operations for `CombatEncounter`.
+- Ensure column names match the SQLAlchemy model `CombatEncounter` in `database.py`:
+  - `id`
+  - `campaign_id`
+  - `session_id`
+  - `name`
+  - `is_active` (boolean, defaults to True)
+  - `current_turn_index` (int, defaults to 0)
+  - `round_number` (int, defaults to 1)
+  - `combatants_json` (text, nullable)
+  - `combat_log_json` (text, nullable)
+  - `created_at`
+- Endpoints:
+  - `POST /start`: Starts a new combat encounter. Creates a `CombatEncounter` model (campaign_id=1, name="Encounter 1", is_active=True). Returns `{"id": encounter.id}`.
+  - `POST /{id}/next`: Storyteller only (`require_storyteller`). Advances turn:
+    - Increment `current_turn_index`.
+    - If `current_turn_index` exceeds the number of combatants, reset it to 0 and increment `round_number`.
+    - Commit, return the updated state.
+  - `GET /{id}`: Returns the combat encounter state:
+    - Returns `{"id": encounter.id, "name": encounter.name, "is_active": encounter.is_active, "current_turn_index": encounter.current_turn_index, "round_number": encounter.round_number, "combatants": json.loads(encounter.combatants_json) if encounter.combatants_json else []}`.
+  - `POST /{id}/combatants`: Add/update combatants. Body: list of dicts (name, initiative, health, etc.). Serializes to `combatants_json` and saves.
+
+Output full code. No placeholders.

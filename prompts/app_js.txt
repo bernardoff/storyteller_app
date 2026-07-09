@@ -1,0 +1,9 @@
+You are an expert JS developer. Output ONLY Javascript code inside a single ```javascript code block. No explanations.
+Build `client/app.js` for the Storyteller App.
+Requirements:
+- Handle login (`/api/auth/login`) using fetch. Save JWT token to localStorage.
+- If logged in, show Dashboard and hide Login screen.
+- Establish WebSocket connection to `ws://127.0.0.1:8000/ws/1?token=<JWT_TOKEN>`.
+- Handle WebSocket messages and append them to the feed area.
+- Handle Dice Roll button click: send POST to `/api/dice/roll` with JWT token.
+- Add basic error handling and UI feedback (e.g., alert on login failure).

@@ -1,0 +1,30 @@
+You are an expert FastAPI developer. Modify `server/routers/dice_routes.py`.
+Output ONLY the fully modified python file.
+
+Requirements:
+- Router: `router = APIRouter(prefix="/api/dice", tags=["dice"])`
+- Use fully async SQLAlchemy 2.0.
+- Database session: `db: AsyncSession = Depends(get_db)`.
+- Imports:
+  `from fastapi import APIRouter, Depends, HTTPException, Query`
+  `from sqlalchemy.ext.asyncio import AsyncSession`
+  `from sqlalchemy import select`
+  `from pydantic import BaseModel`
+  `from typing import List`
+  `import json`
+  `from server.engines.dice_engine import roll_v20, roll_initiative, contested_roll`
+  `from server.database import get_db, DiceRoll`
+  `from server.auth import get_current_user`
+- Endpoints:
+  - `POST /roll`: Async. Calls `roll_v20(request.pool_size, request.difficulty, request.specialty)`.
+    - Creates a `DiceRoll` model:
+      `dice_roll = DiceRoll(user_id=user.id, pool_size=request.pool_size, difficulty=request.difficulty, specialty=request.specialty, context=request.context, rolls_json=json.dumps(result['rolls']), successes=result['successes'], is_botch=result['is_botch'], result_label=result['result_label'])`
+    - Saves to database: `db.add(dice_roll); await db.commit(); await db.refresh(dice_roll)`.
+    - Returns `{"result_label": result['result_label'], "successes": result['successes'], "rolls_json": json.dumps(result['rolls'])}` matching what the frontend expects!
+  - `POST /initiative`: Async.
+  - `POST /contested`: Async.
+  - `GET /history`: Async. Fetches rolls for the user:
+    - Query: `select(DiceRoll).where(DiceRoll.user_id == user.id).order_by(DiceRoll.id.desc()).limit(limit)`
+    - Execute, fetch scalars, return list.
+
+Output full code. No placeholders.

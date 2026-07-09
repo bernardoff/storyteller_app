@@ -1,0 +1,6 @@
+You are an expert JS Developer. Modify `client/app.js` to handle Character and Combat panels. Output ONLY Javascript code inside a ```javascript block. No explanations.
+Requirements:
+- Add navigation logic: Clicking "Chat", "Dice", "Character", "Combat" in the sidebar should hide other sections and show the active one.
+- Character Panel Logic: Fetch characters from `/api/character/` and render them in the list. Handle the create character form submission by POSTing to `/api/character/`.
+- Combat Panel Logic: Fetch combat state from `/api/combat/1`. Handle "Start Combat" (`/api/combat/start`) and "Next Turn" (`/api/combat/1/next`).
+- Keep the existing WebSocket logic and Login logic intact.

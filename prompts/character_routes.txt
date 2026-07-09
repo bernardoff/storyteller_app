@@ -1,0 +1,16 @@
+You are a FastAPI expert. Build `server/routers/character_routes.py`. Output ONLY python code.
+Requirements:
+- Router prefix: `/api/character`, tags: `["characters"]`
+- Endpoints:
+  - `GET /` - List user's characters. If storyteller, list all characters.
+  - `POST /` - Create a new character sheet (JSON payload matching Character model fields).
+  - `GET /{id}` - Get a specific character.
+  - `PUT /{id}` - Update a specific character.
+- Imports:
+  - `from fastapi import APIRouter, Depends, HTTPException`
+  - `from sqlalchemy.ext.asyncio import AsyncSession`
+  - `from sqlalchemy import select`
+  - `from server.database import get_db, Character`
+  - `from server.auth import get_current_user`
+- Use AsyncSession for DB operations.
+- DO NOT use Pydantic models for the requests, just `dict` or specific fields to keep it simple, or generate simple Pydantic models in the file.

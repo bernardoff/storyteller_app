@@ -1,0 +1,638 @@
+You are an expert Frontend Developer. Output the following JavaScript code exactly as provided. Do not add explanations. Do not modify it. Just output it.
+
+```javascript
+window.addEventListener('error', (event) => {
+    alert(`JS ERROR: ${event.message}\nAt: ${event.filename}:${event.lineno}`);
+});
+
+window.addEventListener('unhandledrejection', (event) => {
+    alert(`JS PROMISE REJECTION: ${event.reason}`);
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+    const loginBtn = document.getElementById('login-btn');
+    const setupBtn = document.getElementById('setup-btn');
+    const logoutBtn = document.getElementById('logout-btn');
+    
+    const loginScreen = document.getElementById('login-screen');
+    const dashboardScreen = document.getElementById('dashboard-screen');
+    const welcomeMessage = document.getElementById('welcome-message');
+
+    let ws = null;
+    let currentUser = null;
+    let combatEncounterId = localStorage.getItem('combat_encounter_id');
+
+    // Auto-login on load
+    const token = localStorage.getItem('access_token');
+    if (token) {
+        fetch('/api/auth/me', {
+            headers: { 'Authorization': `Bearer ${token}` }
+        }).then(res => {
+            if (res.ok) {
+                return res.json();
+            } else {
+                throw new Error("Invalid token");
+            }
+        }).then(user => {
+            currentUser = user;
+            loginScreen.classList.add('hidden');
+            dashboardScreen.classList.remove('hidden');
+            welcomeMessage.textContent = `Welcome, ${user.display_name || user.username} (${user.role})`;
+            
+            // Connect socket and load UI panels
+            connectWebSocket(token);
+            loadCharacters();
+            fetchSessions();
+            if (combatEncounterId) {
+                loadCombatState();
+            }
+        }).catch(() => {
+            localStorage.removeItem('access_token');
+            loginScreen.classList.remove('hidden');
+            dashboardScreen.classList.add('hidden');
+        });
+    } else {
+        loginScreen.classList.remove('hidden');
+        dashboardScreen.classList.add('hidden');
+    }
+
+    // Connect WebSocket
+    function connectWebSocket(token) {
+        const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+        ws = new WebSocket(`${protocol}//${window.location.host}/ws/1?token=${token}`);
+        
+        ws.onopen = () => {
+            appendSystemMessage("Connected to live game chat.");
+        };
+
+        ws.onmessage = (event) => {
+            try {
+                const message = JSON.parse(event.data);
+                if (message.type === 'chat') {
+                    appendChatMessage(message.sender_name || 'System', message.text);
+                } else if (message.type === 'roll') {
+                    appendRollMessage(message.sender_name || 'System', message);
+                } else if (message.type === 'combat') {
+                    appendCombatMessage(message);
+                    if (combatEncounterId) {
+                        loadCombatState();
+                    }
+                }
+            } catch (err) {
+                console.error("Error processing WebSocket message:", err);
+            }
+        };
+
+        ws.onclose = () => {
+            appendSystemMessage("Disconnected from live game chat. Reconnecting in 5s...");
+            setTimeout(() => connectWebSocket(token), 5000);
+        };
+    }
+
+    function appendSystemMessage(text) {
+        const chatMessages = document.getElementById('chat-messages');
+        const div = document.createElement('div');
+        div.style.color = '#888';
+        div.style.fontStyle = 'italic';
+        div.style.marginBottom = '0.5rem';
+        div.textContent = text;
+        chatMessages.appendChild(div);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    function appendChatMessage(sender, text) {
+        const chatMessages = document.getElementById('chat-messages');
+        const div = document.createElement('div');
+        div.style.marginBottom = '0.5rem';
+        div.innerHTML = `<strong style="color: #ff4d4f;">${sender}:</strong> <span>${text}</span>`;
+        chatMessages.appendChild(div);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    function appendRollMessage(sender, roll) {
+        const chatMessages = document.getElementById('chat-messages');
+        const div = document.createElement('div');
+        div.style.marginBottom = '0.5rem';
+        div.style.padding = '0.5rem';
+        div.style.background = 'rgba(139,0,0,0.15)';
+        div.style.borderLeft = '3px solid #8b0000';
+        div.innerHTML = `
+            <strong style="color: #ff4d4f;">${sender} rolled dice:</strong><br>
+            <span>Pool: ${roll.pool} | Difficulty: ${roll.diff}</span><br>
+            <span style="font-weight: bold;">Successes: ${roll.successes} (${roll.result})</span><br>
+            <span style="color: #aaa; font-size: 0.85rem;">Rolls: [${roll.rolls.join(', ')}]</span>
+        `;
+        chatMessages.appendChild(div);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    function appendCombatMessage(msg) {
+        const chatMessages = document.getElementById('chat-messages');
+        const div = document.createElement('div');
+        div.style.marginBottom = '0.5rem';
+        div.style.color = '#ff4d4f';
+        div.style.fontWeight = 'bold';
+        div.textContent = `[Combat] ${msg.text}`;
+        chatMessages.appendChild(div);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    // Chat Form Submit
+    const sendChatBtn = document.getElementById('send-chat-btn');
+    const chatInput = document.getElementById('chat-input');
+    if (sendChatBtn) {
+        sendChatBtn.addEventListener('click', () => {
+            const text = chatInput.value.trim();
+            if (!text || !ws) return;
+            ws.send(JSON.stringify({ type: 'chat', text: text }));
+            chatInput.value = '';
+        });
+        chatInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                sendChatBtn.click();
+            }
+        });
+    }
+
+    // Login Handler
+    loginBtn.addEventListener('click', async () => {
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+
+        try {
+            const response = await fetch('/api/auth/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: `username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}`
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                localStorage.setItem('access_token', data.access_token);
+                
+                // Fetch profile
+                const profileRes = await fetch('/api/auth/me', {
+                    headers: { 'Authorization': `Bearer ${data.access_token}` }
+                });
+                currentUser = await profileRes.json();
+                
+                loginScreen.classList.add('hidden');
+                dashboardScreen.classList.remove('hidden');
+                welcomeMessage.textContent = `Welcome, ${currentUser.display_name || currentUser.username} (${currentUser.role})`;
+                
+                connectWebSocket(data.access_token);
+                loadCharacters();
+                fetchSessions();
+            } else {
+                alert('Login failed: Incorrect username or password');
+            }
+        } catch (error) {
+            console.error('Error during login:', error);
+        }
+    });
+
+    // Setup Account Handler
+    if (setupBtn) {
+        setupBtn.addEventListener('click', async () => {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            if (!username || !password) {
+                alert("Please fill in Username and Password inputs first.");
+                return;
+            }
+            const setup_key = prompt("Enter the Storyteller Setup Key:");
+            if (!setup_key) return;
+
+            try {
+                const response = await fetch('/api/auth/setup', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        username: username,
+                        password: password,
+                        display_name: username,
+                        setup_key: setup_key
+                    })
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    localStorage.setItem('access_token', data.access_token);
+                    currentUser = { username, role: 'storyteller', display_name: username };
+                    loginScreen.classList.add('hidden');
+                    dashboardScreen.classList.remove('hidden');
+                    welcomeMessage.textContent = `Welcome, ${data.display_name || username} (storyteller)`;
+                    
+                    connectWebSocket(data.access_token);
+                    loadCharacters();
+                    fetchSessions();
+                    alert("Setup successful! Welcome Storyteller.");
+                } else {
+                    const err = await response.json();
+                    alert('Setup failed: ' + (err.detail || 'Unknown error'));
+                }
+            } catch (error) {
+                console.error('Error during setup:', error);
+            }
+        });
+    }
+
+    // Logout Handler
+    if (logoutBtn) {
+        logoutBtn.addEventListener('click', () => {
+            localStorage.removeItem('access_token');
+            localStorage.removeItem('combat_encounter_id');
+            if (ws) ws.close();
+            loginScreen.classList.remove('hidden');
+            dashboardScreen.classList.add('hidden');
+            welcomeMessage.textContent = '';
+        });
+    }
+
+    // Sidebar Navigation
+    const sidebarLinks = document.querySelectorAll('.sidebar-link');
+    sidebarLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const targetId = link.getAttribute('data-target');
+            document.querySelectorAll('.panel section').forEach(section => {
+                section.classList.add('hidden');
+            });
+            document.getElementById(targetId).classList.remove('hidden');
+        });
+    });
+
+    // Dice Roller Handler
+    const rollBtn = document.getElementById('roll-btn');
+    if (rollBtn) {
+        rollBtn.addEventListener('click', async () => {
+            const pool = parseInt(document.getElementById('pool-size').value) || 5;
+            const diff = parseInt(document.getElementById('difficulty').value) || 6;
+            const token = localStorage.getItem('access_token');
+
+            try {
+                const response = await fetch('/api/dice/roll', {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        pool_size: pool,
+                        difficulty: diff,
+                        specialty: false,
+                        context: 'Manual Roll'
+                    })
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    const resultsDiv = document.getElementById('dice-results');
+                    resultsDiv.classList.remove('hidden');
+                    resultsDiv.innerHTML = `
+                        <h4 style="color: #ff4d4f; margin-bottom: 0.5rem;">Roll Result: ${data.result_label}</h4>
+                        <p style="margin-bottom: 0.25rem;"><strong>Successes:</strong> ${data.successes}</p>
+                        <p style="margin-bottom: 0rem; color: #aaa;"><strong>Individual Rolls:</strong> [${data.rolls_json}]</p>
+                    `;
+
+                    // Broadcast via WebSocket
+                    if (ws && ws.readyState === WebSocket.OPEN) {
+                        // Parse rolls_json which is a stringified JSON array
+                        const rollsArray = JSON.parse(data.rolls_json);
+                        ws.send(JSON.stringify({
+                            type: 'roll',
+                            pool: pool,
+                            diff: diff,
+                            successes: data.successes,
+                            rolls: rollsArray,
+                            result: data.result_label
+                        }));
+                    }
+                } else {
+                    alert("Dice roll failed.");
+                }
+            } catch (err) {
+                console.error(err);
+            }
+        });
+    }
+
+    // Character Panel - Load
+    async function loadCharacters() {
+        const token = localStorage.getItem('access_token');
+        if (!token) return;
+        try {
+            const response = await fetch('/api/character/', {
+                headers: { 'Authorization': `Bearer ${token}` }
+            });
+
+            if (response.ok) {
+                const characters = await response.json();
+                const characterList = document.getElementById('characters-list');
+                characterList.innerHTML = '';
+                characters.forEach(character => {
+                    const li = document.createElement('li');
+                    li.textContent = `${character.name} (${character.clan || 'No Clan'}, Gen ${character.generation || 'Unknown'})`;
+                    characterList.appendChild(li);
+                });
+            }
+        } catch (error) {
+            console.error('Error loading characters:', error);
+        }
+    }
+
+    // Character Panel - Create
+    const createCharacterForm = document.getElementById('create-character-form');
+    createCharacterForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const name = document.getElementById('char-name').value;
+        const clan = document.getElementById('char-clan').value;
+        const generation = parseInt(document.getElementById('char-gen').value);
+        const token = localStorage.getItem('access_token');
+
+        try {
+            const response = await fetch('/api/character/', {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ name, clan, generation })
+            });
+
+            if (response.ok) {
+                loadCharacters();
+                createCharacterForm.reset();
+            } else {
+                alert('Failed to create character');
+            }
+        } catch (error) {
+            console.error('Error creating character:', error);
+        }
+    });
+
+    // Combat Panel Tracker
+    const startCombatBtn = document.getElementById('start-combat-btn');
+    const nextTurnBtn = document.getElementById('next-turn-btn');
+    const endCombatBtn = document.getElementById('end-combat-btn');
+    const addCombatantForm = document.getElementById('add-combatant-form');
+
+    if (startCombatBtn) {
+        startCombatBtn.addEventListener('click', async () => {
+            const token = localStorage.getItem('access_token');
+            try {
+                const response = await fetch('/api/combat/start', {
+                    method: 'POST',
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                if (response.ok) {
+                    const data = await response.json();
+                    combatEncounterId = data.id;
+                    localStorage.setItem('combat_encounter_id', combatEncounterId);
+                    loadCombatState();
+                    if (ws) ws.send(JSON.stringify({ type: 'combat', text: 'New combat encounter started!' }));
+                }
+            } catch (err) {
+                console.error(err);
+            }
+        });
+    }
+
+    if (nextTurnBtn) {
+        nextTurnBtn.addEventListener('click', async () => {
+            const token = localStorage.getItem('access_token');
+            if (!combatEncounterId) return;
+            try {
+                const response = await fetch(`/api/combat/${combatEncounterId}/next`, {
+                    method: 'POST',
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                if (response.ok) {
+                    const state = await response.json();
+                    loadCombatState();
+                    
+                    const activeCombatant = state.combatants[state.current_turn_index];
+                    const activeName = activeCombatant ? activeCombatant.name : 'Unknown';
+                    if (ws) {
+                        ws.send(JSON.stringify({
+                            type: 'combat',
+                            text: `Advanced turn. Round ${state.round_number}, Current Turn is now: ${activeName}`
+                        }));
+                    }
+                }
+            } catch (err) {
+                console.error(err);
+            }
+        });
+    }
+
+    if (addCombatantForm) {
+        addCombatantForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const name = document.getElementById('comb-name').value;
+            const init = parseInt(document.getElementById('comb-init').value);
+            const token = localStorage.getItem('access_token');
+
+            if (!combatEncounterId) {
+                alert("Please start a combat encounter first!");
+                return;
+            }
+
+            try {
+                // Fetch current state
+                const getRes = await fetch(`/api/combat/${combatEncounterId}`, {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                const state = await getRes.json();
+                let combatants = state.combatants || [];
+                
+                combatants.push({ name, initiative: init });
+                // Sort by initiative descending
+                combatants.sort((a, b) => b.initiative - a.initiative);
+
+                // Save
+                const saveRes = await fetch(`/api/combat/${combatEncounterId}/combatants`, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(combatants)
+                });
+
+                if (saveRes.ok) {
+                    loadCombatState();
+                    addCombatantForm.reset();
+                }
+            } catch (err) {
+                console.error(err);
+            }
+        });
+    }
+
+    async function loadCombatState() {
+        if (!combatEncounterId) return;
+        const token = localStorage.getItem('access_token');
+        try {
+            const response = await fetch(`/api/combat/${combatEncounterId}`, {
+                headers: { 'Authorization': `Bearer ${token}` }
+            });
+            if (response.ok) {
+                const state = await response.json();
+                const stateInfo = document.getElementById('combat-state-info');
+                const combatantsList = document.getElementById('combatants-list');
+                const controls = document.getElementById('combat-controls');
+
+                // Show controls if storyteller
+                if (currentUser && currentUser.role === 'storyteller') {
+                    controls.classList.remove('hidden');
+                } else {
+                    controls.classList.add('hidden');
+                }
+
+                // Render state text
+                const activeCombatant = state.combatants[state.current_turn_index];
+                stateInfo.innerHTML = `
+                    Active Encounter ID: ${state.id}<br>
+                    Round: ${state.round_number} | Current Turn Index: ${state.current_turn_index}<br>
+                    Current Active Turn: <span style="color: #ff4d4f;">${activeCombatant ? activeCombatant.name : 'None'}</span>
+                `;
+
+                // Render list
+                combatantsList.innerHTML = '';
+                state.combatants.forEach((c, idx) => {
+                    const li = document.createElement('li');
+                    li.style.padding = '0.5rem';
+                    li.style.marginBottom = '0.25rem';
+                    li.style.borderRadius = '4px';
+                    
+                    if (idx === state.current_turn_index) {
+                        li.style.background = 'rgba(139,0,0,0.3)';
+                        li.style.borderLeft = '4px solid #ff4d4f';
+                        li.style.fontWeight = 'bold';
+                        li.innerHTML = `👉 ${c.name} (Initiative: ${c.initiative}) - CURRENT`;
+                    } else {
+                        li.style.background = '#1a1a1f';
+                        li.innerHTML = `${c.name} (Initiative: ${c.initiative})`;
+                    }
+                    combatantsList.appendChild(li);
+                });
+            }
+        } catch (err) {
+            console.error(err);
+        }
+    }
+
+    // Rules Search Panel
+    const searchRulesBtn = document.getElementById('search-rules-btn');
+    if (searchRulesBtn) {
+        searchRulesBtn.addEventListener('click', async () => {
+            const query = document.getElementById('rules-query').value;
+            const token = localStorage.getItem('access_token');
+            if (!query) return;
+
+            try {
+                const response = await fetch(`/api/rules/search?q=${encodeURIComponent(query)}`, {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    const resultsContainer = document.getElementById('rules-results');
+                    resultsContainer.innerHTML = '';
+                    data.forEach(rule => {
+                        const li = document.createElement('li');
+                        li.style.marginBottom = "1.5rem";
+                        li.style.borderBottom = "1px solid #333";
+                        li.style.paddingBottom = "1rem";
+                        li.innerHTML = `
+                            <p style="color: #ccc; font-style: italic;">"${rule.text}"</p>
+                            <p style="font-size: 0.85rem; color: #888; margin-top: 0.25rem;">
+                                <strong>Source:</strong> ${rule.source} | <strong>Relevance:</strong> ${(1 - rule.distance).toFixed(2)}
+                            </p>
+                        `;
+                        resultsContainer.appendChild(li);
+                    });
+                }
+            } catch (error) {
+                console.error('Error searching rules:', error);
+            }
+        });
+    }
+
+    // Sessions Panel - Load
+    async function fetchSessions() {
+        const token = localStorage.getItem('access_token');
+        if (!token) return;
+        try {
+            const response = await fetch('/api/session/', {
+                headers: { 'Authorization': `Bearer ${token}` }
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                const sessionsHeading = document.getElementById('sessions-heading');
+                if (sessionsHeading) {
+                    sessionsHeading.textContent = `Sessions (${data.length})`;
+                }
+                const sessionsList = document.getElementById('sessions-list');
+                sessionsList.innerHTML = '';
+                data.forEach(session => {
+                    const div = document.createElement('div');
+                    div.style.marginBottom = "1.5rem";
+                    div.style.padding = "1rem";
+                    div.style.background = "#1a1a1f";
+                    div.style.border = "1px solid #3a1a1a";
+                    div.style.borderRadius = "8px";
+                    div.innerHTML = `
+                        <h4 style="margin-bottom: 0.5rem; color: #ff4d4f;">Session #${session.session_number}: ${session.title}</h4>
+                        <p style="margin-bottom: 0.5rem;"><strong>Log:</strong> ${session.detailed_log}</p>
+                    `;
+                    sessionsList.appendChild(div);
+                });
+            }
+        } catch (error) {
+            console.error('Error fetching sessions:', error);
+            alert('Error loading sessions: ' + error.message);
+        }
+    }
+
+    // Sessions Panel - Create
+    const createSessionForm = document.getElementById('create-session-form');
+    if (createSessionForm) {
+        createSessionForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const campaignId = parseInt(document.getElementById('sess-campaign-id').value) || 1;
+            const sessionNumber = parseInt(document.getElementById('sess-number').value);
+            const title = document.getElementById('sess-title').value;
+            const detailedLog = document.getElementById('sess-log').value;
+            const token = localStorage.getItem('access_token');
+
+            try {
+                const response = await fetch('/api/session/', {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        campaign_id: campaignId,
+                        session_number: sessionNumber,
+                        title: title,
+                        detailed_log: detailedLog
+                    })
+                });
+
+                if (response.ok) {
+                    fetchSessions();
+                    createSessionForm.reset();
+                } else {
+                    alert('Failed to create session log.');
+                }
+            } catch (error) {
+                console.error('Error creating session:', error);
+            }
+        });
+    }
+});
+```

@@ -1,0 +1,17 @@
+You are an expert Python developer. Output ONLY the Python code inside a single ```python code block. No explanations.
+Build `server/routers/dice_routes.py`
+
+FastAPI router with prefix `/api/dice`, tag `dice`.
+
+Pydantic request models:
+- `DiceRollRequest`: pool_size: int, difficulty: int = 6, specialty: bool = False, context: str = ''
+- `InitiativeRequest`: dexterity: int, wits: int
+- `ContestedRequest`: pool1: int, pool2: int, difficulty: int = 6
+
+Endpoints:
+- `POST /roll` — Requires auth (get_current_user). Roll dice using roll_v20, save to DiceRoll table in DB, return result. Add a comment `# TODO: WebSocket broadcast`
+- `POST /initiative` — Requires auth. Return initiative result.
+- `POST /contested` — Requires auth. Return contested result.
+- `GET /history` — Requires auth. Query param limit=20. Return recent DiceRoll records for current user using sqlalchemy select.
+
+Import from server.engines.dice_engine, server.database (get_db, DiceRoll), server.auth (get_current_user).

@@ -1,0 +1,9 @@
+You are an expert Frontend Developer. Write the COMPLETE `client/app.js` for the Storyteller App.
+Output ONLY the JavaScript code inside a ```javascript block.
+
+Requirements:
+- Login Logic: Handle `#login-btn` click. Fetch POST to `/api/auth/login` (Content-Type: application/x-www-form-urlencoded) with `username` and `password`. Save `access_token` to `localStorage`. Hide `#login-screen`, show `#dashboard-screen`.
+- Navigation: Handle sidebar clicks to toggle visibility of `#dice-roller`, `#feed-area`, `#character-panel`, and `#combat-panel`.
+- Character Logic: Fetch `GET /api/character/` (with Authorization Bearer token). Display in character list. Handle create form submit -> `POST /api/character/`.
+- Combat Logic: Handle `#start-combat-btn` -> `POST /api/combat/start`. Handle `#next-turn-btn` -> `POST /api/combat/1/next`.
+- DO NOT use placeholders like "// logic here". Write actual fetch calls for all of them.

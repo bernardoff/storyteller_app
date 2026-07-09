@@ -1,0 +1,331 @@
+You are an expert Frontend Developer. Output the following JavaScript code exactly as provided. Do not add explanations. Do not modify it. Just output it.
+
+```javascript
+document.addEventListener('DOMContentLoaded', () => {
+    const loginBtn = document.getElementById('login-btn');
+    const setupBtn = document.getElementById('setup-btn');
+    const logoutBtn = document.getElementById('logout-btn');
+    
+    const loginScreen = document.getElementById('login-screen');
+    const dashboardScreen = document.getElementById('dashboard-screen');
+    const welcomeMessage = document.getElementById('welcome-message');
+
+    // Auto-login on load
+    const token = localStorage.getItem('access_token');
+    if (token) {
+        fetch('/api/auth/me', {
+            headers: { 'Authorization': `Bearer ${token}` }
+        }).then(res => {
+            if (res.ok) {
+                return res.json();
+            } else {
+                throw new Error("Invalid token");
+            }
+        }).then(user => {
+            loginScreen.classList.add('hidden');
+            dashboardScreen.classList.remove('hidden');
+            welcomeMessage.textContent = `Welcome, ${user.display_name || user.username}`;
+            loadCharacters();
+            fetchSessions();
+        }).catch(() => {
+            localStorage.removeItem('access_token');
+            loginScreen.classList.remove('hidden');
+            dashboardScreen.classList.add('hidden');
+        });
+    } else {
+        loginScreen.classList.remove('hidden');
+        dashboardScreen.classList.add('hidden');
+    }
+
+    // Login Handler
+    loginBtn.addEventListener('click', async () => {
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+
+        try {
+            const response = await fetch('/api/auth/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: `username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}`
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                localStorage.setItem('access_token', data.access_token);
+                
+                // Fetch profile
+                const profileRes = await fetch('/api/auth/me', {
+                    headers: { 'Authorization': `Bearer ${data.access_token}` }
+                });
+                const user = await profileRes.json();
+                
+                loginScreen.classList.add('hidden');
+                dashboardScreen.classList.remove('hidden');
+                welcomeMessage.textContent = `Welcome, ${user.display_name || user.username}`;
+                loadCharacters();
+                fetchSessions();
+            } else {
+                alert('Login failed: Incorrect username or password');
+            }
+        } catch (error) {
+            console.error('Error during login:', error);
+        }
+    });
+
+    // Setup Account Handler
+    if (setupBtn) {
+        setupBtn.addEventListener('click', async () => {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            if (!username || !password) {
+                alert("Please fill in Username and Password inputs first.");
+                return;
+            }
+            const setup_key = prompt("Enter the Storyteller Setup Key:");
+            if (!setup_key) return;
+
+            try {
+                const response = await fetch('/api/auth/setup', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        username: username,
+                        password: password,
+                        display_name: username,
+                        setup_key: setup_key
+                    })
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    localStorage.setItem('access_token', data.access_token);
+                    loginScreen.classList.add('hidden');
+                    dashboardScreen.classList.remove('hidden');
+                    welcomeMessage.textContent = `Welcome, ${data.display_name || username}`;
+                    loadCharacters();
+                    fetchSessions();
+                    alert("Setup successful! Welcome Storyteller.");
+                } else {
+                    const err = await response.json();
+                    alert('Setup failed: ' + (err.detail || 'Unknown error'));
+                }
+            } catch (error) {
+                console.error('Error during setup:', error);
+            }
+        });
+    }
+
+    // Logout Handler
+    if (logoutBtn) {
+        logoutBtn.addEventListener('click', () => {
+            localStorage.removeItem('access_token');
+            loginScreen.classList.remove('hidden');
+            dashboardScreen.classList.add('hidden');
+            welcomeMessage.textContent = '';
+        });
+    }
+
+    // Sidebar Navigation
+    const sidebarLinks = document.querySelectorAll('.sidebar-link');
+    sidebarLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const targetId = link.getAttribute('data-target');
+            document.querySelectorAll('.panel section').forEach(section => {
+                section.classList.add('hidden');
+            });
+            document.getElementById(targetId).classList.remove('hidden');
+        });
+    });
+
+    // Character Panel - Load
+    async function loadCharacters() {
+        const token = localStorage.getItem('access_token');
+        if (!token) return;
+        try {
+            const response = await fetch('/api/character/', {
+                headers: { 'Authorization': `Bearer ${token}` }
+            });
+
+            if (response.ok) {
+                const characters = await response.json();
+                const characterList = document.getElementById('characters-list');
+                characterList.innerHTML = '';
+                characters.forEach(character => {
+                    const li = document.createElement('li');
+                    li.textContent = `${character.name} (${character.clan || 'No Clan'}, Gen ${character.generation || 'Unknown'})`;
+                    characterList.appendChild(li);
+                });
+            }
+        } catch (error) {
+            console.error('Error loading characters:', error);
+        }
+    }
+
+    // Character Panel - Create
+    const createCharacterForm = document.getElementById('create-character-form');
+    createCharacterForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const name = document.getElementById('char-name').value;
+        const clan = document.getElementById('char-clan').value;
+        const generation = parseInt(document.getElementById('char-gen').value);
+        const token = localStorage.getItem('access_token');
+
+        try {
+            const response = await fetch('/api/character/', {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ name, clan, generation })
+            });
+
+            if (response.ok) {
+                loadCharacters();
+                createCharacterForm.reset();
+            } else {
+                alert('Failed to create character');
+            }
+        } catch (error) {
+            console.error('Error creating character:', error);
+        }
+    });
+
+    // Rules Search Panel
+    const searchRulesBtn = document.getElementById('search-rules-btn');
+    if (searchRulesBtn) {
+        searchRulesBtn.addEventListener('click', async () => {
+            const query = document.getElementById('rules-query').value;
+            const token = localStorage.getItem('access_token');
+            if (!query) return;
+
+            try {
+                const response = await fetch(`/api/rules/search?q=${encodeURIComponent(query)}`, {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    const resultsContainer = document.getElementById('rules-results');
+                    resultsContainer.innerHTML = '';
+                    data.forEach(rule => {
+                        const li = document.createElement('li');
+                        li.style.marginBottom = "1.5rem";
+                        li.style.borderBottom = "1px solid #333";
+                        li.style.paddingBottom = "1rem";
+                        li.innerHTML = `
+                            <p style="color: #ccc; font-style: italic;">"${rule.text}"</p>
+                            <p style="font-size: 0.85rem; color: #888; margin-top: 0.25rem;">
+                                <strong>Source:</strong> ${rule.source} | <strong>Relevance:</strong> ${(1 - rule.distance).toFixed(2)}
+                            </p>
+                        `;
+                        resultsContainer.appendChild(li);
+                    });
+                }
+            } catch (error) {
+                console.error('Error searching rules:', error);
+            }
+        });
+    }
+
+    // Sessions Panel - Load
+    async function fetchSessions() {
+        const token = localStorage.getItem('access_token');
+        if (!token) return;
+        try {
+            const response = await fetch('/api/session/', {
+                headers: { 'Authorization': `Bearer ${token}` }
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                const sessionsList = document.getElementById('sessions-list');
+                sessionsList.innerHTML = '';
+                data.forEach(session => {
+                    const sessionElement = document.createElement('li');
+                    sessionElement.style.marginBottom = "2rem";
+                    sessionElement.style.padding = "1rem";
+                    sessionElement.style.background = "#1a1a1f";
+                    sessionElement.style.border = "1px solid #3a1a1a";
+                    sessionElement.style.borderRadius = "8px";
+                    sessionElement.innerHTML = `
+                        <h4 style="margin-bottom: 0.5rem; color: #ff4d4f;">Session #${session.session_number}: ${session.title}</h4>
+                        <p style="margin-bottom: 0.5rem;"><strong>Log:</strong> ${session.detailed_log}</p>
+                        <p style="margin-bottom: 1rem;" class="summary-container">
+                            <strong>Summary:</strong> <span class="summary-text">${session.summary || 'No summary generated yet.'}</span>
+                        </p>
+                        <button data-id="${session.id}" class="summarize-btn">Auto-Summarize via Ollama</button>
+                    `;
+                    sessionsList.appendChild(sessionElement);
+
+                    const summarizeButton = sessionElement.querySelector('.summarize-btn');
+                    summarizeButton.addEventListener('click', async () => {
+                        summarizeButton.disabled = true;
+                        const summaryTextSpan = sessionElement.querySelector('.summary-text');
+                        summaryTextSpan.textContent = 'Generating summary locally on GPU...';
+                        
+                        try {
+                            const sumRes = await fetch(`/api/session/${session.id}/summarize`, {
+                                method: 'POST',
+                                headers: { 'Authorization': `Bearer ${token}` }
+                            });
+                            if (sumRes.ok) {
+                                const updatedSession = await sumRes.json();
+                                summaryTextSpan.textContent = updatedSession.summary;
+                            } else {
+                                summaryTextSpan.textContent = 'Failed to generate summary.';
+                            }
+                        } catch (err) {
+                            console.error(err);
+                            summaryTextSpan.textContent = 'Error calling local model.';
+                        } finally {
+                            summarizeButton.disabled = false;
+                        }
+                    });
+                });
+            }
+        } catch (error) {
+            console.error('Error fetching sessions:', error);
+        }
+    }
+
+    // Sessions Panel - Create
+    const createSessionForm = document.getElementById('create-session-form');
+    if (createSessionForm) {
+        createSessionForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const campaignId = parseInt(document.getElementById('sess-campaign-id').value) || 1;
+            const sessionNumber = parseInt(document.getElementById('sess-number').value);
+            const title = document.getElementById('sess-title').value;
+            const detailedLog = document.getElementById('sess-log').value;
+            const token = localStorage.getItem('access_token');
+
+            try {
+                const response = await fetch('/api/session/', {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        campaign_id: campaignId,
+                        session_number: sessionNumber,
+                        title: title,
+                        detailed_log: detailedLog
+                    })
+                });
+
+                if (response.ok) {
+                    fetchSessions();
+                    createSessionForm.reset();
+                } else {
+                    alert('Failed to create session log.');
+                }
+            } catch (error) {
+                console.error('Error creating session:', error);
+            }
+        });
+    }
+});
+```

@@ -1,0 +1,52 @@
+You are an expert Frontend Developer. Write the COMPLETE `client/index.html` for the Storyteller App.
+Output ONLY the HTML code inside a ```html block. Do not add explanations. Do not leave placeholder comments.
+
+Requirements:
+- Link styling: `<link rel="stylesheet" href="style.css">` inside `<head>`.
+- Body: `<body class="dark-theme">`.
+- Section 1: `<div id="login-screen" class="container">`
+  - Title: Storyteller App
+  - Inputs: `#username`, `#password`
+  - Buttons: `#login-btn` (Login), `#setup-btn` (Setup Account)
+- Section 2: `<div id="dashboard-screen" class="hidden">`
+  - Header: `<header><span id="welcome-message"></span><button id="logout-btn">Logout</button></header>`
+  - Sidebar (`<aside class="sidebar">`):
+    - Navigation list `<ul>` (NOT nested inside `<nav>`!):
+      - `<li><a href="#dice-roller" class="sidebar-link" data-target="dice-roller">Dice</a></li>`
+      - `<li><a href="#feed-area" class="sidebar-link" data-target="feed-area">Chat</a></li>`
+      - `<li><a href="#character-panel" class="sidebar-link" data-target="character-panel">Character</a></li>`
+      - `<li><a href="#combat-panel" class="sidebar-link" data-target="combat-panel">Combat</a></li>`
+      - `<li><a href="#rules-panel" class="sidebar-link" data-target="rules-panel">Rules</a></li>`
+      - `<li><a href="#sessions-panel" class="sidebar-link" data-target="sessions-panel">Sessions</a></li>`
+  - Main Panel (`<main class="panel">`):
+    - `<section id="dice-roller">`:
+      - Title: Dice Roller
+      - Inputs: `#pool-size` (number, default 5), `#difficulty` (number, default 6)
+      - Button: `#roll-btn` (Roll)
+      - Output container: `<div id="dice-results" style="margin-top: 1.5rem; padding: 1rem; background: #1a1a1f; border: 1px solid #3a1a1a; border-radius: 8px;" class="hidden"></div>`
+    - `<section id="feed-area" class="hidden">`:
+      - Title: Live Game Chat
+      - Scrollable message box: `<div id="chat-messages" style="height: 300px; overflow-y: auto; background: #1a1a1f; border: 1px solid #3a1a1a; border-radius: 8px; padding: 1rem; margin-bottom: 1rem;"></div>`
+      - Input row: `<div style="display: flex; gap: 0.5rem;"><input type="text" id="chat-input" placeholder="Type a message..." style="flex: 1;"><button id="send-chat-btn">Send</button></div>`
+    - `<section id="character-panel" class="hidden">`:
+      - List: `#characters-list`
+      - Form: `#create-character-form` (inputs `#char-name`, `#char-clan`, `#char-gen` (default 13))
+    - `<section id="combat-panel" class="hidden">`:
+      - Title: Combat Tracker
+      - State info: `<div id="combat-state-info" style="margin-bottom: 1rem; color: #ff4d4f; font-weight: bold;">No active encounter.</div>`
+      - Combatants list: `<ul id="combatants-list" style="margin-bottom: 1.5rem;"></ul>`
+      - Storyteller controls: `<div id="combat-controls" class="hidden" style="margin-bottom: 1.5rem; display: flex; gap: 0.5rem;"><button id="next-turn-btn">Next Turn</button><button id="end-combat-btn">End Combat</button></div>`
+      - Join/Add combatant form:
+        `<form id="add-combatant-form" style="max-width: 500px;">
+           <h4 style="color: #ff4d4f;">Add Combatant</h4>
+           <label for="comb-name">Name:</label><input type="text" id="comb-name" required>
+           <label for="comb-init">Initiative (Dex + Wits + 1d10):</label><input type="number" id="comb-init" required>
+           <button type="submit">Add to Combat</button>
+         </form>`
+        - Button to start combat (Storyteller only): `<button id="start-combat-btn" style="margin-top: 1rem;">Start New Combat</button>`
+    - `<section id="rules-panel" class="hidden">`:
+      - Search query: `#rules-query`, `#search-rules-btn`, results `#rules-results`
+    - `<section id="sessions-panel" class="hidden">`:
+      - Heading: `<h3 id="sessions-heading">Sessions</h3>`, list `#sessions-list`
+      - Form: `#create-session-form` (inputs `#sess-campaign-id` (default 1), `#sess-number` (default 1), `#sess-title`, `#sess-log`)
+- End of body: `<script src="app.js"></script>`.

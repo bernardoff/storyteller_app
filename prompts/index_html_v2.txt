@@ -1,0 +1,12 @@
+You are an expert Frontend Developer. Modify `client/index.html` to add Character and Combat panels to the dashboard. Output ONLY HTML code inside a ```html block. No explanations.
+Requirements:
+- Add a new `<section id="character-panel" class="hidden">` inside `<main class="panel">`.
+- The character panel should have:
+  - A character list `<ul>`
+  - A form to create a new character (Name, Clan, Generation fields).
+- Add a new `<section id="combat-panel" class="hidden">` inside `<main class="panel">`.
+- The combat panel should have:
+  - A list of combatants
+  - A button to "Start Combat"
+  - A button to "Next Turn"
+- Ensure all sections (dice-roller, character-panel, combat-panel, feed-area) can be toggled by the sidebar nav.

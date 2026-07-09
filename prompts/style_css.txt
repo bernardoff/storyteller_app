@@ -1,0 +1,10 @@
+You are an expert CSS developer. Output ONLY CSS code inside a single ```css code block. No explanations.
+Build `client/style.css` for the Storyteller App.
+Requirements:
+- Premium dark gothic theme (deep reds, blacks, dark grays).
+- Modern web design: vibrant contrast colors, glassmorphism, smooth gradients, subtle micro-animations for hover states.
+- Typography: Use imported Google Font 'Inter' or 'Roboto'.
+- Flexbox/Grid for layout.
+- The UI should feel like a premium V20 desktop app.
+- Hide elements with `.hidden { display: none; }`
+- Make it look stunning at first glance.

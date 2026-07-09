@@ -1,0 +1,28 @@
+You are an expert FastAPI developer. Build `server/routers/session_routes.py`. Output ONLY python code.
+Use fully async SQLAlchemy 2.0.
+
+Requirements:
+- Router: `router = APIRouter(prefix="/api/session", tags=["session"])`
+- Imports:
+  `from fastapi import APIRouter, Depends, HTTPException, status`
+  `from sqlalchemy.ext.asyncio import AsyncSession`
+  `from sqlalchemy import select`
+  `from pydantic import BaseModel`
+  `from typing import List, Optional`
+  `from server.database import get_db, SessionLog`
+  `from server.auth import get_current_user, require_storyteller`
+  `import urllib.request`
+  `import json`
+- Pydantic models:
+  `SessionLogCreate`: campaign_id (int), session_number (int), title (str), detailed_log (str)
+  `SessionLogResponse`: id (int), campaign_id (int), session_number (int), title (str), summary (Optional[str]), detailed_log (str)
+- Endpoints:
+  - `POST /`: Create a new session log. Storyteller only (`require_storyteller`). Saves `SessionLog` model.
+  - `GET /`: List all session logs. Returns `List[SessionLogResponse]`.
+  - `POST /{id}/summarize`: Storyteller only. Generate an auto-summary of the session.
+    - Fetch the session log.
+    - Construct a prompt for Ollama: "Summarize this RPG session log into a narrative summary: [detailed_log]".
+    - Call the local Ollama API: `POST http://127.0.0.1:11434/api/generate` with JSON `{"model": "qwen2.5-coder:14b", "prompt": prompt, "stream": false}`.
+    - Parse response, get `response["response"]` and save it to `SessionLog.summary`.
+    - `await db.commit(); await db.refresh(session_log)`.
+    - Return the updated `SessionLogResponse`.

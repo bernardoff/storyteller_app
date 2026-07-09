@@ -1,0 +1,7 @@
+You are an expert Python developer. Output ONLY the Python code inside a single ```python code block. No explanations.
+Build `server/models/user.py`
+Re-export User and InviteCode from server.database:
+```python
+from server.database import User, InviteCode
+__all__ = ['User', 'InviteCode']
+```

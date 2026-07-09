@@ -1,7 +1,7 @@
 {
   "mcpServers": {
     "ollama-local": {
-      "command": "python",
+      "command": "C:\\Users\\Pc\\AppData\\Local\\Programs\\Python\\Python310\\python.exe",
       "args": ["-m", "mcp_ollama_python"],
       "env": {
         "OLLAMA_HOST": "http://localhost:11434"

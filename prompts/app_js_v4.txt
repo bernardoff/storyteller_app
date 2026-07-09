@@ -1,0 +1,16 @@
+You are an expert Frontend Developer. Write the COMPLETE `client/app.js` for the Storyteller App.
+Output ONLY the JavaScript code inside a ```javascript block. Do not add explanations. Do not leave placeholder comments.
+
+Requirements:
+- Login & Logout Logic: Same as before, including auto-login token validation from `/api/auth/me`. Add `#logout-btn` event listener.
+- Navigation: Use `.sidebar-link` click listeners to hide all `.panel section` elements and show the one matching `data-target`.
+- Character Panel: Same as before, handling `characters-list` loading and form submit to `POST /api/character/` with `name`, `clan`, `generation`.
+- Combat Panel: Same as before.
+- Rules Panel: Handle `#search-rules-btn` click. Read `#rules-query` value. Fetch `GET /api/rules/search?q=${encodeURIComponent(query)}` (Bearer token auth). Render results in `#rules-results` (displaying rule snippet, source document filename, and match distance).
+- Sessions Panel:
+  - Fetch sessions from `GET /api/session/` (Bearer token auth). Render in `#sessions-list`.
+  - For each session item in the list, display Title, Session #, Log text, and existing Summary (if any).
+  - Also add a button "Summarize" next to each item. When clicked, it sends `POST /api/session/${id}/summarize` (Bearer token auth), displays a loading indicator, and updates the UI with the generated summary once received.
+  - Handle `#create-session-form` submit -> `POST /api/session/` with `campaign_id` (parse to int), `session_number` (parse to int), `title`, `detailed_log`. Reload sessions list on success.
+- Ensure all fetch calls include the `Authorization: Bearer ${token}` header when needed.
+- Write actual JS code, no placeholders.

@@ -1,0 +1,21 @@
+You are an expert Python developer. Output ONLY the Python code inside a single ```python code block. No explanations.
+Build `server/routers/auth_routes.py`
+
+FastAPI router, prefix `/api/auth`, tag `auth`.
+
+Pydantic models:
+- RegisterRequest: username, password, display_name, invite_code (all str)
+- SetupRequest: username, password, display_name, setup_key (all str)
+- TokenResponse: access_token (str), token_type (str, default 'bearer'), role (str), display_name (str)
+- InviteCodeResponse: code (str)
+- UserResponse: id (int), username (str), display_name (str), role (str), credits_remaining (int) — with ConfigDict(from_attributes=True)
+
+Endpoints:
+- POST /login — OAuth2PasswordRequestForm, verify password, return TokenResponse
+- POST /setup — First-time only (if no users exist in DB). Validates setup_key matches settings.SETUP_KEY. Creates storyteller User. Returns TokenResponse.
+- POST /register — Validates invite_code exists & unused in InviteCode table, creates player User with credits_remaining=settings.DEFAULT_PLAYER_CREDITS, marks invite used_by=new_user.id. Return TokenResponse.
+- POST /invite — requires require_storyteller dependency. Generates invite code, saves to InviteCode table, returns InviteCodeResponse.
+- GET /me — Returns current_user as UserResponse.
+- GET /players — requires require_storyteller dependency. Returns all users as list[UserResponse].
+
+Imports: server.database (get_db, User, InviteCode), server.auth, server.config
