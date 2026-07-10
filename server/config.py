@@ -18,6 +18,10 @@ class Settings(BaseSettings):
     JWT_ALGORITHM: str = 'HS256'
     JWT_EXPIRE_MINUTES: int = 1440
     CORS_ORIGINS: list[str] = ['http://localhost:5173', 'http://localhost:3000']
+    
+    GEMINI_MODEL: str = 'gemini-1.5-flash'
+    GEMINI_BRAIN_ENABLED: bool = True
+    GEMINI_CACHE_TTL_MINUTES: int = 60
 
 @lru_cache
 def get_settings() -> Settings:

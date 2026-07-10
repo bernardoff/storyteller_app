@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LLM-driven Combat Tracker</title>
+<style>
+  body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #2e2c6a, #4b4987);
+    color: white;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  .container {
+    display: flex;
+    width: 90%;
+    max-width: 1400px;
+    gap: 20px;
+  }
+  .panel {
+    border-radius: 16px;
+    overflow: hidden;
+    backdrop-filter: blur(15px);
+    background: rgba(255, 255, 255, 0.07);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+  }
+  .initiative-roster {
+    width: 30%;
+  }
+  .action-sandbox {
+    width: 40%;
+  }
+  .combat-log {
+    width: 30%;
+  }
+  h2 {
+    margin-top: 0;
+  }
+  ul {
+    list-style-type: none;
+    padding: 0;
+    margin-bottom: 10px;
+  }
+  li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  .blood-tracker, .willpower-tracker {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 8px;
+    border-radius: 8px;
+    transition: background 0.3s ease;
+  }
+  .blood-tracker:hover, .willpower-tracker:hover {
+    background: rgba(255, 255, 255, 0.2);
+  }
+  textarea {
+    width: 100%;
+    height: 70px;
+    border: none;
+    border-radius: 8px;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    resize: none;
+    transition: background 0.3s ease;
+  }
+  textarea:focus {
+    outline: none;
+    background: rgba(255, 255, 255, 0.2);
+  }
+  button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    background: #ff6b6b;
+    color: white;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  button:hover {
+    background: #e75a5a;
+  }
+  .combat-log ul {
+    overflow-y: auto;
+    max-height: calc(100% - 60px);
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="panel initiative-roster">
+    <h2>Initiative Roster</h2>
+    <ul id="roster"></ul>
+    <button onclick="openQuickAddModal()">Quick Add NPC</button>
+  </div>
+  <div class="panel action-sandbox">
+    <h2>Action Sandbox</h2>
+    <textarea id="actionInput" placeholder="Type your action here..."></textarea>
+    <p>LLM Mechanical Breakdown: <span id="breakdown"></span></p>
+    <button onclick="rollAction()">Roll</button>
+  </div>
+  <div class="panel combat-log">
+    <h2>Combat Log & Damage Confirmation</h2>
+    <ul id="log"></ul>
+  </div>
+</div>
+
+<div id="modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); justify-content: center; align-items: center;">
+  <div style="background: rgba(255, 255, 255, 0.07); padding: 20px; border-radius: 16px; backdrop-filter: blur(15px);">
+    <h3>Add NPC</h3>
+    <input type="text" id="npcName" placeholder="Name">
+    <input type="number" id="npcHP" placeholder="HP">
+    <input type="number" id="npcBlood" placeholder="Blood/Willpower">
+    <button onclick="addNPC()">Add</button>
+    <button onclick="closeModal()">Cancel</button>
+  </div>
+</div>
+
+<script>
+  const roster = document.getElementById('roster');
+  const log = document.getElementById('log');
+  const modal = document.getElementById('modal');
+
+  function openQuickAddModal() {
+    modal.style.display = 'flex';
+  }
+
+  function closeModal() {
+    modal.style.display = 'none';
+  }
+
+  function addNPC() {
+    const name = document.getElementById('npcName').value;
+    const hp = document.getElementById('npcHP').value;
+    const blood = document.getElementById('npcBlood').value;
+
+    if (name && hp && blood) {
+      const li = document.createElement('li');
+      li.innerHTML = `
+        <span>${name}</span>
+        <div class="blood-tracker">HP: ${hp} / ${hp}</div>
+        <div class="willpower-tracker">Blood/Willpower: ${blood} / ${blood}</div>
+      `;
+      roster.appendChild(li);
+      closeModal();
+    }
+  }
+
+  function rollAction() {
+    const action = document.getElementById('actionInput').value;
+    const breakdown = document.getElementById('breakdown');
+    const logItem = document.createElement('li');
+
+    if (action) {
+      // Simulate LLM breakdown and damage
+      const llmBreakdown = 'LLM analysis here';
+      breakdown.textContent = llmBreakdown;
+
+      logItem.textContent = `Action: ${action} - ${llmBreakdown}`;
+      log.appendChild(logItem);
+
+      // Ask for confirmation to apply damage
+      if (confirm('Confirm damage application?')) {
+        // Apply damage logic here
+      }
+    }
+  }
+</script>
+</body>
+</html>

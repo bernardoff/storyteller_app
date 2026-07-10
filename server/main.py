@@ -81,6 +81,8 @@ from server.routers.action_routes import router as action_router
 from server.routers.lore_routes import router as lore_router
 from server.routers.vtt_routes import router as vtt_router
 from server.routers.admin_routes import router as admin_router
+from server.routers.brain_routes import router as brain_router
+from server.routers.equipment_routes import router as equipment_router
 
 app.include_router(auth_router)
 app.include_router(dice_router)
@@ -92,6 +94,8 @@ app.include_router(action_router)
 app.include_router(lore_router)
 app.include_router(vtt_router)
 app.include_router(admin_router)
+app.include_router(brain_router)
+app.include_router(equipment_router)
 
 
 # ── Health check ────────────────────────────────────────────────────

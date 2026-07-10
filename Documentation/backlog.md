@@ -8,7 +8,8 @@ This document tracks future features and nice-to-have ideas for the Storyteller 
 
 ## AI Automations (Deferred)
 - **Advanced Action Engine:** Local LLM ingestion of full character sheets for exact dice pool suggestions.
-- **Session Log Generator:** Gemini 3.1 Pro integration to rewrite chat/game logs into book-like narrative chapters.
+- **Combat LLM Engine Decision:** Decide whether to stick with Local Llama (requires building a local RAG vector DB to process the 1.9MB core rulebook) or Gemini 1.5 Flash (massive context handles the entire rulebook in-prompt, but uses API quota). Currently there is an `engine="gemini"|"llama"` toggle in `combat_routes.py` for testing.
+- **Session Log Generator (Audio Transcription):** Upload 3-6 hour .m4a session recordings. Process locally using Whisper (GPU) with speaker diarization as a background job. Generate both a detailed action log and a player-friendly narrative summary using a local LLM.
 - **Storyteller Chapter Planner:** Gemini brainstorming tool for upcoming plot hooks based on campaign lore.
 - **Integrated Image Generation:** Generate and broadcast VTT tokens, backgrounds, and character portraits via AI.
 
@@ -33,3 +34,28 @@ This document tracks future features and nice-to-have ideas for the Storyteller 
 
 ## Technical Debt & Bug Fixes
 - **Fix Placeholder Characters/Users**: The attendance ingestion script currently creates placeholder 'Unknown Player' users for characters that don't have a markdown sheet. Update this in the future to map these characters to their actual players once their sheets or player mappings are imported.
+
+## UI/UX Improvements
+- **Floating Interaction Buttons**: Maintain the floating action button pattern (like the bottom-right rule search button) as a core UI principle. Expand this to provide similar quick-access interaction buttons across different modules where appropriate for all players.
+- **Dedicated Combat Wizard Modal (Alternative)**: As a future alternative to the current inline Chat/Dice integration, consider building a dedicated, standalone modal for the Action Resolution Wizard that pops up during combat.
+
+## Immersive Multimedia & Campaign Management Suite
+- **WebRTC Mesh connection layer**: Implement local WebRTC Mesh within webrtc-broker to handle peer channels for low-latency peer-to-peer AV communication.
+- **Web Audio DSP Engine**: Build Web Audio processing pipe featuring pitch-shifting, custom resonance filters, and preset templates (e.g., Vampire preset).
+- **WebGL Overlays**: Create a WebGL overlay processing class mapping face tracking landmarks to real-time image masking filters (stylistic shadows, skin tone altering).
+- **AmbientMixer Component**: Develop a component handling seamless asset looping, crossover fades, and multi-track audio nodes for the soundscape.
+- **Contextual Soundscape Observer**: Write a reactive observer pattern listening to the `orchestration-brain` output stream to dispatch matching spatial audio files (e.g., "hit", "miss").
+- **Campaign Relational Schema Editor**: Construct a multi-tiered relational schema editor dividing input data into Chapter, NPC, Intrigue, and Location domains.
+- **Session Prompt Synthesizer**: Build an interface reading the last session's recap and dynamically pulling linked entity nodes to build context for the next session.
+- **Unified Workspace Dashboard**: Refactor the application layout into a grid container hosting the VTT interactive canvas, collapsable messaging sidebar, and individual player status rows.
+- **Token Synchronization System**: Extract the character sheet's primary image file, crop it using a circular boundary matrix, and populate the canvas as a movable token with perimeter borders.
+
+## Vampire: The Dark Ages Integration Framework (WoD-VTT)
+- **Damage-Sorting Algorithm**: Implement `sortWounds(boxesArray)` to dynamically arrange a 7-element array based on severity (Aggravated `*` -> Lethal `X` -> Bashing `/`), pushing less severe wounds downward.
+- **Reflexive Blood Mend API**: Build `/api/actor/spend-blood` endpoint to decrement `bloodPool`, identify the bottom-most Bashing/Lethal damage marker, and clear it.
+- **Tri-Tier Damage Track UI**: Render vector health track checkboxes. Clicking cycles Empty -> Bashing -> Lethal -> Aggravated. Display the active pool penalty in a glowing badge that flashes when damage updates.
+- **Multi-Level Map Render Layer**: Integrate `ChangeLevel` and `DefineSurface` coordinates to track token height elevation and render corresponding map tiers, using opacity masks for lower levels.
+- **Spectre Private Client Asset Filter**: Build WebGL interceptor evaluating `spectreSettings.isSpectre` and current player's UUID. Draw asset at 0.7 opacity for permitted players; bypass rendering entirely for others.
+- **Spectre Toggle UI**: GM sidebar menu to select map assets, check "Spectre", and toggle player names permitted to view them.
+- **Vector Relationship Diagram**: Develop draggable, zoomable canvas component (e.g. d3-force) displaying faction/actor relationships with custom `relationStyling` patterns (dashed red, dotted green, solid blue).
+- **Actor Drag-and-Drop Binding**: Add drag-and-drop listener over faction nodes to bind an actor sheet, appending the actor's UUID to the node's members list and updating the database.

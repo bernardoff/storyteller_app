@@ -14,11 +14,12 @@ class RollRequest(BaseModel):
     pool_size: int
     difficulty: int
     specialty: bool
+    willpower: bool = False
     context: str = None
 
 @router.post("/roll")
 async def roll_dice(request: RollRequest, db: AsyncSession = Depends(get_db), user=Depends(get_current_user)):
-    result = roll_v20(request.pool_size, request.difficulty, request.specialty)
+    result = roll_v20(request.pool_size, request.difficulty, request.specialty, request.willpower)
     dice_roll = DiceRoll(
         user_id=user.id,
         pool_size=request.pool_size,

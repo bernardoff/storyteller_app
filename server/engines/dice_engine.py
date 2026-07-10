@@ -7,7 +7,7 @@ class V20RollResult(TypedDict):
     is_botch: bool
     result_label: str
 
-def roll_v20(pool_size: int, difficulty: int = 6, specialty: bool = False) -> V20RollResult:
+def roll_v20(pool_size: int, difficulty: int = 6, specialty: bool = False, willpower: bool = False) -> V20RollResult:
     if pool_size < 1:
         return {"rolls": [], "successes": 0, "is_botch": False, "result_label": "Failure (No dice)"}
 
@@ -34,6 +34,10 @@ def roll_v20(pool_size: int, difficulty: int = 6, specialty: bool = False) -> V2
     net_successes = successes - ones
     is_botch = net_successes < 0 and successes == 0
     
+    if willpower:
+        net_successes += 1
+        is_botch = False
+
     if is_botch:
         result_label = "Botch"
     elif net_successes <= 0:

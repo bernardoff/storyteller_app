@@ -107,15 +107,18 @@
         
         <aside class="sidebar">
             <ul>
-                <li><a href="#dice-roller" class="sidebar-link" data-target="dice-roller">Dice</a></li>
-                <li><a href="#feed-area" class="sidebar-link" data-target="feed-area">Chat</a></li>
-                <li><a href="#character-panel" class="sidebar-link" data-target="character-panel">Character</a></li>
-                <li><a href="#combat-panel" class="sidebar-link" data-target="combat-panel">Combat</a></li>
-                <li><a href="#rules-panel" class="sidebar-link" data-target="rules-panel">Rules</a></li>
-                <li><a href="#sessions-panel" class="sidebar-link" data-target="sessions-panel">Sessions</a></li>
-                <li><a href="#vtt-panel" class="sidebar-link" data-target="vtt-panel">VTT</a></li>
-                <li><a href="#lore-panel" class="sidebar-link" data-target="lore-panel">Lore</a></li>
-                <li id="nav-st-dashboard" class="hidden"><a href="#st-dashboard-panel" class="sidebar-link" data-target="st-dashboard-panel" style="color: #a855f7;">ST Dashboard</a></li>
+                <li><a href="#dice-roller" class="sidebar-link" data-target="dice-roller">🎲 Dice</a></li>
+                <li><a href="#feed-area" class="sidebar-link" data-target="feed-area">💬 Chat</a></li>
+                <li><a href="#character-panel" class="sidebar-link" data-target="character-panel">📜 Character</a></li>
+                <li><a href="#combat-panel" class="sidebar-link" data-target="combat-panel">⚔️ Combat</a></li>
+                <li><a href="#rules-panel" class="sidebar-link" data-target="rules-panel">📝 Rules</a></li>
+                <li><a href="#sessions-panel" class="sidebar-link" data-target="sessions-panel">📅 Sessions</a></li>
+                <li><a href="#vtt-panel" class="sidebar-link" data-target="vtt-panel">🎮 VTT</a></li>
+                <li><a href="#lore-panel" class="sidebar-link" data-target="lore-panel">📜 Lore</a></li>
+                <li><a href="#brain-panel" class="sidebar-link" data-target="brain-panel" style="color: #4ade80;">🧠 The Brain</a></li>
+                <a href="#" class="sidebar-link" data-target="admin-panel"><i class="fas fa-cog"></i> <span>Administration</span></a>
+                <a href="#" class="sidebar-link" data-target="equipment-db-panel"><i class="fas fa-shield-alt"></i> <span>Equipment DB</span></a>
+                <li id="nav-st-dashboard" class="hidden"><a href="#st-dashboard-panel" class="sidebar-link" data-target="st-dashboard-panel" style="color: #a855f7;">📋 ST Dashboard</a></li>
             </ul>
         </aside>
 
@@ -144,24 +147,46 @@
                             <input type="text" id="chat-input" placeholder="Type a message..." style="flex: 1;">
                             <button id="send-chat-btn">Send</button>
                         </div>
+                        
+                        <!-- Intelligent Combat Wizard -->
+                        <div id="combat-wizard-controls" style="margin-top: 1rem; padding: 1rem; border: 1px solid #3a1a1a; border-radius: 8px; background: #222;">
+                            <h4 style="margin-top: 0; color: #4ade80;">Intelligent Combat Wizard</h4>
+                            <div style="display: flex; gap: 0.5rem; margin-bottom: 0.5rem;">
+                                <input type="text" id="wizard-action-input" placeholder="Describe your action (e.g. 'I spend 1 blood for Celerity and attack twice')..." style="flex: 1; padding: 0.5rem; background: #1a1a24; color: white; border: 1px solid #3b3b4f; border-radius: 4px;">
+                                <select id="wizard-engine-select" style="padding: 0.5rem; background: #1a1a24; color: white; border: 1px solid #3b3b4f; border-radius: 4px;">
+                                    <option value="gemini">Gemini</option>
+                                    <option value="llama">Local Llama</option>
+                                </select>
+                                <button id="wizard-analyze-btn">Analyze Action</button>
+                            </div>
+                            <div id="wizard-results" style="display: none; margin-top: 1rem;">
+                                <!-- Results will be displayed here -->
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
 
             <section id="character-panel" class="hidden">
                 <h3>Character Panel</h3>
-                <ul id="characters-list" style="cursor: pointer;"></ul>
-                <form id="create-character-form">
-                    <label for="char-name">Name:</label><input type="text" id="char-name" required>
-                    <label for="char-clan">Clan:</label><input type="text" id="char-clan" required>
-                    <label for="char-gen">Generation:</label><input type="number" id="char-gen" value="13" required>
-                    <button type="submit">Create Character</button>
-                </form>
+                <div id="characters-container" style="margin-bottom: 1rem;"></div>
+                <button id="new-character-btn" style="padding: 5px 10px; margin-bottom: 10px; cursor: pointer;">New Character</button>
 
                 
                 <div id="character-sheet" class="hidden" style="margin-top: 1rem;">
                     <div class="v20-sheet">
                         <h4>Twentieth Anniversary Edition - Vampire The Dark Ages</h4>
+                        
+                        <div class="sheet-tabs" style="display: flex; gap: 10px; margin-bottom: 20px; border-bottom: 2px solid #3b3b4f; padding-bottom: 10px;">
+                            <button class="sheet-tab-btn active" data-tab="tab-main" style="background: none; border: none; color: #fff; cursor: pointer; font-size: 1.1em;">Main Stats</button>
+                            <button class="sheet-tab-btn" data-tab="tab-equipment" style="background: none; border: none; color: #fff; cursor: pointer; font-size: 1.1em;">Equipment</button>
+                            <button class="sheet-tab-btn" data-tab="tab-disciplines" style="background: none; border: none; color: #fff; cursor: pointer; font-size: 1.1em;">Disciplines</button>
+                            <button class="sheet-tab-btn" data-tab="tab-backgrounds" style="background: none; border: none; color: #fff; cursor: pointer; font-size: 1.1em;">Backgrounds</button>
+                            <button class="sheet-tab-btn" data-tab="tab-notes" style="background: none; border: none; color: #fff; cursor: pointer; font-size: 1.1em;">Notes</button>
+                        </div>
+                        
+                        <!-- TAB: MAIN STATS -->
+                        <div id="tab-main" class="sheet-tab-content active">
                         
                         <div class="v20-row">
                             <div class="v20-col">
@@ -258,48 +283,20 @@
                             </div>
                         </div>
 
-                        <h5>Advantages</h5>
-                        <div class="v20-row">
-                            <div class="v20-col">
-                                <h6 style="border:none; text-transform:none;">Disciplines</h6>
-                                <div class="v20-field"><input type="text" placeholder="Custom" class="disciplines-custom-name" data-index="0"><div class="dot-rating" data-stat="disciplines-custom_0"><span class="dot" data-val="1">○</span><span class="dot" data-val="2">○</span><span class="dot" data-val="3">○</span><span class="dot" data-val="4">○</span><span class="dot" data-val="5">○</span></div></div>
-<div class="v20-field"><input type="text" placeholder="Custom" class="disciplines-custom-name" data-index="1"><div class="dot-rating" data-stat="disciplines-custom_1"><span class="dot" data-val="1">○</span><span class="dot" data-val="2">○</span><span class="dot" data-val="3">○</span><span class="dot" data-val="4">○</span><span class="dot" data-val="5">○</span></div></div>
-<div class="v20-field"><input type="text" placeholder="Custom" class="disciplines-custom-name" data-index="2"><div class="dot-rating" data-stat="disciplines-custom_2"><span class="dot" data-val="1">○</span><span class="dot" data-val="2">○</span><span class="dot" data-val="3">○</span><span class="dot" data-val="4">○</span><span class="dot" data-val="5">○</span></div></div>
-<div class="v20-field"><input type="text" placeholder="Custom" class="disciplines-custom-name" data-index="3"><div class="dot-rating" data-stat="disciplines-custom_3"><span class="dot" data-val="1">○</span><span class="dot" data-val="2">○</span><span class="dot" data-val="3">○</span><span class="dot" data-val="4">○</span><span class="dot" data-val="5">○</span></div></div>
-<div class="v20-field"><input type="text" placeholder="Custom" class="disciplines-custom-name" data-index="4"><div class="dot-rating" data-stat="disciplines-custom_4"><span class="dot" data-val="1">○</span><span class="dot" data-val="2">○</span><span class="dot" data-val="3">○</span><span class="dot" data-val="4">○</span><span class="dot" data-val="5">○</span></div></div>
-<div class="v20-field"><input type="text" placeholder="Custom" class="disciplines-custom-name" data-index="5"><div class="dot-rating" data-stat="disciplines-custom_5"><span class="dot" data-val="1">○</span><span class="dot" data-val="2">○</span><span class="dot" data-val="3">○</span><span class="dot" data-val="4">○</span><span class="dot" data-val="5">○</span></div></div>
+                        <!-- Disciplines and Backgrounds were moved to their respective tabs -->
 
                             </div>
-                            <div class="v20-col">
-                                <h6 style="border:none; text-transform:none;">Backgrounds</h6>
-                                <div class="v20-field"><input type="text" placeholder="Custom" class="backgrounds-custom-name" data-index="0"><div class="dot-rating" data-stat="backgrounds-custom_0"><span class="dot" data-val="1">○</span><span class="dot" data-val="2">○</span><span class="dot" data-val="3">○</span><span class="dot" data-val="4">○</span><span class="dot" data-val="5">○</span></div></div>
-<div class="v20-field"><input type="text" placeholder="Custom" class="backgrounds-custom-name" data-index="1"><div class="dot-rating" data-stat="backgrounds-custom_1"><span class="dot" data-val="1">○</span><span class="dot" data-val="2">○</span><span class="dot" data-val="3">○</span><span class="dot" data-val="4">○</span><span class="dot" data-val="5">○</span></div></div>
-<div class="v20-field"><input type="text" placeholder="Custom" class="backgrounds-custom-name" data-index="2"><div class="dot-rating" data-stat="backgrounds-custom_2"><span class="dot" data-val="1">○</span><span class="dot" data-val="2">○</span><span class="dot" data-val="3">○</span><span class="dot" data-val="4">○</span><span class="dot" data-val="5">○</span></div></div>
-<div class="v20-field"><input type="text" placeholder="Custom" class="backgrounds-custom-name" data-index="3"><div class="dot-rating" data-stat="backgrounds-custom_3"><span class="dot" data-val="1">○</span><span class="dot" data-val="2">○</span><span class="dot" data-val="3">○</span><span class="dot" data-val="4">○</span><span class="dot" data-val="5">○</span></div></div>
-<div class="v20-field"><input type="text" placeholder="Custom" class="backgrounds-custom-name" data-index="4"><div class="dot-rating" data-stat="backgrounds-custom_4"><span class="dot" data-val="1">○</span><span class="dot" data-val="2">○</span><span class="dot" data-val="3">○</span><span class="dot" data-val="4">○</span><span class="dot" data-val="5">○</span></div></div>
-<div class="v20-field"><input type="text" placeholder="Custom" class="backgrounds-custom-name" data-index="5"><div class="dot-rating" data-stat="backgrounds-custom_5"><span class="dot" data-val="1">○</span><span class="dot" data-val="2">○</span><span class="dot" data-val="3">○</span><span class="dot" data-val="4">○</span><span class="dot" data-val="5">○</span></div></div>
-
-                            </div>
-                            <div class="v20-col">
-                                <h6 style="border:none; text-transform:none;">Virtues</h6>
-                                <div class="v20-field"><label>Conscience</label><div class="dot-rating" data-stat="virtue-conscience"><span class="dot" data-val="1">○</span><span class="dot" data-val="2">○</span><span class="dot" data-val="3">○</span><span class="dot" data-val="4">○</span><span class="dot" data-val="5">○</span></div></div>
-                                <div class="v20-field"><label>Self-Control</label><div class="dot-rating" data-stat="virtue-self_control"><span class="dot" data-val="1">○</span><span class="dot" data-val="2">○</span><span class="dot" data-val="3">○</span><span class="dot" data-val="4">○</span><span class="dot" data-val="5">○</span></div></div>
-                                <div class="v20-field"><label>Courage</label><div class="dot-rating" data-stat="virtue-courage"><span class="dot" data-val="1">○</span><span class="dot" data-val="2">○</span><span class="dot" data-val="3">○</span><span class="dot" data-val="4">○</span><span class="dot" data-val="5">○</span></div></div>
+                        <!-- Specializations -->
+                        <div class="v20-row" style="margin-top: 15px;">
+                            <div class="v20-col" style="flex: 1;">
+                                <label style="display:block; margin-bottom:5px;">Specializations:</label>
+                                <textarea id="sheet-specializations" class="v20-textarea" style="height: 60px;" placeholder="e.g. Melee (Broadsword), Firearms (Pistols)"></textarea>
                             </div>
                         </div>
 
-                        <div class="v20-row">
+                        <div class="v20-row" style="margin-top: 15px;">
                             <div class="v20-col">
-                                <h5>Other Traits</h5>
-                                <div class="v20-field"><input type="text" placeholder="Custom" class="other-custom-name" data-index="0"><div class="dot-rating" data-stat="other-custom_0"><span class="dot" data-val="1">○</span><span class="dot" data-val="2">○</span><span class="dot" data-val="3">○</span><span class="dot" data-val="4">○</span><span class="dot" data-val="5">○</span></div></div>
-<div class="v20-field"><input type="text" placeholder="Custom" class="other-custom-name" data-index="1"><div class="dot-rating" data-stat="other-custom_1"><span class="dot" data-val="1">○</span><span class="dot" data-val="2">○</span><span class="dot" data-val="3">○</span><span class="dot" data-val="4">○</span><span class="dot" data-val="5">○</span></div></div>
-<div class="v20-field"><input type="text" placeholder="Custom" class="other-custom-name" data-index="2"><div class="dot-rating" data-stat="other-custom_2"><span class="dot" data-val="1">○</span><span class="dot" data-val="2">○</span><span class="dot" data-val="3">○</span><span class="dot" data-val="4">○</span><span class="dot" data-val="5">○</span></div></div>
-<div class="v20-field"><input type="text" placeholder="Custom" class="other-custom-name" data-index="3"><div class="dot-rating" data-stat="other-custom_3"><span class="dot" data-val="1">○</span><span class="dot" data-val="2">○</span><span class="dot" data-val="3">○</span><span class="dot" data-val="4">○</span><span class="dot" data-val="5">○</span></div></div>
-<div class="v20-field"><input type="text" placeholder="Custom" class="other-custom-name" data-index="4"><div class="dot-rating" data-stat="other-custom_4"><span class="dot" data-val="1">○</span><span class="dot" data-val="2">○</span><span class="dot" data-val="3">○</span><span class="dot" data-val="4">○</span><span class="dot" data-val="5">○</span></div></div>
-<div class="v20-field"><input type="text" placeholder="Custom" class="other-custom-name" data-index="5"><div class="dot-rating" data-stat="other-custom_5"><span class="dot" data-val="1">○</span><span class="dot" data-val="2">○</span><span class="dot" data-val="3">○</span><span class="dot" data-val="4">○</span><span class="dot" data-val="5">○</span></div></div>
-
-                            </div>
-                            <div class="v20-col">
+                                <h6 style="border:none; text-transform:none;">Virtues</h6>
                                 <h5>Road</h5>
                                 <div class="v20-field"><label>Road:</label><input type="text" id="sheet-road"></div>
                                 <div style="text-align: center;"><div class="dot-rating" data-stat="road-rating"><span class="dot" data-val="1">○</span><span class="dot" data-val="2">○</span><span class="dot" data-val="3">○</span><span class="dot" data-val="4">○</span><span class="dot" data-val="5">○</span><span class="dot" data-val="6">○</span><span class="dot" data-val="7">○</span><span class="dot" data-val="8">○</span><span class="dot" data-val="9">○</span><span class="dot" data-val="10">○</span></div></div>
@@ -328,16 +325,8 @@
                             </div>
                         </div>
 
-                        <h5>Notes</h5>
-                        <div class="v20-row">
-                            <div class="v20-col"><label>Merits:</label><textarea id="sheet-merits" class="v20-textarea"></textarea></div>
-                            <div class="v20-col"><label>Flaws:</label><textarea id="sheet-flaws" class="v20-textarea"></textarea></div>
-                            <div class="v20-col"><label>Notes:</label><textarea id="sheet-notes" class="v20-textarea"></textarea></div>
-                        </div>
-
                         <div style="text-align: center; margin-top: 20px;">
                             <button id="save-character-sheet-btn" style="padding: 10px 20px; font-size: 1.1em; cursor: pointer;">Save Character</button>
-                            <button id="suggest-actions-btn" style="padding: 10px 20px; font-size: 1.1em; cursor: pointer; margin-left: 10px;">Suggest Actions</button>
                             <button id="close-sheet-btn" style="padding: 10px 20px; font-size: 1.1em; cursor: pointer; margin-left: 10px;">Close</button>
                         </div>
                         <div id="suggested-actions" style="margin-top: 1rem; color: #555;"></div>
@@ -349,18 +338,50 @@
             <section id="combat-panel" class="hidden">
                 <h3>Combat Tracker</h3>
                 <div id="combat-state-info" style="margin-bottom: 1rem; color: #ff4d4f; font-weight: bold;">No active encounter.</div>
-                <ul id="combatants-list" style="margin-bottom: 1.5rem;"></ul>
-                <div id="combat-controls" class="hidden" style="margin-bottom: 1.5rem; display: flex; gap: 0.5rem;">
-                    <button id="next-turn-btn">Next Turn</button>
-                    <button id="end-combat-btn">End Combat</button>
+                
+                <button id="start-new-combat-btn" style="margin-bottom: 1rem;">Start New Combat</button>
+
+                <!-- Setup Phase -->
+                <div id="setup-phase" class="hidden" style="margin-bottom: 1rem; border: 1px solid #333; padding: 1rem;">
+                    <h4 style="color: #ff4d4f; margin-top: 0;">Setup Phase</h4>
+                    
+                    <form id="add-character-form" style="margin-bottom: 1rem;">
+                        <label for="setup-character-select">Add Existing Character:</label>
+                        <select id="setup-character-select" required></select>
+                        <button type="submit">Add</button>
+                    </form>
+
+                    <form id="generate-npc-form" style="margin-bottom: 1rem;">
+                        <label for="npc-name-input">Generate NPC Name:</label>
+                        <input type="text" id="npc-name-input" required placeholder="e.g. Brujah Thug 1">
+                        <label for="npc-concept-input">Concept:</label>
+                        <input type="text" id="npc-concept-input" required placeholder="e.g. A tough brujah brawler">
+                        <button type="submit">Generate LLM NPC</button>
+                    </form>
+
+                    <h5>Combatants in Encounter:</h5>
+                    <ul id="combatants-list" style="margin-bottom: 1rem; list-style: none; padding-left: 0;"></ul>
+
+                    <button id="roll-initiatives-btn">Move to Initiative Phase</button>
                 </div>
-                <form id="add-combatant-form" style="max-width: 500px;">
-                    <h4 style="color: #ff4d4f;">Add Combatant</h4>
-                    <label for="comb-name">Name:</label><input type="text" id="comb-name" required>
-                    <label for="comb-init">Initiative (Dex + Wits + 1d10):</label><input type="number" id="comb-init" required>
-                    <button type="submit">Add to Combat</button>
-                </form>
-                <button id="start-combat-btn" style="margin-top: 1rem;">Start New Combat</button>
+
+                <!-- Initiative Phase -->
+                <div id="initiative-phase" class="hidden" style="margin-bottom: 1rem; border: 1px solid #333; padding: 1rem;">
+                    <h4 style="color: #ff4d4f; margin-top: 0;">Initiative Phase</h4>
+                    <p style="font-size: 0.9em; color: #aaa;">Roll initiative for all combatants below.</p>
+                    <ul id="initiative-combatants-list" style="list-style: none; padding-left: 0;"></ul>
+                    <button id="start-round-btn" style="margin-top: 1rem;">Start Active Combat</button>
+                </div>
+
+                <!-- Active Combat Phase -->
+                <div id="active-phase" class="hidden" style="margin-bottom: 1rem; border: 1px solid #333; padding: 1rem;">
+                    <h4 style="color: #ff4d4f; margin-top: 0;">Active Combat</h4>
+                    <ul id="active-combatants-list" style="list-style: none; padding-left: 0; margin-bottom: 1rem;"></ul>
+                    <div style="display: flex; gap: 0.5rem;">
+                        <button id="next-turn-btn">Next Turn</button>
+                        <button id="end-combat-btn" style="background: #8b0000;">End Combat</button>
+                    </div>
+                </div>
             </section>
 
             <section id="rules-panel" class="hidden">
@@ -374,7 +395,7 @@
                 <h3 id="sessions-heading">Sessions</h3>
                 <ul id="sessions-list"></ul>
                 <form id="create-session-form">
-                    <label for="sess-campaign-id">Campaign ID:</label><input type="number" id="sess-campaign-id" value="1" required>
+                    <label for="sess-campaign-id">Season (Campaign ID):</label><input type="number" id="sess-campaign-id" value="1" required>
                     <label for="sess-number">Session Number:</label><input type="number" id="sess-number" value="1" required>
                     <label for="sess-title">Title:</label><input type="text" id="sess-title" required>
                     <label for="sess-log">Log:</label><textarea id="sess-log" required></textarea>
@@ -397,6 +418,32 @@
                 <button id="ingest-lore-btn" style="margin-top: 0.5rem;">Ingest Lore</button>
             </section>
 
+            <section id="brain-panel" class="hidden">
+                <h3>🧠 NotebookLM Brain</h3>
+                <div id="brain-chat-history" style="height: 300px; overflow-y: auto; background: #1a1a1f; border: 1px solid #3a1a1a; border-radius: 8px; padding: 1rem; margin-bottom: 1rem;"></div>
+                <div style="display: flex; gap: 0.5rem;">
+                    <input type="text" id="brain-chat-input" placeholder="Ask the brain..." style="flex: 1;">
+                    <select id="brain-domain-select">
+                        <option value="rules">Rules</option>
+                        <option value="lore">Lore</option>
+                        <option value="campaign">Campaign</option>
+                    </select>
+                    <button id="send-brain-btn">Ask</button>
+                </div>
+            </section>
+
+        <!-- Equipment DB Panel -->
+        <section id="equipment-db-panel" class="hidden panel">
+            <div class="panel-header">
+                <h2><i class="fas fa-shield-alt"></i> Equipment Database</h2>
+                <button id="new-catalog-item-btn" class="btn btn-primary" style="display: none;">+ Add Custom Item</button>
+            </div>
+            
+            <div class="equipment-catalog-list" id="equipment-catalog-list" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 15px; margin-top: 20px;">
+                <!-- Catalog items will be loaded here -->
+            </div>
+        </section>
+
             <section id="st-dashboard-panel" class="hidden">
                 <h3 style="color: #a855f7;">Storyteller Dashboard</h3>
                 <div style="background: #1a1a1f; padding: 1rem; border: 1px solid #3a1a1a; border-radius: 8px;">
@@ -414,6 +461,12 @@
                             <!-- Characters populated here -->
                         </tbody>
                     </table>
+                </div>
+
+                <div style="margin-top: 1rem; background: #1a1a1f; padding: 1rem; border: 1px solid #3a1a1a; border-radius: 8px;">
+                    <h4>🧠 Brain Management</h4>
+                    <p>Status: <span id="brain-status-text">Checking...</span></p>
+                    <button id="rebuild-brain-btn">Rebuild Context Caches</button>
                 </div>
             </section>
         </main>

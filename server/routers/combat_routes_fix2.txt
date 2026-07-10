@@ -1,0 +1,26 @@
+from fastapi import APIRouter, Depends
+from sqlalchemy.orm import Session
+import asyncio
+
+router = APIRouter()
+
+def get_db():
+    # Placeholder for database dependency
+    pass
+
+async def resolve_action_via_llm(action_description: str):
+    # Placeholder for llama logic
+    return {"adjudication": "LLaMA response"}
+
+@router.post("/resolve_action_llm")
+def resolve_action_llm(id: int, action_description: str, engine: str = "gemini", db: Session = Depends(get_db)):
+    if engine == "gemini":
+        query = f"Adjudicate this combat action based on V20 Dark Ages rules: {action_description}"
+        response = brain_engine.ask(query, domain="rules")
+        return {"adjudication": response}
+    elif engine == "llama":
+        # Assuming resolve_action_via_llm is an async function
+        llm_response = asyncio.run(resolve_action_via_llm(action_description))
+        return llm_response
+    else:
+        raise ValueError("Invalid engine specified")

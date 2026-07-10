@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter, Depends, HTTPException, status, UploadFile, File, BackgroundTasks
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
 from pydantic import BaseModel
@@ -6,8 +6,11 @@ from typing import List, Optional
 from server.database import get_db, SessionLog, Campaign
 from server.auth import get_current_user, require_storyteller
 from server.websocket_manager import manager
+from server.engines.audio_engine import process_session_audio
 import urllib.request
 import json
+import os
+import shutil
 
 router = APIRouter(prefix="/api/session", tags=["session"])
 
@@ -21,9 +24,9 @@ class SessionLogResponse(BaseModel):
     id: int
     campaign_id: int
     session_number: int
-    title: str
+    title: Optional[str]
     summary: Optional[str]
-    detailed_log: str
+    detailed_log: Optional[str]
 
 @router.post("/", response_model=SessionLogResponse)
 async def create_session_log(
@@ -45,6 +48,31 @@ async def list_session_logs(
     result = await db.execute(select(SessionLog))
     session_logs = result.scalars().all()
     return session_logs
+
+@router.post("/{id}/upload_audio")
+async def upload_audio(
+    id: int,
+    background_tasks: BackgroundTasks,
+    file: UploadFile = File(...),
+    db: AsyncSession = Depends(get_db),
+    current_user: dict = Depends(require_storyteller)
+):
+    result = await db.execute(select(SessionLog).where(SessionLog.id == id))
+    session_log = result.scalar_one_or_none()
+    
+    if not session_log:
+        raise HTTPException(status_code=404, detail="Session not found")
+        
+    os.makedirs('scratch/audio', exist_ok=True)
+    temp_path = f"scratch/audio/session_{id}_{file.filename}"
+    with open(temp_path, "wb") as buffer:
+        shutil.copyfileobj(file.file, buffer)
+        
+    session_log.audio_status = "processing"
+    await db.commit()
+    
+    background_tasks.add_task(process_session_audio, id, temp_path)
+    return {"message": "Audio upload received, processing in background."}
 
 @router.post("/{id}/summarize", response_model=SessionLogResponse)
 async def summarize_session_log(

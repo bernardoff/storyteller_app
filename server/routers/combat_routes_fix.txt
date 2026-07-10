@@ -1,0 +1,13 @@
+@router.post("/api/combat/{id}/resolve-action-llm")
+async def resolve_action_llm(id: int, action_description: str, engine: str = "gemini", db: Session = Depends(get_db)):
+    if engine == "gemini":
+        # Use the current implementation of brain_engine
+        result = await brain_engine(action_description, db)
+    elif engine == "llama":
+        # Call resolve_action_via_llm from server.services.combat_llm
+        from server.services.combat_llm import resolve_action_via_llm
+        result = await resolve_action_via_llm(action_description, db)
+    else:
+        raise HTTPException(status_code=400, detail="Invalid engine specified. Use 'gemini' or 'llama'.")
+    
+    return result

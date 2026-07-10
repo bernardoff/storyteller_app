@@ -22,12 +22,33 @@ async def suggest_actions(request: SuggestActionsRequest, db: AsyncSession = Dep
     if not character:
         raise HTTPException(status_code=404, detail="Character not found")
     
+    import json
+    abilities_talents = json.loads(character.abilities_talents_json or "{}")
+    abilities_skills = json.loads(character.abilities_skills_json or "{}")
+    abilities_knowledges = json.loads(character.abilities_knowledges_json or "{}")
+    disciplines = json.loads(character.disciplines_json or "{}")
+    
+    character_sheet = {
+        "name": character.name,
+        "physical_strength": character.physical_strength,
+        "physical_dexterity": character.physical_dexterity,
+        "physical_stamina": character.physical_stamina,
+        "social_charisma": character.social_charisma,
+        "social_manipulation": character.social_manipulation,
+        "social_appearance": character.social_appearance,
+        "mental_perception": character.mental_perception,
+        "mental_intelligence": character.mental_intelligence,
+        "mental_wits": character.mental_wits,
+        "abilities_talents": abilities_talents,
+        "abilities_skills": abilities_skills,
+        "abilities_knowledges": abilities_knowledges,
+        "disciplines": disciplines
+    }
+    
     prompt = (
-        f"Name: {character.name}\n"
-        f"Physical Strength: {character.physical_strength}\n"
-        f"Physical Dexterity: {character.physical_dexterity}\n"
-        f"Physical Stamina: {character.physical_stamina}\n\n"
+        f"Character Sheet: {json.dumps(character_sheet, indent=2)}\n\n"
         "Based on the character's stats and the given context, suggest 3 actions.\n"
+        "For each action, calculate the exact dice pool by adding the relevant Attribute + Ability rating.\n"
         "Return the result STRICTLY as a JSON array of objects, where each object has:\n"
         '- "description": A short string describing the action\n'
         '- "pool": The dice pool size (integer)\n'
@@ -53,7 +74,6 @@ async def suggest_actions(request: SuggestActionsRequest, db: AsyncSession = Dep
     if response.status_code != 200:
         raise HTTPException(status_code=500, detail="Failed to generate actions")
         
-    import json
     try:
         suggestions_text = response.json().get("response", "[]")
         suggestions = json.loads(suggestions_text)

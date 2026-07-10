@@ -332,6 +332,24 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    // Character Sheet Tabs
+    const sheetTabBtns = document.querySelectorAll('.sheet-tab-btn');
+    sheetTabBtns.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            // Remove active from all tabs
+            sheetTabBtns.forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('.sheet-tab-content').forEach(c => c.classList.add('hidden'));
+            document.querySelectorAll('.sheet-tab-content').forEach(c => c.classList.remove('active'));
+            
+            // Add active to clicked tab
+            btn.classList.add('active');
+            const targetId = btn.getAttribute('data-tab');
+            document.getElementById(targetId).classList.remove('hidden');
+            document.getElementById(targetId).classList.add('active');
+        });
+    });
+
     // Dice Roller Handler
     const rollBtn = document.getElementById('roll-btn');
     if (rollBtn) {
@@ -397,19 +415,115 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (response.ok) {
                 const characters = await response.json();
-                const characterList = document.getElementById('characters-list');
-                characterList.innerHTML = '';
-                characters.forEach(character => {
-                    const li = document.createElement('li');
-                    li.textContent = `${character.name} (${character.clan || 'No Clan'}, Gen ${character.generation || 'Unknown'})`;
-                    li.style.padding = "0.5rem";
-                    li.style.borderBottom = "1px solid #333";
-                    li.addEventListener('click', () => openCharacterSheet(character));
-                    characterList.appendChild(li);
+                const characterContainer = document.getElementById('characters-container');
+                characterContainer.innerHTML = '';
+
+                // Group characters by character_type
+                const groupedCharacters = characters.reduce((acc, character) => {
+                    let ctype = character.character_type || "PC";
+                    acc[ctype] = acc[ctype] || [];
+                    acc[ctype].push(character);
+                    return acc;
+                }, {});
+
+                Object.keys(groupedCharacters).forEach(type => {
+                    const detailsElement = document.createElement('details');
+                    detailsElement.open = true;
+
+                    const summaryElement = document.createElement('summary');
+                    summaryElement.textContent = type === "PC" ? "PCs" : (type === "NPC_Lore" ? "NPCs (Lore)" : "NPCs (Critters)");
+                    summaryElement.style.fontWeight = 'bold';
+                    summaryElement.style.color = '#ff4d4f';
+                    summaryElement.style.cursor = 'pointer';
+                    summaryElement.style.marginBottom = '0.5rem';
+                    detailsElement.appendChild(summaryElement);
+
+                    const ulElement = document.createElement('ul');
+                    ulElement.style.listStyle = 'none';
+                    ulElement.style.padding = 0;
+
+                    groupedCharacters[type].forEach(character => {
+                        const liElement = document.createElement('li');
+                        liElement.style.padding = "0.5rem";
+                        liElement.style.borderBottom = "1px solid #333";
+                        liElement.style.cursor = 'pointer';
+                        liElement.style.display = 'flex';
+                        liElement.style.justifyContent = 'space-between';
+
+                        const nameSpan = document.createElement('span');
+                        nameSpan.textContent = `${character.name} (${character.clan || 'No Clan'}, Gen ${character.generation || 'Unknown'})`;
+                        nameSpan.addEventListener('click', () => openCharacterSheet(character));
+                        
+                        const deleteButton = document.createElement('button');
+                        deleteButton.textContent = '✖';
+                        deleteButton.style.backgroundColor = 'transparent';
+                        deleteButton.style.border = 'none';
+                        deleteButton.style.color = 'red';
+                        deleteButton.style.cursor = 'pointer';
+                        deleteButton.style.marginLeft = '0.5rem';
+                        deleteButton.title = "Delete Character";
+
+                        deleteButton.addEventListener('click', async (event) => {
+                            event.stopPropagation();
+                            if(confirm(`Are you sure you want to delete ${character.name}?`)) {
+                                await deleteCharacter(character.id);
+                                loadCharacters(); // Reload characters after deletion
+                            }
+                        });
+
+                        liElement.appendChild(nameSpan);
+                        liElement.appendChild(deleteButton);
+                        ulElement.appendChild(liElement);
+                    });
+
+                    detailsElement.appendChild(ulElement);
+                    characterContainer.appendChild(detailsElement);
                 });
             }
         } catch (error) {
             console.error('Error loading characters:', error);
+        }
+    }
+
+    // Delete Character
+    async function deleteCharacter(id) {
+        const token = localStorage.getItem('access_token');
+        if (!token) return;
+        try {
+            const weapons = Array.from(document.querySelectorAll('.weapon-item')).map(item => ({
+                name: item.querySelector('.weapon-name').value,
+                damage: item.querySelector('.weapon-damage').value,
+                conceal: item.querySelector('.weapon-conceal').value,
+                equipped: item.querySelector('.weapon-equipped').checked
+            }));
+            const armor = Array.from(document.querySelectorAll('.armor-item')).map(item => ({
+                name: item.querySelector('.armor-name').value,
+                rating: item.querySelector('.armor-rating').value,
+                penalty: item.querySelector('.armor-penalty').value,
+                equipped: item.querySelector('.armor-equipped').checked
+            }));
+            const equipment_json = { weapons, armor, gear: document.getElementById('sheet-gear').value };
+            bodyData.equipment_json = equipment_json;
+
+            const url = window.currentCharacterId ? `/api/character/${window.currentCharacterId}` : '/api/character/';
+            const method = window.currentCharacterId ? 'PUT' : 'POST';
+
+            const response = await fetch(url, {
+                method: method,
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(bodyData)
+            });
+
+            if (response.ok) {
+                console.log('Character deleted successfully');
+            } else {
+                console.error('Error deleting character:', await response.text());
+            }
+        } catch (error) {
+            console.error('Error in delete request:', error);
         }
     }
 
@@ -494,6 +608,39 @@ document.addEventListener('DOMContentLoaded', () => {
         return obj;
     }
 
+    
+    function createWeaponRow(weapon = {name:'', damage:'', conceal:'', equipped:false}) {
+        const div = document.createElement('div');
+        div.className = 'weapon-item';
+        div.style.marginBottom = '5px';
+        div.innerHTML = `
+            <input type="text" class="weapon-name" placeholder="Name" value="${weapon.name}" style="width: 30%;">
+            <input type="text" class="weapon-damage" placeholder="Damage" value="${weapon.damage}" style="width: 20%;">
+            <input type="text" class="weapon-conceal" placeholder="Conceal" value="${weapon.conceal}" style="width: 20%;">
+            <label><input type="checkbox" class="weapon-equipped" ${weapon.equipped ? 'checked' : ''}> Eqp</label>
+        `;
+        return div;
+    }
+
+    function createArmorRow(armor = {name:'', rating:'', penalty:'', equipped:false}) {
+        const div = document.createElement('div');
+        div.className = 'armor-item';
+        div.style.marginBottom = '5px';
+        div.innerHTML = `
+            <input type="text" class="armor-name" placeholder="Name" value="${armor.name}" style="width: 30%;">
+            <input type="text" class="armor-rating" placeholder="Rating" value="${armor.rating}" style="width: 20%;">
+            <input type="text" class="armor-penalty" placeholder="Penalty" value="${armor.penalty}" style="width: 20%;">
+            <label><input type="checkbox" class="armor-equipped" ${armor.equipped ? 'checked' : ''}> Eqp</label>
+        `;
+        return div;
+    }
+
+    const addWeaponBtn = document.getElementById('add-weapon-btn');
+    if (addWeaponBtn) addWeaponBtn.onclick = () => document.getElementById('weapons-container').appendChild(createWeaponRow());
+    
+    const addArmorBtn = document.getElementById('add-armor-btn');
+    if (addArmorBtn) addArmorBtn.onclick = () => document.getElementById('armor-container').appendChild(createArmorRow());
+
     function openCharacterSheet(character) {
         window.currentCharacterId = character.id;
         const sheet = document.getElementById('character-sheet');
@@ -522,6 +669,7 @@ document.addEventListener('DOMContentLoaded', () => {
         setVal('sheet-demeanor', character.demeanor || '');
         setVal('sheet-road', character.road || '');
         setVal('sheet-concept', character.concept || '');
+        setVal('sheet-specializations', character.specializations || '');
         
         // Attributes
         setDots('attr-strength', character.physical_strength);
@@ -583,6 +731,19 @@ document.addEventListener('DOMContentLoaded', () => {
             const el = document.getElementById('hp-' + lvl);
             if (el) el.checked = !!health[lvl];
         });
+
+        
+        // Populate equipment
+        const eq = parseJson(character.equipment_json);
+        const wContainer = document.getElementById('weapons-container');
+        wContainer.innerHTML = '';
+        if (eq.weapons) eq.weapons.forEach(w => wContainer.appendChild(createWeaponRow(w)));
+        
+        const aContainer = document.getElementById('armor-container');
+        aContainer.innerHTML = '';
+        if (eq.armor) eq.armor.forEach(a => aContainer.appendChild(createArmorRow(a)));
+        
+        setVal('sheet-gear', eq.gear || '');
 
         const meritsFlaws = parseJson(character.merits_flaws_json);
         setVal('sheet-merits', meritsFlaws.merits || '');
@@ -651,6 +812,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 generation: parseInt(document.getElementById('sheet-gen').value, 10),
                 road: document.getElementById('sheet-road').value,
                 concept: document.getElementById('sheet-concept').value,
+                specializations: document.getElementById('sheet-specializations').value,
                 
                 physical_strength: getDots('attr-strength') || 1,
                 physical_dexterity: getDots('attr-dexterity') || 1,
@@ -669,6 +831,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 backgrounds_json: getCustomList('backgrounds'),
                 other_traits_json: getCustomList('other'),
                 merits_flaws_json: meritsFlaws,
+                specializations: document.getElementById('sheet-specializations').value,
                 
                 virtue_conscience: getDots('virtue-conscience'),
                 virtue_self_control: getDots('virtue-self_control'),
@@ -685,8 +848,26 @@ document.addEventListener('DOMContentLoaded', () => {
                 notes: document.getElementById('sheet-notes').value
             };
 
-            const response = await fetch(`/api/character/${id}`, {
-                method: 'PUT',
+            const weapons = Array.from(document.querySelectorAll('.weapon-item')).map(item => ({
+                name: item.querySelector('.weapon-name').value,
+                damage: item.querySelector('.weapon-damage').value,
+                conceal: item.querySelector('.weapon-conceal').value,
+                equipped: item.querySelector('.weapon-equipped').checked
+            }));
+            const armor = Array.from(document.querySelectorAll('.armor-item')).map(item => ({
+                name: item.querySelector('.armor-name').value,
+                rating: item.querySelector('.armor-rating').value,
+                penalty: item.querySelector('.armor-penalty').value,
+                equipped: item.querySelector('.armor-equipped').checked
+            }));
+            const equipment_json = { weapons, armor, gear: document.getElementById('sheet-gear').value };
+            bodyData.equipment_json = equipment_json;
+
+            const url = window.currentCharacterId ? `/api/character/${window.currentCharacterId}` : '/api/character/';
+            const method = window.currentCharacterId ? 'PUT' : 'POST';
+
+            const response = await fetch(url, {
+                method: method,
                 headers: {
                     'Authorization': `Bearer ${token}`,
                     'Content-Type': 'application/json'
@@ -708,6 +889,27 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Character Panel - Create
+    
+    const newCharBtn = document.getElementById('new-character-btn');
+    if (newCharBtn) {
+        newCharBtn.addEventListener('click', () => {
+            window.currentCharacterId = null;
+            const sheet = document.getElementById('character-sheet');
+            sheet.classList.remove('hidden');
+            
+            // clear form
+            const inputs = sheet.querySelectorAll('input[type="text"], input[type="number"], textarea');
+            inputs.forEach(el => el.value = '');
+            const checks = sheet.querySelectorAll('input[type="checkbox"]');
+            checks.forEach(el => el.checked = false);
+            const dots = sheet.querySelectorAll('.dot-rating');
+            dots.forEach(d => { d.dataset.value = '0'; Array.from(d.querySelectorAll('.dot')).forEach(dot => {dot.classList.remove('filled'); dot.textContent = '○';}); });
+            
+            document.getElementById('weapons-container').innerHTML = '';
+            document.getElementById('armor-container').innerHTML = '';
+        });
+    }
+
     const createCharacterForm = document.getElementById('create-character-form');
     if (createCharacterForm) {
         createCharacterForm.addEventListener('submit', async (e) => {
@@ -740,16 +942,153 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Combat Panel Tracker
-    const startCombatBtn = document.getElementById('start-combat-btn');
+    const startNewCombatBtn = document.getElementById('start-new-combat-btn');
+    const setupPhase = document.getElementById('setup-phase');
+    const initiativePhase = document.getElementById('initiative-phase');
+    const activePhase = document.getElementById('active-phase');
+    const addCharacterForm = document.getElementById('add-character-form');
+    const generateNPCForm = document.getElementById('generate-npc-form');
+    const rollInitiativesBtn = document.getElementById('roll-initiatives-btn');
+    const startRoundBtn = document.getElementById('start-round-btn');
     const nextTurnBtn = document.getElementById('next-turn-btn');
     const endCombatBtn = document.getElementById('end-combat-btn');
-    const addCombatantForm = document.getElementById('add-combatant-form');
 
-    if (startCombatBtn) {
-        startCombatBtn.addEventListener('click', async () => {
+    // Show the correct phase based on the current combat state
+    async function loadCombatState() {
+        const token = localStorage.getItem('access_token');
+        if (!combatEncounterId || !token) {
+            if (setupPhase) setupPhase.classList.add('hidden');
+            if (initiativePhase) initiativePhase.classList.add('hidden');
+            if (activePhase) activePhase.classList.add('hidden');
+            if (startNewCombatBtn) startNewCombatBtn.classList.remove('hidden');
+            const stateInfo = document.getElementById('combat-state-info');
+            if (stateInfo) stateInfo.innerHTML = "No active encounter.";
+            return;
+        }
+
+        try {
+            const response = await fetch(`/api/combat/${combatEncounterId}`, {
+                headers: { 'Authorization': `Bearer ${token}` }
+            });
+            if (!response.ok) {
+                if (response.status === 404) {
+                    combatEncounterId = null;
+                    localStorage.removeItem('combat_encounter_id');
+                    loadCombatState();
+                }
+                return;
+            }
+            const data = await response.json();
+            const stateInfo = document.getElementById('combat-state-info');
+            if (stateInfo) stateInfo.innerHTML = `Active Encounter ID: ${data.id} | Phase: ${data.phase.toUpperCase()} | Round: ${data.round_number}`;
+
+            if (startNewCombatBtn) startNewCombatBtn.classList.add('hidden');
+
+            if (data.phase === 'setup') {
+                setupPhase.classList.remove('hidden');
+                initiativePhase.classList.add('hidden');
+                activePhase.classList.add('hidden');
+
+                // Populate character select
+                const charSelect = document.getElementById('setup-character-select');
+                if (charSelect && charSelect.children.length === 0) {
+                    // Fetch all available characters to add
+                    fetch('/api/character/', { headers: { 'Authorization': `Bearer ${token}` } })
+                        .then(r => r.json())
+                        .then(chars => {
+                            charSelect.innerHTML = '';
+                            chars.forEach(c => {
+                                const opt = document.createElement('option');
+                                opt.value = c.id;
+                                opt.textContent = `${c.name} (${c.character_type})`;
+                                charSelect.appendChild(opt);
+                            });
+                        });
+                }
+
+                // Show combatants
+                const combatantsList = document.getElementById('combatants-list');
+                if (combatantsList) {
+                    combatantsList.innerHTML = '';
+                    data.combatants.forEach(c => {
+                        const li = document.createElement('li');
+                        li.textContent = `✔ ${c.name} (${c.type})`;
+                        combatantsList.appendChild(li);
+                    });
+                }
+            } else if (data.phase === 'initiative') {
+                setupPhase.classList.add('hidden');
+                initiativePhase.classList.remove('hidden');
+                activePhase.classList.add('hidden');
+
+                const initiativeList = document.getElementById('initiative-combatants-list');
+                if (initiativeList) {
+                    initiativeList.innerHTML = '';
+                    data.combatants.forEach(c => {
+                        const li = document.createElement('li');
+                        li.style.marginBottom = '0.5rem';
+                        if (c.has_rolled) {
+                            li.innerHTML = `<strong>${c.name}</strong> - Initiative: ${c.initiative}`;
+                        } else {
+                            li.innerHTML = `<strong>${c.name}</strong> - Pending `;
+                            const rollBtn = document.createElement('button');
+                            rollBtn.textContent = 'Roll Initiative';
+                            rollBtn.addEventListener('click', async () => {
+                                await fetch(`/api/combat/${combatEncounterId}/roll-initiative`, {
+                                    method: 'POST',
+                                    headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' },
+                                    body: JSON.stringify({ character_id: c.character_id })
+                                });
+                                if (ws) ws.send(JSON.stringify({ type: 'combat', text: `${c.name} rolled initiative!` }));
+                                loadCombatState();
+                            });
+                            li.appendChild(rollBtn);
+                        }
+                        initiativeList.appendChild(li);
+                    });
+                }
+                
+                if (currentUser && currentUser.role === 'storyteller' && startRoundBtn) {
+                    startRoundBtn.classList.remove('hidden');
+                } else if (startRoundBtn) {
+                    startRoundBtn.classList.add('hidden');
+                }
+
+            } else if (data.phase === 'active') {
+                setupPhase.classList.add('hidden');
+                initiativePhase.classList.add('hidden');
+                activePhase.classList.remove('hidden');
+
+                const activeList = document.getElementById('active-combatants-list');
+                if (activeList) {
+                    activeList.innerHTML = '';
+                    data.combatants.forEach((c, idx) => {
+                        const li = document.createElement('li');
+                        li.style.padding = '0.5rem';
+                        li.style.marginBottom = '0.25rem';
+                        li.style.borderRadius = '4px';
+                        if (idx === data.current_turn_index) {
+                            li.style.background = 'rgba(139,0,0,0.3)';
+                            li.style.borderLeft = '4px solid #ff4d4f';
+                            li.innerHTML = `👉 <strong>${c.name}</strong> (Initiative: ${c.initiative}) - CURRENT TURN`;
+                        } else {
+                            li.style.background = '#1a1a1f';
+                            li.innerHTML = `${c.name} (Initiative: ${c.initiative})`;
+                        }
+                        activeList.appendChild(li);
+                    });
+                }
+            }
+        } catch (err) {
+            console.error(err);
+        }
+    }
+
+    if (startNewCombatBtn) {
+        startNewCombatBtn.addEventListener('click', async () => {
             const token = localStorage.getItem('access_token');
             try {
-                const response = await fetch('/api/combat/start', {
+                const response = await fetch('/api/combat/start', { 
                     method: 'POST',
                     headers: { 'Authorization': `Bearer ${token}` }
                 });
@@ -758,161 +1097,79 @@ document.addEventListener('DOMContentLoaded', () => {
                     combatEncounterId = data.id;
                     localStorage.setItem('combat_encounter_id', combatEncounterId);
                     loadCombatState();
-                    if (ws) ws.send(JSON.stringify({ type: 'combat', text: 'New combat encounter started!' }));
-                }
-            } catch (err) {
-                console.error(err);
-            }
-        });
-    }
-
-    if (nextTurnBtn) {
-        nextTurnBtn.addEventListener('click', async () => {
-            const token = localStorage.getItem('access_token');
-            if (!combatEncounterId) return;
-            try {
-                const response = await fetch(`/api/combat/${combatEncounterId}/next`, {
-                    method: 'POST',
-                    headers: { 'Authorization': `Bearer ${token}` }
-                });
-                if (response.ok) {
-                    const state = await response.json();
-                    loadCombatState();
-                    
-                    const activeCombatant = state.combatants[state.current_turn_index];
-                    const activeName = activeCombatant ? activeCombatant.name : 'Unknown';
-                    if (ws) {
-                        ws.send(JSON.stringify({
-                            type: 'combat',
-                            text: `Advanced turn. Round ${state.round_number}, Current Turn is now: ${activeName}`
-                        }));
-                    }
-                }
-            } catch (err) {
-                console.error(err);
-            }
-        });
-    }
-
-    if (endCombatBtn) {
-        endCombatBtn.addEventListener('click', async () => {
-            const token = localStorage.getItem('access_token');
-            if (!combatEncounterId) return;
-            try {
-                const response = await fetch(`/api/combat/${combatEncounterId}/end`, {
-                    method: 'POST',
-                    headers: { 'Authorization': `Bearer ${token}` }
-                });
-                if (response.ok) {
-                    combatEncounterId = null;
-                    localStorage.removeItem('combat_encounter_id');
-                    const stateInfo = document.getElementById('combat-state-info');
-                    if (stateInfo) stateInfo.innerHTML = "Combat ended.";
-                    const combatantsList = document.getElementById('combatants-list');
-                    if (combatantsList) combatantsList.innerHTML = '';
-                    const controls = document.getElementById('combat-controls');
-                    if (controls) controls.classList.add('hidden');
-                    if (ws) ws.send(JSON.stringify({ type: 'combat', text: 'Combat encounter ended.' }));
-                }
-            } catch (err) {
-                console.error(err);
-            }
-        });
-    }
-
-    if (addCombatantForm) {
-        addCombatantForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const name = document.getElementById('comb-name').value;
-            const init = parseInt(document.getElementById('comb-init').value);
-            const token = localStorage.getItem('access_token');
-
-            if (!combatEncounterId) {
-                alert("Please start a combat encounter first!");
-                return;
-            }
-
-            try {
-                const getRes = await fetch(`/api/combat/${combatEncounterId}`, {
-                    headers: { 'Authorization': `Bearer ${token}` }
-                });
-                const state = await getRes.json();
-                let combatants = state.combatants || [];
-                
-                combatants.push({ name, initiative: init });
-                combatants.sort((a, b) => b.initiative - a.initiative);
-
-                const saveRes = await fetch(`/api/combat/${combatEncounterId}/combatants`, {
-                    method: 'POST',
-                    headers: {
-                        'Authorization': `Bearer ${token}`,
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(combatants)
-                });
-
-                if (saveRes.ok) {
-                    loadCombatState();
-                    addCombatantForm.reset();
-                }
-            } catch (err) {
-                console.error(err);
-            }
-        });
-    }
-
-    async function loadCombatState() {
-        if (!combatEncounterId) return;
-        const token = localStorage.getItem('access_token');
-        try {
-            const response = await fetch(`/api/combat/${combatEncounterId}`, {
-                headers: { 'Authorization': `Bearer ${token}` }
-            });
-            if (response.ok) {
-                const state = await response.json();
-                const stateInfo = document.getElementById('combat-state-info');
-                const combatantsList = document.getElementById('combatants-list');
-                const controls = document.getElementById('combat-controls');
-
-                if (currentUser && currentUser.role === 'storyteller') {
-                    if (controls) controls.classList.remove('hidden');
                 } else {
-                    if (controls) controls.classList.add('hidden');
+                    alert(`Failed to start combat. Server returned ${response.status}. (Did you forget to restart the server?)`);
                 }
-
-                const activeCombatant = state.combatants[state.current_turn_index];
-                if (stateInfo) {
-                    stateInfo.innerHTML = `
-                        Active Encounter ID: ${state.id}<br>
-                        Round: ${state.round_number} | Current Turn Index: ${state.current_turn_index}<br>
-                        Current Active Turn: <span style="color: #ff4d4f;">${activeCombatant ? activeCombatant.name : 'None'}</span>
-                    `;
-                }
-
-                if (combatantsList) {
-                    combatantsList.innerHTML = '';
-                    state.combatants.forEach((c, idx) => {
-                        const li = document.createElement('li');
-                        li.style.padding = '0.5rem';
-                        li.style.marginBottom = '0.25rem';
-                        li.style.borderRadius = '4px';
-                        
-                        if (idx === state.current_turn_index) {
-                            li.style.background = 'rgba(139,0,0,0.3)';
-                            li.style.borderLeft = '4px solid #ff4d4f';
-                            li.style.fontWeight = 'bold';
-                            li.innerHTML = `👉 ${c.name} (Initiative: ${c.initiative}) - CURRENT`;
-                        } else {
-                            li.style.background = '#1a1a1f';
-                            li.innerHTML = `${c.name} (Initiative: ${c.initiative})`;
-                        }
-                        combatantsList.appendChild(li);
-                    });
-                }
+            } catch (err) {
+                console.error("Error starting combat:", err);
+                alert("Network error. Is the server running?");
             }
-        } catch (err) {
-            console.error(err);
-        }
+        });
+    }
+
+    if (addCharacterForm) {
+        addCharacterForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const token = localStorage.getItem('access_token');
+            const charSelect = document.getElementById('setup-character-select');
+            await fetch(`/api/combat/${combatEncounterId}/add-character`, {
+                method: 'POST',
+                headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' },
+                body: JSON.stringify({ character_id: parseInt(charSelect.value) })
+            });
+            loadCombatState();
+        });
+    }
+
+    if (generateNPCForm) {
+        generateNPCForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const token = localStorage.getItem('access_token');
+            const nameInput = document.getElementById('npc-name-input');
+            const conceptInput = document.getElementById('npc-concept-input');
+            
+            // Show loading state
+            const btn = generateNPCForm.querySelector('button');
+            const oldText = btn.textContent;
+            btn.textContent = 'Generating...';
+            btn.disabled = true;
+
+            await fetch(`/api/combat/${combatEncounterId}/generate-npc`, {
+                method: 'POST',
+                headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' },
+                body: JSON.stringify({ name: nameInput.value, concept: conceptInput.value, character_type: "NPC_Critter" })
+            });
+            
+            btn.textContent = oldText;
+            btn.disabled = false;
+            nameInput.value = '';
+            conceptInput.value = '';
+            loadCombatState();
+        });
+    }
+
+    if (rollInitiativesBtn) {
+        rollInitiativesBtn.addEventListener('click', async () => {
+            const token = localStorage.getItem('access_token');
+            await fetch(`/api/combat/${combatEncounterId}/phase`, {
+                method: 'POST',
+                headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' },
+                body: JSON.stringify({ phase: "initiative" })
+            });
+            loadCombatState();
+        });
+    }
+
+    if (startRoundBtn) {
+        startRoundBtn.addEventListener('click', async () => {
+            const token = localStorage.getItem('access_token');
+            await fetch(`/api/combat/${combatEncounterId}/phase`, {
+                method: 'POST',
+                headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' },
+                body: JSON.stringify({ phase: "active" })
+            });
+            loadCombatState();
+        });
     }
 
     // Rules Search Panel
@@ -991,8 +1248,51 @@ document.addEventListener('DOMContentLoaded', () => {
                     div.innerHTML = `
                         <h4 style="margin-bottom: 0.5rem; color: #ff4d4f;">Session #${session.session_number}: ${session.title}</h4>
                         <p style="margin-bottom: 0.5rem;"><strong>Log:</strong> ${session.detailed_log}</p>
+                        ${(currentUser && currentUser.role === 'storyteller') ? `
+                            <form id="upload-audio-form-${session.id}" style="margin-top: 1rem; border-top: 1px solid #3a1a1a; padding-top: 1rem;">
+                                <label style="display:block; margin-bottom: 0.5rem;">Upload Audio Session (.m4a):</label>
+                                <input type="file" id="audio-file-${session.id}" accept=".m4a,.mp3,.wav" style="margin-bottom: 0.5rem;">
+                                <button type="submit" style="padding: 4px 8px; font-size: 0.9em; background: #ff4d4f; color: #fff; border: none; border-radius: 4px; cursor: pointer;">Upload & Process</button>
+                                <span id="upload-status-${session.id}" style="margin-left: 10px; color: #aaa;"></span>
+                            </form>
+                        ` : ''}
                     `;
                     sessionsList.appendChild(div);
+
+                    if (currentUser && currentUser.role === 'storyteller') {
+                        const form = document.getElementById(`upload-audio-form-${session.id}`);
+                        if (form) {
+                            form.addEventListener('submit', async (e) => {
+                                e.preventDefault();
+                                const fileInput = document.getElementById(`audio-file-${session.id}`);
+                                if (!fileInput.files[0]) return alert('Select an audio file first');
+                                
+                                const statusSpan = document.getElementById(`upload-status-${session.id}`);
+                                statusSpan.textContent = 'Uploading...';
+                                
+                                const formData = new FormData();
+                                formData.append('file', fileInput.files[0]);
+                                
+                                try {
+                                    const response = await fetch('/api/session/' + session.id + '/upload_audio', {
+                                        method: 'POST',
+                                        headers: {
+                                            'Authorization': 'Bearer ' + token
+                                        },
+                                        body: formData
+                                    });
+                                    if (response.ok) {
+                                        statusSpan.textContent = 'Uploaded! Processing in background...';
+                                    } else {
+                                        const err = await response.json();
+                                        statusSpan.textContent = 'Error: ' + err.detail;
+                                    }
+                                } catch (error) {
+                                    statusSpan.textContent = 'Error uploading.';
+                                }
+                            });
+                        }
+                    }
                 });
             }
         } catch (error) {
@@ -1269,13 +1569,31 @@ document.addEventListener('DOMContentLoaded', () => {
     async function updateCharacter(id, data) {
         const token = localStorage.getItem('access_token');
         try {
-            const response = await fetch(`/api/character/${id}`, {
-                method: 'PUT',
+            const weapons = Array.from(document.querySelectorAll('.weapon-item')).map(item => ({
+                name: item.querySelector('.weapon-name').value,
+                damage: item.querySelector('.weapon-damage').value,
+                conceal: item.querySelector('.weapon-conceal').value,
+                equipped: item.querySelector('.weapon-equipped').checked
+            }));
+            const armor = Array.from(document.querySelectorAll('.armor-item')).map(item => ({
+                name: item.querySelector('.armor-name').value,
+                rating: item.querySelector('.armor-rating').value,
+                penalty: item.querySelector('.armor-penalty').value,
+                equipped: item.querySelector('.armor-equipped').checked
+            }));
+            const equipment_json = { weapons, armor, gear: document.getElementById('sheet-gear').value };
+            bodyData.equipment_json = equipment_json;
+
+            const url = window.currentCharacterId ? `/api/character/${window.currentCharacterId}` : '/api/character/';
+            const method = window.currentCharacterId ? 'PUT' : 'POST';
+
+            const response = await fetch(url, {
+                method: method,
                 headers: {
                     'Authorization': `Bearer ${token}`,
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(data)
+                body: JSON.stringify(bodyData)
             });
             if (!response.ok) {
                 console.error('Failed to update character', await response.text());
@@ -1284,4 +1602,341 @@ document.addEventListener('DOMContentLoaded', () => {
             console.error('Update error:', error);
         }
     }
+
+    // --- Intelligent Combat Wizard UI Logic ---
+    const wizardAnalyzeBtn = document.getElementById('wizard-analyze-btn');
+    if (wizardAnalyzeBtn) {
+        wizardAnalyzeBtn.addEventListener('click', async () => {
+            const actionDescription = document.getElementById('wizard-action-input').value;
+            const engine = document.getElementById('wizard-engine-select').value;
+            const token = localStorage.getItem('access_token');
+
+            if (!window.currentCharacterId) {
+                alert("Please select a character from the Character Panel first.");
+                return;
+            }
+
+            const combatEncounterId = localStorage.getItem('combat_encounter_id');
+            if (!combatEncounterId) {
+                alert("No active combat encounter.");
+                return;
+            }
+
+            const wizardResultsDiv = document.getElementById('wizard-results');
+            wizardResultsDiv.innerHTML = '<span style="color: #4ade80;">Analyzing action with ' + engine + '...</span>';
+            wizardResultsDiv.style.display = 'block';
+
+            try {
+                const response = await fetch(`/api/combat/${combatEncounterId}/resolve-action-llm`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify({
+                        character_id: window.currentCharacterId,
+                        action_description: actionDescription,
+                        engine: engine
+                    })
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+
+                const data = await response.json();
+                const actions = data.actions;
+                wizardResultsDiv.innerHTML = ''; // Clear previous results
+                
+                if (!actions || actions.length === 0) {
+                    wizardResultsDiv.innerHTML = '<span style="color: red;">Could not determine actions.</span>';
+                    return;
+                }
+
+                actions.forEach((action, idx) => {
+                    const actionDiv = document.createElement('div');
+                    actionDiv.style.marginBottom = '1rem';
+                    actionDiv.style.padding = '0.5rem';
+                    actionDiv.style.border = '1px solid #3b3b4f';
+                    actionDiv.style.borderRadius = '4px';
+                    
+                    actionDiv.innerHTML = `
+                        <p style="margin-top: 0; color: #a855f7;"><strong>${action.description}</strong></p>
+                        <div style="display: flex; gap: 1rem; align-items: center;">
+                            <span>Pool: <strong>${action.pool}</strong></span>
+                            <span>Diff: <strong>${action.difficulty}</strong></span>
+                            <label><input type="checkbox" id="willpower-${idx}" name="willpower"> Willpower</label>
+                            <label><input type="checkbox" id="specialty-${idx}" name="specialty"> Specialty</label>
+                            <button class="roll-button" data-pool="${action.pool}" data-difficulty="${action.difficulty}" data-idx="${idx}">Roll</button>
+                        </div>
+                    `;
+                    wizardResultsDiv.appendChild(actionDiv);
+                });
+
+                // Add event listeners to roll buttons
+                document.querySelectorAll('.roll-button').forEach(button => {
+                    button.addEventListener('click', async () => {
+                        const poolSize = button.getAttribute('data-pool');
+                        const difficulty = button.getAttribute('data-difficulty');
+                        const idx = button.getAttribute('data-idx');
+                        const willpowerCheckbox = document.getElementById(`willpower-${idx}`);
+                        const specialtyCheckbox = document.getElementById(`specialty-${idx}`);
+
+                        try {
+                            const response = await fetch('/api/dice/roll', {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                    'Authorization': `Bearer ${token}`
+                                },
+                                body: JSON.stringify({
+                                    pool_size: parseInt(poolSize),
+                                    difficulty: parseInt(difficulty),
+                                    specialty: specialtyCheckbox.checked,
+                                    willpower: willpowerCheckbox.checked,
+                                    context: action.description
+                                })
+                            });
+
+                            if (!response.ok) {
+                                throw new Error(`HTTP error! Status: ${response.status}`);
+                            }
+
+                            const rollData = await response.json();
+                            // Broadcast the roll via WebSocket
+                            if (ws && ws.readyState === WebSocket.OPEN) {
+                                const rollsArray = JSON.parse(rollData.rolls_json);
+                                ws.send(JSON.stringify({
+                                    type: 'roll',
+                                    sender_name: currentUser ? currentUser.display_name : 'Player',
+                                    pool: poolSize,
+                                    diff: difficulty,
+                                    successes: rollData.successes,
+                                    rolls: rollsArray,
+                                    result: rollData.result_label
+                                }));
+                            }
+                        } catch (error) {
+                            console.error('Error rolling dice:', error);
+                        }
+                    });
+                });
+
+            } catch (error) {
+                console.error('Error analyzing action:', error);
+                wizardResultsDiv.innerHTML = '<span style="color: red;">Error analyzing action.</span>';
+            }
+        });
+    }
+});
+
+// --- Gemini Brain UI Logic ---
+let brainHistory = [];
+const brainChatHistory = document.getElementById('brain-chat-history');
+const brainChatInput = document.getElementById('brain-chat-input');
+const sendBrainBtn = document.getElementById('send-brain-btn');
+const brainDomainSelect = document.getElementById('brain-domain-select');
+const brainStatusText = document.getElementById('brain-status-text');
+
+async function checkBrainStatus() {
+    try {
+        const res = await fetch('/api/brain/status', {
+            headers: {'Authorization': `Bearer ${token}`}
+        });
+        const data = await res.json();
+        if(brainStatusText) brainStatusText.textContent = data.status === 'online' ? 'Online 🟢' : 'Offline 🔴';
+    } catch(e) {
+        if(brainStatusText) brainStatusText.textContent = 'Error 🔴';
+    }
+}
+
+if(sendBrainBtn) {
+    sendBrainBtn.addEventListener('click', async () => {
+        const text = brainChatInput.value;
+        const domain = brainDomainSelect.value;
+        if(!text) return;
+        
+        brainHistory.push({role: 'user', parts: [text]});
+        if(brainChatHistory) brainChatHistory.innerHTML += `<div style="margin:10px 0;text-align:right"><span style="background:#4ade80;color:#000;padding:5px 10px;border-radius:10px;display:inline-block;">${text}</span></div>`;
+        brainChatInput.value = '';
+        
+        const loadingId = 'loading-' + Date.now();
+        if(brainChatHistory) {
+            brainChatHistory.innerHTML += `<div id="${loadingId}" style="margin:10px 0;text-align:left"><span style="background:#3a1a1a;padding:5px 10px;border-radius:10px;display:inline-block;">Thinking...</span></div>`;
+            brainChatHistory.scrollTop = brainChatHistory.scrollHeight;
+        }
+
+        try {
+            const res = await fetch('/api/brain/chat', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json', 'Authorization': `Bearer ${token}`},
+                body: JSON.stringify({history: brainHistory, domain: domain})
+            });
+            const data = await res.json();
+            const loader = document.getElementById(loadingId);
+            if(loader) loader.remove();
+            
+            const reply = data.response || "Error";
+            brainHistory.push({role: 'model', parts: [reply]});
+            if(brainChatHistory) {
+                brainChatHistory.innerHTML += `<div style="margin:10px 0;text-align:left"><span style="background:#1a1a24;padding:5px 10px;border-radius:10px;display:inline-block;border:1px solid #3a1a1a;">${reply.replace(/\\n/g, '<br>')}</span></div>`;
+                brainChatHistory.scrollTop = brainChatHistory.scrollHeight;
+            }
+        } catch(e) {
+            const loader = document.getElementById(loadingId);
+            if(loader) loader.remove();
+            if(brainChatHistory) brainChatHistory.innerHTML += `<div style="color:red">Error reaching brain.</div>`;
+        }
+    });
+}
+
+// Hook into dashboard load
+document.addEventListener('DOMContentLoaded', () => {
+    const loginBtn = document.getElementById('login-btn');
+    if (loginBtn) {
+        loginBtn.addEventListener('click', () => {
+            setTimeout(checkBrainStatus, 1000);
+        });
+    }
+    const rebuildBrainBtn = document.getElementById('rebuild-brain-btn');
+    if(rebuildBrainBtn) {
+        rebuildBrainBtn.addEventListener('click', async () => {
+            if (!confirm("Rebuilding the Context Caches (Macro-RAG) requires indexing thousands of chunks via the Ollama AI model. Depending on your GPU/CPU, this can take 10 to 20 minutes. Proceed?")) {
+                return;
+            }
+            
+            const token = localStorage.getItem('access_token');
+            brainStatusText.textContent = "Starting rebuild process...";
+            rebuildBrainBtn.disabled = true;
+            
+            try {
+                await fetch('/api/admin/rebuild-brain', {
+                    method: 'POST',
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                
+                // Poll for progress
+                const interval = setInterval(async () => {
+                    const res = await fetch('/api/admin/rebuild-progress', {
+                        headers: { 'Authorization': `Bearer ${token}` }
+                    });
+                    if (res.ok) {
+                        const data = await res.json();
+                        brainStatusText.textContent = `Rebuilding: ${data.progress}% - ${data.message}`;
+                        
+                        // Update progress bar
+                        let progressContainer = document.getElementById('rebuild-progress-container');
+                        if (!progressContainer) {
+                            progressContainer = document.createElement('div');
+                            progressContainer.id = 'rebuild-progress-container';
+                            progressContainer.style.width = '100%';
+                            progressContainer.style.backgroundColor = '#333';
+                            progressContainer.style.marginTop = '10px';
+                            progressContainer.style.borderRadius = '5px';
+                            
+                            const progressBar = document.createElement('div');
+                            progressBar.id = 'rebuild-progress-bar';
+                            progressBar.style.width = '0%';
+                            progressBar.style.height = '10px';
+                            progressBar.style.backgroundColor = '#4ade80';
+                            progressBar.style.borderRadius = '5px';
+                            progressBar.style.transition = 'width 0.5s';
+                            
+                            progressContainer.appendChild(progressBar);
+                            rebuildBrainBtn.parentNode.insertBefore(progressContainer, rebuildBrainBtn.nextSibling);
+                        }
+                        
+                        const bar = document.getElementById('rebuild-progress-bar');
+                        if (bar) bar.style.width = `${data.progress}%`;
+
+                        if (data.status === "completed") {
+                            clearInterval(interval);
+                            brainStatusText.textContent = "Macro-RAG Cache is fully built and ready!";
+                            rebuildBrainBtn.disabled = false;
+                        }
+                    }
+                }, 3000);
+                
+            } catch (err) {
+                console.error(err);
+                brainStatusText.textContent = "Error starting rebuild.";
+                rebuildBrainBtn.disabled = false;
+            }
+        });
+    }
+
+    // Equipment Database UI
+    async function loadEquipmentCatalog() {
+        const token = localStorage.getItem('access_token');
+        if (!token) return;
+        try {
+            const response = await fetch('/api/equipment', {
+                headers: { 'Authorization': `Bearer ${token}` }
+            });
+            if (response.ok) {
+                const catalog = await response.json();
+                const container = document.getElementById('equipment-catalog-list');
+                if (container) {
+                    container.innerHTML = catalog.map(item => `
+                        <div class="catalog-item" style="background: #2a2a35; padding: 10px; border-radius: 5px; border: 1px solid #4ade80;">
+                            <h4 style="margin: 0; color: #4ade80;">${item.name}</h4>
+                            <p style="margin: 5px 0; font-size: 0.9em; color: #aaa;">Type: ${item.type} | Era: ${item.era || 'General'}</p>
+                            <p style="margin: 5px 0; font-size: 0.9em;">
+                                ${item.damage ? `Damage: ${item.damage} <br>` : ''}
+                                ${item.range ? `Range: ${item.range} <br>` : ''}
+                                ${item.conceal ? `Conceal: ${item.conceal} <br>` : ''}
+                                ${item.min_str ? `Min Str: ${item.min_str} <br>` : ''}
+                                ${item.parry_diff ? `Parry Diff: ${item.parry_diff} <br>` : ''}
+                                ${item.attack_penalty ? `Attack Penalty: ${item.attack_penalty} <br>` : ''}
+                            </p>
+                            ${item.notes ? `<p style="margin: 5px 0; font-size: 0.85em; color: #ffeb3b;">Notes: ${item.notes}</p>` : ''}
+                        </div>
+                    `).join('');
+                }
+            }
+        } catch (error) {
+            console.error('Failed to load equipment catalog:', error);
+        }
+    }
+
+    // Call it initially if panel is shown (or just call it on load)
+    loadEquipmentCatalog();
+
+    // Discipline Reference click handler
+    const disciplinesContainer = document.getElementById('disciplines-container');
+    if (disciplinesContainer) {
+        disciplinesContainer.addEventListener('click', async (e) => {
+            if (e.target.tagName === 'INPUT' || e.target.classList.contains('dot')) return; // Ignore inputs and dots
+            
+            const row = e.target.closest('.custom-row');
+            if (row) {
+                const nameInput = row.querySelector('.custom-name');
+                const name = nameInput ? nameInput.value : null;
+                const dots = getDots(row.querySelector('.dot-rating').getAttribute('data-stat'));
+                
+                if (name && dots) {
+                    const refContent = document.getElementById('discipline-reference-content');
+                    refContent.innerHTML = `<p style="color: #4ade80;">Loading rules for ${name} (up to level ${dots})...</p>`;
+                    
+                    const token = localStorage.getItem('access_token');
+                    try {
+                        const response = await fetch(`/api/brain/discipline/${encodeURIComponent(name)}?level=${dots}`, {
+                            headers: { 'Authorization': `Bearer ${token}` }
+                        });
+                        if (response.ok) {
+                            const data = await response.json();
+                            // Basic markdown to HTML (just handling newlines for now)
+                            const htmlText = data.text.replace(/\\n/g, '<br>').replace(/\\*\\*(.*?)\\*\\*/g, '<strong>$1</strong>');
+                            refContent.innerHTML = htmlText;
+                        } else {
+                            refContent.innerHTML = `<p style="color: red;">Failed to load discipline rules.</p>`;
+                        }
+                    } catch (error) {
+                        refContent.innerHTML = `<p style="color: red;">Error: ${error.message}</p>`;
+                    }
+                }
+            }
+        });
+    }
+
 });

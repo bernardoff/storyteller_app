@@ -59,10 +59,12 @@ class Character(Base):
     abilities_knowledges_json: Mapped[Optional[str]] = mapped_column(Text, nullable=True)
     other_traits_json: Mapped[Optional[str]] = mapped_column(Text, nullable=True)
     health_json: Mapped[Optional[str]] = mapped_column(Text, nullable=True)
+    equipment_json: Mapped[Optional[str]] = mapped_column(Text, nullable=True)
     blood_pool_pts: Mapped[int] = mapped_column(default=1)
     concept: Mapped[Optional[str]] = mapped_column(String(100), nullable=True)
     sire: Mapped[Optional[str]] = mapped_column(String(100), nullable=True)
     chronicle: Mapped[Optional[str]] = mapped_column(String(100), nullable=True)
+    specializations: Mapped[Optional[str]] = mapped_column(Text, nullable=True)
     abilities_json: Mapped[Optional[str]] = mapped_column(Text, nullable=True)
     disciplines_json: Mapped[Optional[str]] = mapped_column(Text, nullable=True)
     backgrounds_json: Mapped[Optional[str]] = mapped_column(Text, nullable=True)
@@ -79,6 +81,7 @@ class Character(Base):
     experience_spent: Mapped[int] = mapped_column(default=0)
     notes: Mapped[Optional[str]] = mapped_column(Text, nullable=True)
     is_npc: Mapped[bool] = mapped_column(default=False)
+    character_type: Mapped[str] = mapped_column(String(20), default="PC")
     is_locked: Mapped[bool] = mapped_column(default=False)
     campaign_era: Mapped[Optional[str]] = mapped_column(String(20), nullable=True)
     created_at: Mapped[datetime] = mapped_column(default=func.now())
@@ -111,6 +114,8 @@ class SessionLog(Base):
     items_acquired_json: Mapped[Optional[str]] = mapped_column(Text, nullable=True)
     played_at: Mapped[Optional[datetime]] = mapped_column(nullable=True)
     created_at: Mapped[datetime] = mapped_column(default=func.now())
+    audio_status: Mapped[str] = mapped_column(String(20), default='none')
+    raw_transcript: Mapped[Optional[str]] = mapped_column(Text, nullable=True)
 
 class SessionAttendance(Base):
     __tablename__ = 'session_attendance'
@@ -133,6 +138,10 @@ class CombatEncounter(Base):
     round_number: Mapped[int] = mapped_column(default=1)
     combatants_json: Mapped[Optional[str]] = mapped_column(Text, nullable=True)
     combat_log_json: Mapped[Optional[str]] = mapped_column(Text, nullable=True)
+    phase: Mapped[str] = mapped_column(String(20), default='initiative')
+    initiative_roster_json: Mapped[Optional[str]] = mapped_column(Text, nullable=True)
+    pending_actions_json: Mapped[Optional[str]] = mapped_column(Text, nullable=True)
+    damage_suggestions_json: Mapped[Optional[str]] = mapped_column(Text, nullable=True)
     created_at: Mapped[datetime] = mapped_column(default=func.now())
 
 class DiceRoll(Base):
@@ -226,6 +235,14 @@ class SinRecord(Base):
     description: Mapped[str] = mapped_column(Text)
     humanity_loss: Mapped[int] = mapped_column(default=0)
     session_id: Mapped[Optional[int]] = mapped_column(ForeignKey('session_logs.id'), nullable=True)
+
+class EquipmentCatalog(Base):
+    __tablename__ = 'equipment_catalog'
+    id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
+    name: Mapped[str] = mapped_column(String(200))
+    category: Mapped[str] = mapped_column(String(50))
+    description: Mapped[Optional[str]] = mapped_column(Text, nullable=True)
+    stats_json: Mapped[Optional[str]] = mapped_column(Text, nullable=True)
 
 class HouseRule(Base):
     __tablename__ = 'house_rules'

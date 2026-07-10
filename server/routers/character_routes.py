@@ -19,7 +19,14 @@ async def list_characters(db: AsyncSession = Depends(get_db), user=Depends(get_c
 
 @router.post("/")
 async def create_character(character: dict, db: AsyncSession = Depends(get_db), user=Depends(get_current_user)):
-    new_character = Character(user_id=user.id, **character)
+    import json
+    processed_character = {}
+    for key, value in character.items():
+        if isinstance(value, (dict, list)):
+            processed_character[key] = json.dumps(value)
+        else:
+            processed_character[key] = value
+    new_character = Character(user_id=user.id, **processed_character)
     db.add(new_character)
     await db.commit()
     await db.refresh(new_character)
@@ -41,6 +48,7 @@ async def get_character(id: int, db: AsyncSession = Depends(get_db), user=Depend
 
 @router.put("/{id}")
 async def update_character(id: int, character_data: dict, db: AsyncSession = Depends(get_db), user=Depends(get_current_user)):
+    import json
     query = select(Character).where(Character.id == id)
     result = await db.execute(query)
     character = result.scalar_one_or_none()
@@ -55,8 +63,27 @@ async def update_character(id: int, character_data: dict, db: AsyncSession = Dep
         raise HTTPException(status_code=403, detail="Forbidden")
     
     for key, value in character_data.items():
-        setattr(character, key, value)
+        if isinstance(value, (dict, list)):
+            setattr(character, key, json.dumps(value))
+        else:
+            setattr(character, key, value)
     
     await db.commit()
     await db.refresh(character)
     return character.__dict__
+
+@router.delete("/{id}")
+async def delete_character(id: int, db: AsyncSession = Depends(get_db), user=Depends(get_current_user)):
+    query = select(Character).where(Character.id == id)
+    result = await db.execute(query)
+    character = result.scalar_one_or_none()
+    
+    if not character:
+        raise HTTPException(status_code=404, detail="Character not found")
+        
+    if user.role != 'storyteller' and character.user_id != user.id:
+        raise HTTPException(status_code=403, detail="Forbidden")
+        
+    await db.delete(character)
+    await db.commit()
+    return {"status": "success", "message": "Character deleted"}
