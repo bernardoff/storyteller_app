@@ -10,6 +10,7 @@ import server.auth as auth
 from server.config import get_settings
 from google.oauth2 import id_token
 from google.auth.transport import requests
+from server.websocket_manager import manager
 settings = get_settings()
 
 router = APIRouter(prefix="/api/auth", tags=["auth"])
@@ -18,7 +19,6 @@ class RegisterRequest(BaseModel):
     username: str
     password: str
     display_name: str
-    invite_code: str
 
 class SetupRequest(BaseModel):
     username: str
@@ -41,6 +41,7 @@ class UserResponse(BaseModel):
     display_name: str
     role: str
     credits_remaining: int
+    is_online: bool = False
     
     model_config = ConfigDict(from_attributes=True)
 
@@ -55,6 +56,14 @@ async def login(form_data: OAuth2PasswordRequestForm = Depends(), db: AsyncSessi
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Incorrect username or password")
     access_token = auth.create_access_token(data={"sub": user.username})
     return TokenResponse(access_token=access_token, role=user.role, display_name=user.display_name)
+
+@router.get("/users", response_model=list[UserResponse])
+async def list_users(current_user: User = Depends(auth.require_storyteller), db: AsyncSession = Depends(get_db)):
+    result = await db.execute(select(User))
+    users = result.scalars().all()
+    for user in users:
+        user.is_online = manager.is_online(user.id)
+    return users
 
 @router.post("/google", response_model=TokenResponse)
 async def google_login(request: GoogleAuthRequest, db: AsyncSession = Depends(get_db)):
@@ -83,7 +92,10 @@ async def google_login(request: GoogleAuthRequest, db: AsyncSession = Depends(ge
         
         access_token = auth.create_access_token(data={"sub": user.username})
         return TokenResponse(access_token=access_token, role=user.role, display_name=user.display_name)
-    except ValueError:
+    except ValueError as e:
+        import traceback
+        traceback.print_exc()
+        print(f"Google token validation error: {e}")
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid Google token")
 
 @router.post("/setup", response_model=TokenResponse)
@@ -109,10 +121,10 @@ async def setup(request: SetupRequest, db: AsyncSession = Depends(get_db)):
 
 @router.post("/register", response_model=TokenResponse)
 async def register(request: RegisterRequest, db: AsyncSession = Depends(get_db)):
-    result = await db.execute(select(InviteCode).where(InviteCode.code == request.invite_code, InviteCode.used_by == None))
-    invite_code = result.scalars().first()
-    if not invite_code:
-        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid or already used invite code")
+    result = await db.execute(select(User).where(User.username == request.username))
+    existing_user = result.scalars().first()
+    if existing_user:
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Username already registered")
     
     user = User(
         username=request.username, 
@@ -124,9 +136,6 @@ async def register(request: RegisterRequest, db: AsyncSession = Depends(get_db))
     db.add(user)
     await db.commit()
     await db.refresh(user)
-    
-    invite_code.used_by = user.id
-    await db.commit()
     
     access_token = auth.create_access_token(data={"sub": user.username})
     return TokenResponse(access_token=access_token, role=user.role, display_name=user.display_name)
@@ -148,4 +157,6 @@ async def read_users_me(current_user: User = Depends(auth.get_current_user)):
 async def read_players(current_user: User = Depends(auth.require_storyteller), db: AsyncSession = Depends(get_db)):
     result = await db.execute(select(User).where(User.role == "player"))
     players = result.scalars().all()
+    for player in players:
+        player.is_online = manager.is_online(player.id)
     return players

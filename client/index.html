@@ -1,477 +1,1055 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Storyteller App</title>
-    <link rel="stylesheet" href="style.css?v=3">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/5.3.1/fabric.min.js"></script>
-    <script src="https://accounts.google.com/gsi/client" async defer></script>
-    <style>
-        /* Floating Button Styles */
-        .floating-button {
-          position: fixed;
-          bottom: 20px;
-          right: 20px;
-          background-color: #6366f1;
-          color: white;
-          border: none;
-          padding: 15px;
-          font-size: 16px;
-          cursor: pointer;
-          border-radius: 50%;
-          box-shadow: 0px 8px 16px rgba(0,0,0,0.5);
-          z-index: 1000;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Storyteller App — Vampire: The Dark Ages AI-powered tabletop RPG companion">
+  <title>As Sombras do Poder · Storyteller</title>
 
-        /* Popup Panel Styles */
-        .popup-panel {
-          position: fixed;
-          bottom: 80px;
-          right: 20px;
-          background-color: rgba(15, 15, 19, 0.85);
-          backdrop-filter: blur(8px);
-          color: #e2e8f0;
-          border-radius: 8px;
-          border: 1px solid #3a1a1a;
-          padding: 20px;
-          width: 300px;
-          box-shadow: 0px 4px 16px rgba(0,0,0,0.8);
-          display: none;
-          z-index: 1000;
-        }
-        .popup-panel.active { display: block; }
-        
-        .panel-header {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          margin-bottom: 15px;
-        }
-        .close-btn {
-          background: transparent;
-          border: none;
-          color: white;
-          font-size: 24px;
-          cursor: pointer;
-        }
-    </style>
+  <!-- Design System CSS -->
+  <link rel="stylesheet" href="style/tokens.css">
+  <link rel="stylesheet" href="style/layout.css">
+  <link rel="stylesheet" href="style/components.css">
+  <link rel="stylesheet" href="style/combat.css">
+  <link rel="stylesheet" href="style/animations.css">
+
+  <!-- Google Sign-In -->
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
 </head>
-<body class="dark-theme">
-    <!-- Floating RAG Rule Search -->
-    <button id="floating-rule-btn" class="floating-button">
-      📖
-    </button>
-    <div id="floating-rule-panel" class="popup-panel">
-      <div class="panel-header">
-        <h3 style="margin:0;">Rule Search</h3>
-        <button class="close-btn" id="close-rule-panel">&times;</button>
-      </div>
-      <div>
-        <input type="text" id="floating-rule-search" placeholder="Search rules..." style="width: 100%; padding: 0.5rem; background: #1a1a24; color: white; border: 1px solid #3b3b4f; border-radius: 4px;">
-        <button id="floating-rule-submit" style="width: 100%; margin-top: 0.5rem;">Search</button>
-        <div id="floating-rule-results" style="margin-top: 1rem; max-height: 200px; overflow-y: auto;"></div>
-      </div>
+<body>
+
+<!-- ════════════════════════════════════════════════════════════
+     LOGIN SCREEN
+     ════════════════════════════════════════════════════════════ -->
+<div id="login-screen">
+  <div class="login-card animate-pop-in">
+    <div class="login-logo">
+      <h1>🩸 Storyteller</h1>
+      <p>Vampire: The Dark Ages · As Sombras do Poder</p>
     </div>
 
-    <div id="login-screen" class="container">
-        <h2>Storyteller App</h2>
-        <input type="text" id="username" placeholder="Username" required>
-        <input type="password" id="password" placeholder="Password" required>
-        <button id="login-btn">Login</button>
-        <button id="setup-btn">Setup Account</button>
-        <div style="margin: 1rem 0; text-align: center; color: #aaa;">OR</div>
-        <div id="g_id_onload"
-             data-client_id="538866350132-hl06n56jj2vinq3p31c60oq1bvbfk6mo.apps.googleusercontent.com"
-             data-context="signin"
-             data-ux_mode="popup"
-             data-callback="handleCredentialResponse"
-             data-auto_prompt="false">
-        </div>
-        <div class="g_id_signin"
-             data-type="standard"
-             data-shape="rectangular"
-             data-theme="filled_black"
-             data-text="signin_with"
-             data-size="large"
-             data-logo_alignment="left"
-             style="display: flex; justify-content: center; margin-top: 10px;">
-        </div>
+    <input type="text"  id="username" class="input" placeholder="Username" autocomplete="username">
+    <input type="password" id="password" class="input" placeholder="Password" autocomplete="current-password">
+    <input type="text" id="display_name" class="input hidden" placeholder="Display Name">
+
+    <div style="display:flex; gap: var(--sp-2);">
+      <button id="login-btn" class="btn btn-primary" style="flex:1">Login</button>
+      <button id="register-btn" class="btn btn-secondary" style="flex:1">Register</button>
+      <button id="setup-btn" class="btn btn-ghost">Setup</button>
     </div>
 
-    <div id="dashboard-screen" class="hidden">
-        <header>
-            <span id="welcome-message"></span>
-            <button id="logout-btn">Logout</button>
-        </header>
+    <div class="login-divider">or</div>
+
+    <!-- Google Sign-In -->
+    <div id="g_id_onload"
+         data-client_id="538866350132-hl06n56jj2vinq3p31c60oq1bvbfk6mo.apps.googleusercontent.com"
+         data-context="signin"
+         data-ux_mode="popup"
+         data-callback="handleCredentialResponse"
+         data-auto_prompt="false">
+    </div>
+    <div class="g_id_signin"
+         data-type="standard"
+         data-shape="rectangular"
+         data-theme="filled_black"
+         data-text="signin_with"
+         data-size="large"
+         data-logo_alignment="left"
+         style="display:flex; justify-content:center;">
+    </div>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════════════════════════════
+     APP SHELL (shown after login)
+     ════════════════════════════════════════════════════════════ -->
+<div id="app-shell">
+
+  <!-- ── Top Bar ─────────────────────────────────────────────── -->
+  <header id="topbar">
+    <!-- Left: hamburger (mobile) + role badge + username -->
+    <div class="topbar-left">
+      <button id="mobile-menu-btn" class="btn btn-ghost btn-icon" style="display:none" aria-label="Menu">☰</button>
+      <span id="topbar-role-badge" class="role-badge player">🩸 Player</span>
+      <span id="topbar-username" style="font-size: var(--text-sm); color: var(--c-text-secondary);"></span>
+    </div>
+
+    <!-- Center: chronicle title -->
+    <div class="topbar-center">
+      <span class="session-title" id="topbar-session-title">As Sombras do Poder</span>
+      <span class="chronicle-name">V20 Dark Ages Chronicle</span>
+    </div>
+
+    <!-- Right: player presence + logout -->
+    <div class="topbar-right">
+      <select id="llm-engine-select" class="input" style="padding: 2px 5px; height: auto; font-size: 12px; margin-right: 10px;" title="Select AI Engine">
+        <option value="qwen2.5-coder:14b" selected>Qwen (Local)</option>
+        <option value="gemini">Gemini</option>
+      </select>
+      <div id="topbar-players" class="player-presence"></div>
+      <button id="logout-btn" class="btn btn-ghost btn-sm">Logout</button>
+    </div>
+  </header>
+
+  <!-- ── Sidebar ─────────────────────────────────────────────── -->
+  <nav id="sidebar">
+    <div class="sidebar-nav">
+
+      <!-- Player section -->
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-top: var(--sp-2);">
+        <span class="sidebar-section-label" style="margin-top:0; padding-bottom:0;">My Character</span>
+        <button id="left-sidebar-collapse-btn" class="btn btn-ghost btn-sm" style="padding: 2px 6px; margin-right: var(--sp-3);" aria-label="Collapse Menu">◀</button>
+      </div>
+      <div style="padding: var(--sp-2) var(--sp-3); display:flex; flex-direction:column; gap: var(--sp-2);">
+        <select id="character-select-dropdown" class="input" style="width: 100%;"><option value="">Select Character...</option></select>
+        <div style="display:flex; gap: var(--sp-2);">
+          <button id="new-character-btn" class="btn btn-secondary btn-sm" style="flex:1;">+ New</button>
+          <a class="btn btn-ghost btn-sm" data-view="character" href="#" id="nav-character" style="flex:1; text-align:center; padding: 4px; text-decoration:none;">View Sheet</a>
+        </div>
+      </div>
+      <a class="nav-item" data-view="feed" href="#">
+        <span class="nav-icon">📣</span> Live Feed
+        <span class="nav-badge hidden" id="feed-badge">0</span>
+      </a>
+
+      <div class="sidebar-divider"></div>
+      <span class="sidebar-section-label">World</span>
+      <a class="nav-item" data-view="vtt" href="#">
+        <span class="nav-icon">🗺️</span> Tabletop + Combat
+      </a>
+
+      <div class="sidebar-divider"></div>
+      <span class="sidebar-section-label">Agents</span>
+      <a class="nav-item" data-view="agents" href="#">
+        <span class="nav-icon">🤖</span> All Agents
+      </a>
+      <a class="nav-item" data-view="lore" href="#">
+        <span class="nav-icon">📜</span> Lorekeeper
+      </a>
+
+      <!-- Storyteller-only section -->
+      <div class="sidebar-divider st-only"></div>
+      <span class="sidebar-section-label st-only">Storyteller</span>
+      <a class="nav-item st-only" data-view="npc-control" href="#">
+        <span class="nav-icon">💀</span> NPC Control
+      </a>
+      <a class="nav-item st-only" data-view="sessions" href="#">
+        <span class="nav-icon">📅</span> Sessions
+      </a>
+      <a class="nav-item st-only" data-view="diablerie-log" href="#">
+        <span class="nav-icon">🩸</span> Amaranth
+      </a>
+      <a class="nav-item st-only" data-view="xp-log" href="#">
+        <span class="nav-icon">✨</span> XP Ledger
+      </a>
+
+
+      <div class="sidebar-divider st-only"></div>
+      <span class="sidebar-section-label st-only">Admin</span>
+      <a class="nav-item st-only" data-view="admin" href="#">
+        <span class="nav-icon">⚙️</span> Administration
+      </a>
+      <a class="nav-item st-only" data-view="equipment-db" href="#">
+        <span class="nav-icon">🛡️</span> Equipment DB
+      </a>
+      <a class="nav-item st-only" data-view="media" href="#">
+        <span class="nav-icon">🖼️</span> Media Library
+      </a>
+    </div>
+
+    <!-- Quick Stats pinned at bottom (populated by JS) -->
+    <div class="sidebar-quick-stats" id="sidebar-quick-stats" style="display:none">
+      <div style="font-size: var(--text-xs); color: var(--c-text-muted); text-transform:uppercase; letter-spacing:0.08em; margin-bottom: var(--sp-2);" id="quick-stat-char-name">—</div>
+      <div class="quick-stat-bar">
+        <div class="stat-row">
+          <span class="stat-label">Health</span>
+          <div class="blood-pool" id="qs-health"></div>
+        </div>
+        <div class="stat-row">
+          <span class="stat-label">Blood</span>
+          <div class="blood-pool" id="qs-blood"></div>
+        </div>
+        <div class="stat-row">
+          <span class="stat-label">Willpower</span>
+          <div class="willpower-dots" id="qs-willpower"></div>
+        </div>
+        <div class="stat-row">
+          <span class="stat-label">Experience</span>
+          <div id="qs-xp" style="font-size: var(--text-sm); font-weight:600; color: var(--c-primary);">0</div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ── Main Workspace ───────────────────────────────────────── -->
+  <main id="workspace">
+    <!-- Floating toggle buttons for collapsed states -->
+    <button id="left-sidebar-expand-btn" class="sidebar-expand-btn left" aria-label="Expand Left Sidebar">▶</button>
+    <button id="right-sidebar-expand-btn" class="sidebar-expand-btn right" aria-label="Expand Right Sidebar">◀</button>
+
+    <!-- ── Primary Content Pane ───────────────────────────────── -->
+    <div id="primary-pane">
+
+      <!-- VIEW: Character Sheet -->
+      <div id="view-character" class="content-view">
+        <div class="panel-header">
+          <h2 class="view-title">🩸 Character</h2>
+        </div>
+
+        <!-- Character Sheet (expanded) -->
+        <div id="character-sheet" class="hidden">
+          <div class="v20-sheet">
+            <div style="padding: 10px 20px 5px; text-align:center; font-family:'Cinzel',serif; text-transform:uppercase; letter-spacing:0.08em; font-size:0.85em; color:#555; border-bottom:1px solid #ccc;">
+              Vampire: The Dark Ages — V20 Anniversary Edition
+            </div>
+            
+            <div style="display: flex; gap: var(--sp-2); margin-top: var(--sp-2); justify-content: center;">
+              <input type="text" id="sheet-image-url" placeholder="Image URL" class="input" style="max-width: 300px;" />
+              <input type="text" id="sheet-token-url" placeholder="Token URL" class="input" style="max-width: 300px;" />
+            </div>
+
+            <!-- Sheet Tabs -->
+            <div class="sheet-tabs" style="display:flex; flex-wrap:wrap; justify-content:center; gap:var(--sp-2); margin-top:var(--sp-2);">
+              <button class="sheet-tab-btn active" data-tab="tab-primary">Primary</button>
+              <button class="sheet-tab-btn" data-tab="tab-backgrounds">Backgrounds</button>
+              <button class="sheet-tab-btn" data-tab="tab-merits-flaws">Merits & Flaws</button>
+              <button class="sheet-tab-btn" data-tab="tab-powers">Powers</button>
+              <button class="sheet-tab-btn" data-tab="tab-traits">Traits</button>
+              <button class="sheet-tab-btn" data-tab="tab-notes">Notes</button>
+              <button class="sheet-tab-btn" data-tab="tab-blood-bonds">Blood Bonds</button>
+              <button class="sheet-tab-btn" data-tab="tab-boons">Boons</button>
+              <button class="sheet-tab-btn" data-tab="tab-information">Information</button>
+              <button class="sheet-tab-btn" data-tab="tab-experience">Experience</button>
+              <button class="sheet-tab-btn" data-tab="tab-combat">Combat</button>
+              <button class="sheet-tab-btn" data-tab="tab-equipment-stash">Equipment & Stash</button>
+              <button class="sheet-tab-btn" data-tab="tab-images">Images</button>
+            </div>
+
+            <!-- TAB: PRIMARY -->
+            <div id="tab-primary" class="sheet-tab-content active">
+              <div class="v20-row">
+                <div class="v20-col">
+                  <div class="v20-field"><label>Name:</label><input type="text" id="sheet-name"></div>
+                  <div class="v20-field"><label>Player:</label><select id="sheet-player" style="flex-grow:1; background:transparent; border:none; border-bottom:1px dashed var(--c-border-medium); color:var(--c-text-primary); outline:none; font-family:var(--font-body);"><option value="">Unassigned</option></select></div>
+                  <div class="v20-field"><label>Chronicle:</label><input type="text" id="sheet-chronicle"></div>
+                </div>
+                <div class="v20-col">
+                  <div class="v20-field"><label>Nature:</label><input type="text" id="sheet-nature"></div>
+                  <div class="v20-field"><label>Demeanor:</label><input type="text" id="sheet-demeanor"></div>
+                  <div class="v20-field"><label>Concept:</label><input type="text" id="sheet-concept"></div>
+                </div>
+                <div class="v20-col">
+                  <div class="v20-field"><label>Clan:</label><input type="text" id="sheet-clan"></div>
+                  <div class="v20-field"><label>Sire:</label><input type="text" id="sheet-sire"></div>
+                  <div class="v20-field"><label>Generation:</label><input type="number" id="sheet-gen" value="13"></div>
+                </div>
+              </div>
+
+              <h5>Attributes</h5>
+              <div class="v20-row">
+                <div class="v20-col">
+                  <h6 style="border:none;text-transform:none;">Physical</h6>
+                  <div class="v20-field"><label>Strength</label><div class="dot-rating" data-stat="attr-strength"><span class="dot" data-val="1"></span><span class="dot" data-val="2"></span><span class="dot" data-val="3"></span><span class="dot" data-val="4"></span><span class="dot" data-val="5"></span></div></div>
+                  <div class="v20-field"><label>Dexterity</label><div class="dot-rating" data-stat="attr-dexterity"><span class="dot" data-val="1"></span><span class="dot" data-val="2"></span><span class="dot" data-val="3"></span><span class="dot" data-val="4"></span><span class="dot" data-val="5"></span></div></div>
+                  <div class="v20-field"><label>Stamina</label><div class="dot-rating" data-stat="attr-stamina"><span class="dot" data-val="1"></span><span class="dot" data-val="2"></span><span class="dot" data-val="3"></span><span class="dot" data-val="4"></span><span class="dot" data-val="5"></span></div></div>
+                </div>
+                <div class="v20-col">
+                  <h6 style="border:none;text-transform:none;">Social</h6>
+                  <div class="v20-field"><label>Charisma</label><div class="dot-rating" data-stat="attr-charisma"><span class="dot" data-val="1"></span><span class="dot" data-val="2"></span><span class="dot" data-val="3"></span><span class="dot" data-val="4"></span><span class="dot" data-val="5"></span></div></div>
+                  <div class="v20-field"><label>Manipulation</label><div class="dot-rating" data-stat="attr-manipulation"><span class="dot" data-val="1"></span><span class="dot" data-val="2"></span><span class="dot" data-val="3"></span><span class="dot" data-val="4"></span><span class="dot" data-val="5"></span></div></div>
+                  <div class="v20-field"><label>Appearance</label><div class="dot-rating" data-stat="attr-appearance"><span class="dot" data-val="1"></span><span class="dot" data-val="2"></span><span class="dot" data-val="3"></span><span class="dot" data-val="4"></span><span class="dot" data-val="5"></span></div></div>
+                </div>
+                <div class="v20-col">
+                  <h6 style="border:none;text-transform:none;">Mental</h6>
+                  <div class="v20-field"><label>Perception</label><div class="dot-rating" data-stat="attr-perception"><span class="dot" data-val="1"></span><span class="dot" data-val="2"></span><span class="dot" data-val="3"></span><span class="dot" data-val="4"></span><span class="dot" data-val="5"></span></div></div>
+                  <div class="v20-field"><label>Intelligence</label><div class="dot-rating" data-stat="attr-intelligence"><span class="dot" data-val="1"></span><span class="dot" data-val="2"></span><span class="dot" data-val="3"></span><span class="dot" data-val="4"></span><span class="dot" data-val="5"></span></div></div>
+                  <div class="v20-field"><label>Wits</label><div class="dot-rating" data-stat="attr-wits"><span class="dot" data-val="1"></span><span class="dot" data-val="2"></span><span class="dot" data-val="3"></span><span class="dot" data-val="4"></span><span class="dot" data-val="5"></span></div></div>
+                </div>
+              </div>
+
+              <h5>Abilities</h5>
+              <div class="v20-row">
+                <div class="v20-col">
+                  <h6 style="border:none;text-transform:none;">Talents</h6>
+                  <div class="v20-field"><label>Alertness</label><div class="dot-rating" data-stat="talents-alertness"><span class="dot" data-val="1"></span><span class="dot" data-val="2"></span><span class="dot" data-val="3"></span><span class="dot" data-val="4"></span><span class="dot" data-val="5"></span></div></div>
+                  <div class="v20-field"><label>Athletics</label><div class="dot-rating" data-stat="talents-athletics"><span class="dot" data-val="1"></span><span class="dot" data-val="2"></span><span class="dot" data-val="3"></span><span class="dot" data-val="4"></span><span class="dot" data-val="5"></span></div></div>
+                  <div class="v20-field"><label>Awareness</label><div class="dot-rating" data-stat="talents-awareness"><span class="dot" data-val="1"></span><span class="dot" data-val="2"></span><span class="dot" data-val="3"></span><span class="dot" data-val="4"></span><span class="dot" data-val="5"></span></div></div>
+                  <div class="v20-field"><label>Brawl</label><div class="dot-rating" data-stat="talents-brawl"><span class="dot" data-val="1"></span><span class="dot" data-val="2"></span><span class="dot" data-val="3"></span><span class="dot" data-val="4"></span><span class="dot" data-val="5"></span></div></div>
+                  <div class="v20-field"><label>Empathy</label><div class="dot-rating" data-stat="talents-empathy"><span class="dot" data-val="1"></span><span class="dot" data-val="2"></span><span class="dot" data-val="3"></span><span class="dot" data-val="4"></span><span class="dot" data-val="5"></span></div></div>
+                  <div class="v20-field"><label>Expression</label><div class="dot-rating" data-stat="talents-expression"><span class="dot" data-val="1"></span><span class="dot" data-val="2"></span><span class="dot" data-val="3"></span><span class="dot" data-val="4"></span><span class="dot" data-val="5"></span></div></div>
+                  <div class="v20-field"><label>Intimidation</label><div class="dot-rating" data-stat="talents-intimidation"><span class="dot" data-val="1"></span><span class="dot" data-val="2"></span><span class="dot" data-val="3"></span><span class="dot" data-val="4"></span><span class="dot" data-val="5"></span></div></div>
+                  <div class="v20-field"><label>Leadership</label><div class="dot-rating" data-stat="talents-leadership"><span class="dot" data-val="1"></span><span class="dot" data-val="2"></span><span class="dot" data-val="3"></span><span class="dot" data-val="4"></span><span class="dot" data-val="5"></span></div></div>
+                  <div class="v20-field"><label>Legerdemain</label><div class="dot-rating" data-stat="talents-legerdemain"><span class="dot" data-val="1"></span><span class="dot" data-val="2"></span><span class="dot" data-val="3"></span><span class="dot" data-val="4"></span><span class="dot" data-val="5"></span></div></div>
+                  <div class="v20-field"><label>Subterfuge</label><div class="dot-rating" data-stat="talents-subterfuge"><span class="dot" data-val="1"></span><span class="dot" data-val="2"></span><span class="dot" data-val="3"></span><span class="dot" data-val="4"></span><span class="dot" data-val="5"></span></div></div>
+                </div>
+                <div class="v20-col">
+                  <h6 style="border:none;text-transform:none;">Skills</h6>
+                  <div class="v20-field"><label>Animal Ken</label><div class="dot-rating" data-stat="skills-animal_ken"><span class="dot" data-val="1"></span><span class="dot" data-val="2"></span><span class="dot" data-val="3"></span><span class="dot" data-val="4"></span><span class="dot" data-val="5"></span></div></div>
+                  <div class="v20-field"><label>Archery</label><div class="dot-rating" data-stat="skills-archery"><span class="dot" data-val="1"></span><span class="dot" data-val="2"></span><span class="dot" data-val="3"></span><span class="dot" data-val="4"></span><span class="dot" data-val="5"></span></div></div>
+                  <div class="v20-field"><label>Commerce</label><div class="dot-rating" data-stat="skills-commerce"><span class="dot" data-val="1"></span><span class="dot" data-val="2"></span><span class="dot" data-val="3"></span><span class="dot" data-val="4"></span><span class="dot" data-val="5"></span></div></div>
+                  <div class="v20-field"><label>Crafts</label><div class="dot-rating" data-stat="skills-crafts"><span class="dot" data-val="1"></span><span class="dot" data-val="2"></span><span class="dot" data-val="3"></span><span class="dot" data-val="4"></span><span class="dot" data-val="5"></span></div></div>
+                  <div class="v20-field"><label>Etiquette</label><div class="dot-rating" data-stat="skills-etiquette"><span class="dot" data-val="1"></span><span class="dot" data-val="2"></span><span class="dot" data-val="3"></span><span class="dot" data-val="4"></span><span class="dot" data-val="5"></span></div></div>
+                  <div class="v20-field"><label>Melee</label><div class="dot-rating" data-stat="skills-melee"><span class="dot" data-val="1"></span><span class="dot" data-val="2"></span><span class="dot" data-val="3"></span><span class="dot" data-val="4"></span><span class="dot" data-val="5"></span></div></div>
+                  <div class="v20-field"><label>Performance</label><div class="dot-rating" data-stat="skills-performance"><span class="dot" data-val="1"></span><span class="dot" data-val="2"></span><span class="dot" data-val="3"></span><span class="dot" data-val="4"></span><span class="dot" data-val="5"></span></div></div>
+                  <div class="v20-field"><label>Ride</label><div class="dot-rating" data-stat="skills-ride"><span class="dot" data-val="1"></span><span class="dot" data-val="2"></span><span class="dot" data-val="3"></span><span class="dot" data-val="4"></span><span class="dot" data-val="5"></span></div></div>
+                  <div class="v20-field"><label>Stealth</label><div class="dot-rating" data-stat="skills-stealth"><span class="dot" data-val="1"></span><span class="dot" data-val="2"></span><span class="dot" data-val="3"></span><span class="dot" data-val="4"></span><span class="dot" data-val="5"></span></div></div>
+                  <div class="v20-field"><label>Survival</label><div class="dot-rating" data-stat="skills-survival"><span class="dot" data-val="1"></span><span class="dot" data-val="2"></span><span class="dot" data-val="3"></span><span class="dot" data-val="4"></span><span class="dot" data-val="5"></span></div></div>
+                </div>
+                <div class="v20-col">
+                  <h6 style="border:none;text-transform:none;">Knowledges</h6>
+                  <div class="v20-field"><label>Academics</label><div class="dot-rating" data-stat="knowledges-academics"><span class="dot" data-val="1"></span><span class="dot" data-val="2"></span><span class="dot" data-val="3"></span><span class="dot" data-val="4"></span><span class="dot" data-val="5"></span></div></div>
+                  <div class="v20-field"><label>Enigmas</label><div class="dot-rating" data-stat="knowledges-enigmas"><span class="dot" data-val="1"></span><span class="dot" data-val="2"></span><span class="dot" data-val="3"></span><span class="dot" data-val="4"></span><span class="dot" data-val="5"></span></div></div>
+                  <div class="v20-field"><label>Hearth Wisdom</label><div class="dot-rating" data-stat="knowledges-hearth_wisdom"><span class="dot" data-val="1"></span><span class="dot" data-val="2"></span><span class="dot" data-val="3"></span><span class="dot" data-val="4"></span><span class="dot" data-val="5"></span></div></div>
+                  <div class="v20-field"><label>Investigation</label><div class="dot-rating" data-stat="knowledges-investigation"><span class="dot" data-val="1"></span><span class="dot" data-val="2"></span><span class="dot" data-val="3"></span><span class="dot" data-val="4"></span><span class="dot" data-val="5"></span></div></div>
+                  <div class="v20-field"><label>Law</label><div class="dot-rating" data-stat="knowledges-law"><span class="dot" data-val="1"></span><span class="dot" data-val="2"></span><span class="dot" data-val="3"></span><span class="dot" data-val="4"></span><span class="dot" data-val="5"></span></div></div>
+                  <div class="v20-field"><label>Medicine</label><div class="dot-rating" data-stat="knowledges-medicine"><span class="dot" data-val="1"></span><span class="dot" data-val="2"></span><span class="dot" data-val="3"></span><span class="dot" data-val="4"></span><span class="dot" data-val="5"></span></div></div>
+                  <div class="v20-field"><label>Occult</label><div class="dot-rating" data-stat="knowledges-occult"><span class="dot" data-val="1"></span><span class="dot" data-val="2"></span><span class="dot" data-val="3"></span><span class="dot" data-val="4"></span><span class="dot" data-val="5"></span></div></div>
+                  <div class="v20-field"><label>Politics</label><div class="dot-rating" data-stat="knowledges-politics"><span class="dot" data-val="1"></span><span class="dot" data-val="2"></span><span class="dot" data-val="3"></span><span class="dot" data-val="4"></span><span class="dot" data-val="5"></span></div></div>
+                  <div class="v20-field"><label>Seneschal</label><div class="dot-rating" data-stat="knowledges-seneschal"><span class="dot" data-val="1"></span><span class="dot" data-val="2"></span><span class="dot" data-val="3"></span><span class="dot" data-val="4"></span><span class="dot" data-val="5"></span></div></div>
+                  <div class="v20-field"><label>Theology</label><div class="dot-rating" data-stat="knowledges-theology"><span class="dot" data-val="1"></span><span class="dot" data-val="2"></span><span class="dot" data-val="3"></span><span class="dot" data-val="4"></span><span class="dot" data-val="5"></span></div></div>
+                </div>
+              </div>
+
+              <h5>Advantages</h5>
+              <div class="v20-row">
+                <div class="v20-col">
+                  <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 5px;">
+                    <h6 style="border:none;text-transform:none; margin:0;">Disciplines</h6>
+                    <button class="btn btn-secondary btn-sm" onclick="addCustomListRow('disciplines')" style="padding:0 5px; height: 24px;">+</button>
+                  </div>
+                  <div id="disciplines-primary-list"></div>
+                </div>
+                <div class="v20-col">
+                  <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 5px;">
+                    <h6 style="border:none;text-transform:none; margin:0;">Backgrounds</h6>
+                    <button class="btn btn-secondary btn-sm" onclick="addCustomListRow('backgrounds')" style="padding:0 5px; height: 24px;">+</button>
+                  </div>
+                  <div id="backgrounds-primary-list"></div>
+                </div>
+                <div class="v20-col">
+                  <h6 style="border:none;text-transform:none;">Virtues</h6>
+                  <div class="v20-field"><label>Conscience</label><div class="dot-rating" data-stat="virtue-conscience"><span class="dot" data-val="1"></span><span class="dot" data-val="2"></span><span class="dot" data-val="3"></span><span class="dot" data-val="4"></span><span class="dot" data-val="5"></span></div></div>
+                  <div class="v20-field"><label>Self-Control</label><div class="dot-rating" data-stat="virtue-self_control"><span class="dot" data-val="1"></span><span class="dot" data-val="2"></span><span class="dot" data-val="3"></span><span class="dot" data-val="4"></span><span class="dot" data-val="5"></span></div></div>
+                  <div class="v20-field"><label>Courage</label><div class="dot-rating" data-stat="virtue-courage"><span class="dot" data-val="1"></span><span class="dot" data-val="2"></span><span class="dot" data-val="3"></span><span class="dot" data-val="4"></span><span class="dot" data-val="5"></span></div></div>
+                </div>
+              </div>
+
+              <!-- Bottom rows -->
+              <div class="v20-row" style="margin-top:15px;">
+                <div class="v20-col">
+                  <h6 style="border:none;text-transform:none;">Other Traits</h6>
+                  <div class="v20-field"><input type="text" class="other-custom-name" data-index="0"><div class="dot-rating" data-stat="other-custom_0"><span class="dot" data-val="1"></span><span class="dot" data-val="2"></span><span class="dot" data-val="3"></span><span class="dot" data-val="4"></span><span class="dot" data-val="5"></span></div></div>
+                  <div class="v20-field"><input type="text" class="other-custom-name" data-index="1"><div class="dot-rating" data-stat="other-custom_1"><span class="dot" data-val="1"></span><span class="dot" data-val="2"></span><span class="dot" data-val="3"></span><span class="dot" data-val="4"></span><span class="dot" data-val="5"></span></div></div>
+                  <div class="v20-field"><input type="text" class="other-custom-name" data-index="2"><div class="dot-rating" data-stat="other-custom_2"><span class="dot" data-val="1"></span><span class="dot" data-val="2"></span><span class="dot" data-val="3"></span><span class="dot" data-val="4"></span><span class="dot" data-val="5"></span></div></div>
+                  <div class="v20-field"><input type="text" class="other-custom-name" data-index="3"><div class="dot-rating" data-stat="other-custom_3"><span class="dot" data-val="1"></span><span class="dot" data-val="2"></span><span class="dot" data-val="3"></span><span class="dot" data-val="4"></span><span class="dot" data-val="5"></span></div></div>
+                  <div class="v20-field"><input type="text" class="other-custom-name" data-index="4"><div class="dot-rating" data-stat="other-custom_4"><span class="dot" data-val="1"></span><span class="dot" data-val="2"></span><span class="dot" data-val="3"></span><span class="dot" data-val="4"></span><span class="dot" data-val="5"></span></div></div>
+                </div>
+                
+                <div class="v20-col">
+                  <h6 style="border:none;text-transform:none;">Road</h6>
+                  <div class="v20-field"><label>Path:</label><input type="text" id="sheet-road"></div>
+                  <div style="text-align:center;"><div class="dot-rating" data-stat="road-rating"><span class="dot" data-val="1"></span><span class="dot" data-val="2"></span><span class="dot" data-val="3"></span><span class="dot" data-val="4"></span><span class="dot" data-val="5"></span><span class="dot" data-val="6"></span><span class="dot" data-val="7"></span><span class="dot" data-val="8"></span><span class="dot" data-val="9"></span><span class="dot" data-val="10"></span></div></div>
+                  <div class="v20-field" style="margin-top:10px;"><label>Aura:</label><input type="text" id="sheet-aura"></div>
+
+                  <h6 style="border:none;text-transform:none;margin-top:10px;">Willpower</h6>
+                  <div style="text-align:center;"><div class="dot-rating" data-stat="willpower-max"><span class="dot" data-val="1"></span><span class="dot" data-val="2"></span><span class="dot" data-val="3"></span><span class="dot" data-val="4"></span><span class="dot" data-val="5"></span><span class="dot" data-val="6"></span><span class="dot" data-val="7"></span><span class="dot" data-val="8"></span><span class="dot" data-val="9"></span><span class="dot" data-val="10"></span></div></div>
+                  <div class="v20-field" style="margin-top:8px;"><label>Current:</label><input type="number" id="willpower-current" style="border:1px solid #ccc;"></div>
+
+                  <h6 style="border:none;text-transform:none;margin-top:10px;">Blood Pool</h6>
+                  <div class="v20-field"><label>Pts/Turn:</label><input type="number" id="blood-pool-pts"></div>
+                  <div class="v20-field"><label>Max Blood:</label><input type="number" id="blood-pool-max" value="10"></div>
+                  <div class="v20-field"><label>Current:</label><input type="number" id="blood-pool-current"></div>
+                </div>
+
+                <div class="v20-col">
+                  <h5>Health</h5>
+                  <div class="health-track">
+                    <div class="health-level"><label>Bruised</label><input type="checkbox" id="hp-bruised"></div>
+                    <div class="health-level"><label>Hurt</label><span>-1</span><input type="checkbox" id="hp-hurt"></div>
+                    <div class="health-level"><label>Injured</label><span>-1</span><input type="checkbox" id="hp-injured"></div>
+                    <div class="health-level"><label>Wounded</label><span>-2</span><input type="checkbox" id="hp-wounded"></div>
+                    <div class="health-level"><label>Mauled</label><span>-2</span><input type="checkbox" id="hp-mauled"></div>
+                    <div class="health-level"><label>Crippled</label><span>-5</span><input type="checkbox" id="hp-crippled"></div>
+                    <div class="health-level"><label>Incapacitated</label><input type="checkbox" id="hp-incapacitated"></div>
+                  </div>
+                </div>
+              </div>
+
+              <div style="text-align:center; margin-top:20px; display:flex; gap:8px; justify-content:center;">
+                <button id="save-character-sheet-btn" class="btn btn-primary">Save Character</button>
+                <button id="close-sheet-btn" class="btn btn-secondary">Close</button>
+              </div>
+            </div><!-- /tab-primary -->
+
+            <!-- TAB: BACKGROUNDS -->
+            <div id="tab-backgrounds" class="sheet-tab-content hidden">
+              <div id="backgrounds-container"></div>
+              <p style="color:var(--c-text-muted); font-size:var(--text-xs); text-align:center;">Fill out Backgrounds on the Primary tab to see descriptions here.</p>
+            </div>
+
+            <!-- TAB: MERITS & FLAWS -->
+            <div id="tab-merits-flaws" class="sheet-tab-content hidden">
+              <div class="v20-row">
+                <div class="v20-col">
+                  <h5>Merits</h5>
+                  <div id="merits-list"></div>
+                  <button class="btn btn-secondary btn-sm" onclick="addMeritFlaw('merit')">+ Add Merit</button>
+                </div>
+                <div class="v20-col">
+                  <h5>Flaws</h5>
+                  <div id="flaws-list"></div>
+                  <button class="btn btn-secondary btn-sm" onclick="addMeritFlaw('flaw')">+ Add Flaw</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- TAB: POWERS -->
+            <div id="tab-powers" class="sheet-tab-content hidden">
+              <div class="v20-row">
+                <div class="v20-col" style="flex:2">
+                  <h5>Disciplines</h5>
+                  <div id="disciplines-container"></div>
+                </div>
+                <div class="v20-col">
+                  <h5>Rituals</h5>
+                  <div id="rituals-list"></div>
+                  <button class="btn btn-secondary btn-sm" onclick="addRitual()">+ Add Ritual</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- TAB: TRAITS -->
+            <div id="tab-traits" class="sheet-tab-content hidden">
+               <h6 style="border:none;text-transform:none;">Specializations</h6>
+               <textarea id="sheet-specializations" class="v20-textarea" placeholder="e.g. Melee (Broadsword)" style="width:100%; height:150px;"></textarea>
+               <h6 style="border:none;text-transform:none; margin-top:20px;">Weakness</h6>
+               <textarea id="sheet-weakness" class="v20-textarea" placeholder="Clan Weakness..." style="width:100%; height:100px;"></textarea>
+            </div>
+
+            <!-- TAB: NOTES -->
+            <div id="tab-notes" class="sheet-tab-content hidden">
+               <textarea id="sheet-notes" class="v20-textarea" placeholder="Character notes..." style="width:100%; height:400px;"></textarea>
+            </div>
+
+            <!-- TAB: BLOOD BONDS -->
+            <div id="tab-blood-bonds" class="sheet-tab-content hidden">
+              <div class="v20-row">
+                <div class="v20-col">
+                  <h5>Blood Bonds</h5>
+                  <div id="blood-bonds-container"></div>
+                  <button class="btn btn-secondary btn-sm" onclick="addBloodBond()">+ Add Bond</button>
+                </div>
+                <div class="v20-col">
+                  <h5>Vaulderie (Vinculum)</h5>
+                  <div id="vaulderie-container"></div>
+                  <button class="btn btn-secondary btn-sm" onclick="addVaulderie()">+ Add Vaulderie</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- TAB: BOONS -->
+            <div id="tab-boons" class="sheet-tab-content hidden">
+              <div class="v20-row">
+                <div class="v20-col">
+                  <h5>Owed To Me</h5>
+                  <div id="boons-owed-to-container"></div>
+                  <button class="btn btn-secondary btn-sm" onclick="addBoon('to')">+ Add Boon</button>
+                </div>
+                <div class="v20-col">
+                  <h5>Owed By Me</h5>
+                  <div id="boons-owed-by-container"></div>
+                  <button class="btn btn-secondary btn-sm" onclick="addBoon('by')">+ Add Boon</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- TAB: INFORMATION -->
+            <div id="tab-information" class="sheet-tab-content hidden">
+              <h5>Biography</h5>
+              <textarea id="sheet-bio" class="v20-textarea" placeholder="Mortal days, the Embrace, unlife..." style="width:100%; height:200px;"></textarea>
+              <h5>Appearance</h5>
+              <textarea id="sheet-appearance" class="v20-textarea" placeholder="Physical description..." style="width:100%; height:100px;"></textarea>
+              <h5>Haven</h5>
+              <textarea id="sheet-haven" class="v20-textarea" placeholder="Where they sleep..." style="width:100%; height:100px;"></textarea>
+            </div>
+
+            <!-- TAB: EXPERIENCE -->
+            <div id="tab-experience" class="sheet-tab-content hidden">
+              <h5>Experience Ledger</h5>
+              <div style="display:flex; justify-content:space-between; margin-bottom:10px;">
+                 <strong>Total XP: <span id="xp-total-display">0</span></strong>
+                 <strong>Spent XP: <span id="xp-spent-display">0</span></strong>
+                 <strong>Unspent XP: <span id="xp-unspent-display" style="color:var(--c-gold-200);">0</span></strong>
+              </div>
+              <table class="data-table">
+                <thead><tr><th>Date</th><th>Description</th><th>Type</th><th>Amount</th></tr></thead>
+                <tbody id="xp-ledger-tbody"></tbody>
+              </table>
+            </div>
+
+            <!-- TAB: COMBAT -->
+            <div id="tab-combat" class="sheet-tab-content hidden">
+              <div class="v20-row">
+                <div class="v20-col">
+                   <h5>Combat Stats</h5>
+                   <p>Initiative Rating: <span id="combat-init" style="font-weight:bold;">0</span></p>
+                   <p>Armor Rating: <span id="combat-armor" style="font-weight:bold;">0</span></p>
+                </div>
+                <div class="v20-col" style="flex:2">
+                   <h5>Quick Weapons</h5>
+                   <table class="data-table">
+                     <thead><tr><th>Weapon</th><th>Damage</th><th>Conceal</th></tr></thead>
+                     <tbody id="combat-weapons-tbody"></tbody>
+                   </table>
+                </div>
+              </div>
+            </div>
+
+            <!-- TAB: EQUIPMENT STASH -->
+            <div id="tab-equipment-stash" class="sheet-tab-content hidden">
+              <div style="padding: 20px;">
+                  <h4 style="color: var(--c-gold-300);">Equipment & Stash</h4>
+                  <div id="stash-container" style="display:flex; flex-direction:column; gap: 10px; margin-top:15px;">
+                      <p style="color: var(--c-text-muted);">No items in stash. Go to Equipment DB to add some.</p>
+                  </div>
+              </div>
+            </div>
+
+            <!-- TAB: IMAGES -->
+            <div id="tab-images" class="sheet-tab-content hidden">
+              <div style="padding: 20px;">
+                <h4 style="color: var(--c-gold-300);">Character Media Gallery</h4>
+                <p style="color: var(--c-text-muted); font-size: 0.9em;">Images tagged with this character's name will appear here.</p>
+                <div id="character-images-container" style="display:flex; flex-wrap:wrap; gap: 10px; margin-top:15px;">
+                  <!-- Images injected by JS -->
+                </div>
+              </div>
+            </div>
+
+          </div><!-- /v20-sheet -->
+        </div>
+      </div><!-- /view-character -->
+
+
+      <!-- VIEW: Tabletop + Combat -->
+      <div id="view-vtt" class="content-view" style="padding: 0; flex-direction: row;">
+        <div class="vtt-main-area">
+          <div class="panel-header" style="margin: var(--sp-3); flex-shrink: 0;">
+            <h2 class="view-title">🗺️ Virtual Tabletop</h2>
+            <div style="display:flex; gap: var(--sp-2);">
+              <label style="font-size: var(--text-xs); align-self:center;">Grid Size:</label>
+              <input type="number" id="vtt-grid-cols" class="input" value="30" style="width:60px;" title="Cols">
+              <input type="number" id="vtt-grid-rows" class="input" value="20" style="width:60px;" title="Rows">
+              <button id="set-bg-btn" class="btn btn-secondary btn-sm">Set Background</button>
+              <input type="file" id="vtt-bg-upload" accept="image/*" style="display:none">
+              <button id="add-token-btn" class="btn btn-secondary btn-sm">Add Token</button>
+            </div>
+          </div>
+          <div style="flex-grow: 1; position: relative; min-height: 0; padding: 0 var(--sp-3) var(--sp-3) var(--sp-3); overflow: auto;">
+            <canvas id="vtt-canvas" style="border:1px solid var(--c-border-strong); border-radius: var(--r-lg); display:block;"></canvas>
+          </div>
+        </div>
+
         
-        <aside class="sidebar">
-            <ul>
-                <li><a href="#dice-roller" class="sidebar-link" data-target="dice-roller">🎲 Dice</a></li>
-                <li><a href="#feed-area" class="sidebar-link" data-target="feed-area">💬 Chat</a></li>
-                <li><a href="#character-panel" class="sidebar-link" data-target="character-panel">📜 Character</a></li>
-                <li><a href="#combat-panel" class="sidebar-link" data-target="combat-panel">⚔️ Combat</a></li>
-                <li><a href="#rules-panel" class="sidebar-link" data-target="rules-panel">📝 Rules</a></li>
-                <li><a href="#sessions-panel" class="sidebar-link" data-target="sessions-panel">📅 Sessions</a></li>
-                <li><a href="#vtt-panel" class="sidebar-link" data-target="vtt-panel">🎮 VTT</a></li>
-                <li><a href="#lore-panel" class="sidebar-link" data-target="lore-panel">📜 Lore</a></li>
-                <li><a href="#brain-panel" class="sidebar-link" data-target="brain-panel" style="color: #4ade80;">🧠 The Brain</a></li>
-                <a href="#" class="sidebar-link" data-target="admin-panel"><i class="fas fa-cog"></i> <span>Administration</span></a>
-                <a href="#" class="sidebar-link" data-target="equipment-db-panel"><i class="fas fa-shield-alt"></i> <span>Equipment DB</span></a>
-                <li id="nav-st-dashboard" class="hidden"><a href="#st-dashboard-panel" class="sidebar-link" data-target="st-dashboard-panel" style="color: #a855f7;">📋 ST Dashboard</a></li>
-            </ul>
-        </aside>
+      </div><!-- /view-vtt -->
 
-        <main class="panel">
-            <section id="dice-roller">
-                <h3>Dice Roller</h3>
-                <input type="number" id="pool-size" placeholder="Pool Size" value="5" required>
-                <input type="number" id="difficulty" placeholder="Difficulty" value="6" required>
-                <button id="roll-btn">Roll</button>
-                <div id="dice-results" style="margin-top: 1.5rem; padding: 1rem; background: #1a1a1f; border: 1px solid #3a1a1a; border-radius: 8px;" class="hidden"></div>
-            </section>
 
-            <section id="feed-area" class="hidden">
-                <h3>Shared Event Feed</h3>
-                <div style="display: flex; gap: 1rem;">
-                    <!-- Connected Players List -->
-                    <div style="flex: 1; background: #1a1a1f; border: 1px solid #3a1a1a; border-radius: 8px; padding: 1rem; margin-bottom: 1rem;">
-                        <h4 style="margin-top: 0; margin-bottom: 1rem; color: #ff4d4f;">Connected Players</h4>
-                        <ul id="player-list" style="list-style: none; padding: 0; margin: 0;"></ul>
-                    </div>
-            
-                    <!-- Chat Messages -->
-                    <div style="flex: 2;">
-                        <div id="chat-messages" style="height: 300px; overflow-y: auto; background: #1a1a1f; border: 1px solid #3a1a1a; border-radius: 8px; padding: 1rem; margin-bottom: 1rem;"></div>
-                        <div style="display: flex; gap: 0.5rem;">
-                            <input type="text" id="chat-input" placeholder="Type a message..." style="flex: 1;">
-                            <button id="send-chat-btn">Send</button>
-                        </div>
-                        
-                        <!-- Intelligent Combat Wizard -->
-                        <div id="combat-wizard-controls" style="margin-top: 1rem; padding: 1rem; border: 1px solid #3a1a1a; border-radius: 8px; background: #222;">
-                            <h4 style="margin-top: 0; color: #4ade80;">Intelligent Combat Wizard</h4>
-                            <div style="display: flex; gap: 0.5rem; margin-bottom: 0.5rem;">
-                                <input type="text" id="wizard-action-input" placeholder="Describe your action (e.g. 'I spend 1 blood for Celerity and attack twice')..." style="flex: 1; padding: 0.5rem; background: #1a1a24; color: white; border: 1px solid #3b3b4f; border-radius: 4px;">
-                                <select id="wizard-engine-select" style="padding: 0.5rem; background: #1a1a24; color: white; border: 1px solid #3b3b4f; border-radius: 4px;">
-                                    <option value="gemini">Gemini</option>
-                                    <option value="llama">Local Llama</option>
-                                </select>
-                                <button id="wizard-analyze-btn">Analyze Action</button>
-                            </div>
-                            <div id="wizard-results" style="display: none; margin-top: 1rem;">
-                                <!-- Results will be displayed here -->
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
+      <!-- VIEW: Agents Hub -->
+      <div id="view-agents" class="content-view" style="padding: 0;">
+        <div class="panel-header" style="margin: var(--sp-4) var(--sp-4) 0; flex-shrink: 0;">
+          <h2 class="view-title">🤖 AI Agents</h2>
+        </div>
+        <p style="margin: 0 var(--sp-4) var(--sp-3); color: var(--c-text-muted); font-size: var(--text-sm);">Select an agent below to interact with their specific capabilities.</p>
+        
+        <div id="agent-hud" role="tablist" aria-label="AI Agents" style="display:flex; border-bottom: 1px solid var(--c-border-strong); background: var(--c-bg-600);"></div>
+        
+        <div id="agent-content" style="flex: 1; overflow-y: auto; padding: var(--sp-4); display: flex; flex-direction: column; gap: var(--sp-3);"></div>
+        
+        <div id="agent-input-row" style="padding: var(--sp-3); border-top:1px solid var(--c-border-subtle); display:flex; flex-direction:column; gap: var(--sp-2); background: var(--c-bg-700);">
+          <div style="display:flex; gap: var(--sp-2);">
+            <input type="text" id="agent-chat-input" class="input" placeholder="Type a message or ask an agent..." style="flex:1;">
+            <button id="send-agent-btn" class="btn btn-primary">Send</button>
+          </div>
+        </div>
+      </div><!-- /view-agents -->
 
-            <section id="character-panel" class="hidden">
-                <h3>Character Panel</h3>
-                <div id="characters-container" style="margin-bottom: 1rem;"></div>
-                <button id="new-character-btn" style="padding: 5px 10px; margin-bottom: 10px; cursor: pointer;">New Character</button>
 
-                
-                <div id="character-sheet" class="hidden" style="margin-top: 1rem;">
-                    <div class="v20-sheet">
-                        <h4>Twentieth Anniversary Edition - Vampire The Dark Ages</h4>
-                        
-                        <div class="sheet-tabs" style="display: flex; gap: 10px; margin-bottom: 20px; border-bottom: 2px solid #3b3b4f; padding-bottom: 10px;">
-                            <button class="sheet-tab-btn active" data-tab="tab-main" style="background: none; border: none; color: #fff; cursor: pointer; font-size: 1.1em;">Main Stats</button>
-                            <button class="sheet-tab-btn" data-tab="tab-equipment" style="background: none; border: none; color: #fff; cursor: pointer; font-size: 1.1em;">Equipment</button>
-                            <button class="sheet-tab-btn" data-tab="tab-disciplines" style="background: none; border: none; color: #fff; cursor: pointer; font-size: 1.1em;">Disciplines</button>
-                            <button class="sheet-tab-btn" data-tab="tab-backgrounds" style="background: none; border: none; color: #fff; cursor: pointer; font-size: 1.1em;">Backgrounds</button>
-                            <button class="sheet-tab-btn" data-tab="tab-notes" style="background: none; border: none; color: #fff; cursor: pointer; font-size: 1.1em;">Notes</button>
-                        </div>
-                        
-                        <!-- TAB: MAIN STATS -->
-                        <div id="tab-main" class="sheet-tab-content active">
-                        
-                        <div class="v20-row">
-                            <div class="v20-col">
-                                <div class="v20-field"><label>Name:</label><input type="text" id="sheet-name"></div>
-                                <div class="v20-field"><label>Player:</label><input type="text" id="sheet-player" disabled></div>
-                                <div class="v20-field"><label>Chronicle:</label><input type="text" id="sheet-chronicle"></div>
-                            </div>
-                            <div class="v20-col">
-                                <div class="v20-field"><label>Nature:</label><input type="text" id="sheet-nature"></div>
-                                <div class="v20-field"><label>Demeanor:</label><input type="text" id="sheet-demeanor"></div>
-                                <div class="v20-field"><label>Concept:</label><input type="text" id="sheet-concept"></div>
-                            </div>
-                            <div class="v20-col">
-                                <div class="v20-field"><label>Clan:</label><input type="text" id="sheet-clan"></div>
-                                <div class="v20-field"><label>Sire:</label><input type="text" id="sheet-sire"></div>
-                                <div class="v20-field"><label>Generation:</label><input type="number" id="sheet-gen" value="13"></div>
-                            </div>
-                        </div>
+      <!-- VIEW: Lore (Lorekeeper) -->
+      <div id="view-lore" class="content-view">
+        <div class="panel-header">
+          <h2 class="view-title">📜 Lorekeeper</h2>
+          <div style="display:flex; gap: var(--sp-2);">
+            <button id="sync-graph-btn" class="btn btn-secondary btn-sm">🔄 Sync Graph DB</button>
+            <button id="toggle-ingest-lore-btn" class="btn btn-ghost btn-sm">+ Ingest Lore</button>
+          </div>
+        </div>
+        <div id="lore-ingest-area" style="display:none; margin-bottom: var(--sp-4); background: var(--c-bg-500); border: 1px solid var(--c-border-medium); border-radius: var(--r-lg); padding: var(--sp-4);">
+          <textarea id="lore-input" class="input" placeholder="Enter lore to ingest..." style="min-height:80px;"></textarea>
+          <button id="ingest-lore-btn" class="btn btn-danger btn-sm" style="margin-top: var(--sp-2);">Ingest to Database</button>
+        </div>
+        <p style="color: var(--c-text-muted); font-size: var(--text-sm); margin-bottom: var(--sp-4);">Ask about history, clans, locations, and the world.</p>
+        <div id="lore-chat-history" style="flex:1; overflow-y:auto; background: var(--c-bg-500); border:1px solid var(--c-border-medium); border-radius: var(--r-lg); padding: var(--sp-4); min-height:200px; max-height:calc(100vh - 300px); margin-bottom: var(--sp-3);"></div>
+        <div style="display:flex; gap: var(--sp-2);">
+          <input type="text" id="lore-chat-input" class="input" placeholder="Ask about the lore...">
+          <button id="send-lore-btn" class="btn btn-primary">Ask</button>
+          <button id="reset-lore-btn" class="btn btn-danger btn-sm">Reset</button>
+        </div>
+      </div><!-- /view-lore -->
 
-                        <h5>Attributes</h5>
-                        <div class="v20-row">
-                            <div class="v20-col">
-                                <h6 style="border:none; text-transform:none;">Physical</h6>
-                                <div class="v20-field"><label>Strength</label><div class="dot-rating" data-stat="attr-strength"><span class="dot" data-val="1">○</span><span class="dot" data-val="2">○</span><span class="dot" data-val="3">○</span><span class="dot" data-val="4">○</span><span class="dot" data-val="5">○</span></div></div>
-                                <div class="v20-field"><label>Dexterity</label><div class="dot-rating" data-stat="attr-dexterity"><span class="dot" data-val="1">○</span><span class="dot" data-val="2">○</span><span class="dot" data-val="3">○</span><span class="dot" data-val="4">○</span><span class="dot" data-val="5">○</span></div></div>
-                                <div class="v20-field"><label>Stamina</label><div class="dot-rating" data-stat="attr-stamina"><span class="dot" data-val="1">○</span><span class="dot" data-val="2">○</span><span class="dot" data-val="3">○</span><span class="dot" data-val="4">○</span><span class="dot" data-val="5">○</span></div></div>
-                            </div>
-                            <div class="v20-col">
-                                <h6 style="border:none; text-transform:none;">Social</h6>
-                                <div class="v20-field"><label>Charisma</label><div class="dot-rating" data-stat="attr-charisma"><span class="dot" data-val="1">○</span><span class="dot" data-val="2">○</span><span class="dot" data-val="3">○</span><span class="dot" data-val="4">○</span><span class="dot" data-val="5">○</span></div></div>
-                                <div class="v20-field"><label>Manipulation</label><div class="dot-rating" data-stat="attr-manipulation"><span class="dot" data-val="1">○</span><span class="dot" data-val="2">○</span><span class="dot" data-val="3">○</span><span class="dot" data-val="4">○</span><span class="dot" data-val="5">○</span></div></div>
-                                <div class="v20-field"><label>Appearance</label><div class="dot-rating" data-stat="attr-appearance"><span class="dot" data-val="1">○</span><span class="dot" data-val="2">○</span><span class="dot" data-val="3">○</span><span class="dot" data-val="4">○</span><span class="dot" data-val="5">○</span></div></div>
-                            </div>
-                            <div class="v20-col">
-                                <h6 style="border:none; text-transform:none;">Mental</h6>
-                                <div class="v20-field"><label>Perception</label><div class="dot-rating" data-stat="attr-perception"><span class="dot" data-val="1">○</span><span class="dot" data-val="2">○</span><span class="dot" data-val="3">○</span><span class="dot" data-val="4">○</span><span class="dot" data-val="5">○</span></div></div>
-                                <div class="v20-field"><label>Intelligence</label><div class="dot-rating" data-stat="attr-intelligence"><span class="dot" data-val="1">○</span><span class="dot" data-val="2">○</span><span class="dot" data-val="3">○</span><span class="dot" data-val="4">○</span><span class="dot" data-val="5">○</span></div></div>
-                                <div class="v20-field"><label>Wits</label><div class="dot-rating" data-stat="attr-wits"><span class="dot" data-val="1">○</span><span class="dot" data-val="2">○</span><span class="dot" data-val="3">○</span><span class="dot" data-val="4">○</span><span class="dot" data-val="5">○</span></div></div>
-                            </div>
-                        </div>
 
-                        <h5>Abilities</h5>
-                        <div class="v20-row">
-                            <div class="v20-col">
-                                <h6 style="border:none; text-transform:none;">Talents</h6>
-                                <div class="v20-field"><label>Alertness</label><div class="dot-rating" data-stat="talents-alertness"><span class="dot" data-val="1">○</span><span class="dot" data-val="2">○</span><span class="dot" data-val="3">○</span><span class="dot" data-val="4">○</span><span class="dot" data-val="5">○</span></div></div>
-<div class="v20-field"><label>Athletics</label><div class="dot-rating" data-stat="talents-athletics"><span class="dot" data-val="1">○</span><span class="dot" data-val="2">○</span><span class="dot" data-val="3">○</span><span class="dot" data-val="4">○</span><span class="dot" data-val="5">○</span></div></div>
-<div class="v20-field"><label>Awareness</label><div class="dot-rating" data-stat="talents-awareness"><span class="dot" data-val="1">○</span><span class="dot" data-val="2">○</span><span class="dot" data-val="3">○</span><span class="dot" data-val="4">○</span><span class="dot" data-val="5">○</span></div></div>
-<div class="v20-field"><label>Brawl</label><div class="dot-rating" data-stat="talents-brawl"><span class="dot" data-val="1">○</span><span class="dot" data-val="2">○</span><span class="dot" data-val="3">○</span><span class="dot" data-val="4">○</span><span class="dot" data-val="5">○</span></div></div>
-<div class="v20-field"><label>Empathy</label><div class="dot-rating" data-stat="talents-empathy"><span class="dot" data-val="1">○</span><span class="dot" data-val="2">○</span><span class="dot" data-val="3">○</span><span class="dot" data-val="4">○</span><span class="dot" data-val="5">○</span></div></div>
-<div class="v20-field"><label>Expression</label><div class="dot-rating" data-stat="talents-expression"><span class="dot" data-val="1">○</span><span class="dot" data-val="2">○</span><span class="dot" data-val="3">○</span><span class="dot" data-val="4">○</span><span class="dot" data-val="5">○</span></div></div>
-<div class="v20-field"><label>Intimidation</label><div class="dot-rating" data-stat="talents-intimidation"><span class="dot" data-val="1">○</span><span class="dot" data-val="2">○</span><span class="dot" data-val="3">○</span><span class="dot" data-val="4">○</span><span class="dot" data-val="5">○</span></div></div>
-<div class="v20-field"><label>Leadership</label><div class="dot-rating" data-stat="talents-leadership"><span class="dot" data-val="1">○</span><span class="dot" data-val="2">○</span><span class="dot" data-val="3">○</span><span class="dot" data-val="4">○</span><span class="dot" data-val="5">○</span></div></div>
-<div class="v20-field"><label>Legerdemain</label><div class="dot-rating" data-stat="talents-legerdemain"><span class="dot" data-val="1">○</span><span class="dot" data-val="2">○</span><span class="dot" data-val="3">○</span><span class="dot" data-val="4">○</span><span class="dot" data-val="5">○</span></div></div>
-<div class="v20-field"><label>Subterfuge</label><div class="dot-rating" data-stat="talents-subterfuge"><span class="dot" data-val="1">○</span><span class="dot" data-val="2">○</span><span class="dot" data-val="3">○</span><span class="dot" data-val="4">○</span><span class="dot" data-val="5">○</span></div></div>
-<div class="v20-field"><input type="text" placeholder="Custom" class="talents-custom-name" data-index="0"><div class="dot-rating" data-stat="talents-custom_0"><span class="dot" data-val="1">○</span><span class="dot" data-val="2">○</span><span class="dot" data-val="3">○</span><span class="dot" data-val="4">○</span><span class="dot" data-val="5">○</span></div></div>
-<div class="v20-field"><input type="text" placeholder="Custom" class="talents-custom-name" data-index="1"><div class="dot-rating" data-stat="talents-custom_1"><span class="dot" data-val="1">○</span><span class="dot" data-val="2">○</span><span class="dot" data-val="3">○</span><span class="dot" data-val="4">○</span><span class="dot" data-val="5">○</span></div></div>
-<div class="v20-field"><input type="text" placeholder="Custom" class="talents-custom-name" data-index="2"><div class="dot-rating" data-stat="talents-custom_2"><span class="dot" data-val="1">○</span><span class="dot" data-val="2">○</span><span class="dot" data-val="3">○</span><span class="dot" data-val="4">○</span><span class="dot" data-val="5">○</span></div></div>
+      <!-- VIEW: NPC Control (ST Only) -->
+      <div id="view-npc-control" class="content-view">
+        <div class="panel-header">
+          <h2 class="view-title">💀 NPC Control</h2>
+        </div>
+      </div><!-- /view-npc-control -->
 
-                            </div>
-                            <div class="v20-col">
-                                <h6 style="border:none; text-transform:none;">Skills</h6>
-                                <div class="v20-field"><label>Animal Ken</label><div class="dot-rating" data-stat="skills-animal_ken"><span class="dot" data-val="1">○</span><span class="dot" data-val="2">○</span><span class="dot" data-val="3">○</span><span class="dot" data-val="4">○</span><span class="dot" data-val="5">○</span></div></div>
-<div class="v20-field"><label>Archery</label><div class="dot-rating" data-stat="skills-archery"><span class="dot" data-val="1">○</span><span class="dot" data-val="2">○</span><span class="dot" data-val="3">○</span><span class="dot" data-val="4">○</span><span class="dot" data-val="5">○</span></div></div>
-<div class="v20-field"><label>Commerce</label><div class="dot-rating" data-stat="skills-commerce"><span class="dot" data-val="1">○</span><span class="dot" data-val="2">○</span><span class="dot" data-val="3">○</span><span class="dot" data-val="4">○</span><span class="dot" data-val="5">○</span></div></div>
-<div class="v20-field"><label>Crafts</label><div class="dot-rating" data-stat="skills-crafts"><span class="dot" data-val="1">○</span><span class="dot" data-val="2">○</span><span class="dot" data-val="3">○</span><span class="dot" data-val="4">○</span><span class="dot" data-val="5">○</span></div></div>
-<div class="v20-field"><label>Etiquette</label><div class="dot-rating" data-stat="skills-etiquette"><span class="dot" data-val="1">○</span><span class="dot" data-val="2">○</span><span class="dot" data-val="3">○</span><span class="dot" data-val="4">○</span><span class="dot" data-val="5">○</span></div></div>
-<div class="v20-field"><label>Melee</label><div class="dot-rating" data-stat="skills-melee"><span class="dot" data-val="1">○</span><span class="dot" data-val="2">○</span><span class="dot" data-val="3">○</span><span class="dot" data-val="4">○</span><span class="dot" data-val="5">○</span></div></div>
-<div class="v20-field"><label>Performance</label><div class="dot-rating" data-stat="skills-performance"><span class="dot" data-val="1">○</span><span class="dot" data-val="2">○</span><span class="dot" data-val="3">○</span><span class="dot" data-val="4">○</span><span class="dot" data-val="5">○</span></div></div>
-<div class="v20-field"><label>Ride</label><div class="dot-rating" data-stat="skills-ride"><span class="dot" data-val="1">○</span><span class="dot" data-val="2">○</span><span class="dot" data-val="3">○</span><span class="dot" data-val="4">○</span><span class="dot" data-val="5">○</span></div></div>
-<div class="v20-field"><label>Stealth</label><div class="dot-rating" data-stat="skills-stealth"><span class="dot" data-val="1">○</span><span class="dot" data-val="2">○</span><span class="dot" data-val="3">○</span><span class="dot" data-val="4">○</span><span class="dot" data-val="5">○</span></div></div>
-<div class="v20-field"><label>Survival</label><div class="dot-rating" data-stat="skills-survival"><span class="dot" data-val="1">○</span><span class="dot" data-val="2">○</span><span class="dot" data-val="3">○</span><span class="dot" data-val="4">○</span><span class="dot" data-val="5">○</span></div></div>
-<div class="v20-field"><input type="text" placeholder="Custom" class="skills-custom-name" data-index="0"><div class="dot-rating" data-stat="skills-custom_0"><span class="dot" data-val="1">○</span><span class="dot" data-val="2">○</span><span class="dot" data-val="3">○</span><span class="dot" data-val="4">○</span><span class="dot" data-val="5">○</span></div></div>
-<div class="v20-field"><input type="text" placeholder="Custom" class="skills-custom-name" data-index="1"><div class="dot-rating" data-stat="skills-custom_1"><span class="dot" data-val="1">○</span><span class="dot" data-val="2">○</span><span class="dot" data-val="3">○</span><span class="dot" data-val="4">○</span><span class="dot" data-val="5">○</span></div></div>
-<div class="v20-field"><input type="text" placeholder="Custom" class="skills-custom-name" data-index="2"><div class="dot-rating" data-stat="skills-custom_2"><span class="dot" data-val="1">○</span><span class="dot" data-val="2">○</span><span class="dot" data-val="3">○</span><span class="dot" data-val="4">○</span><span class="dot" data-val="5">○</span></div></div>
 
-                            </div>
-                            <div class="v20-col">
-                                <h6 style="border:none; text-transform:none;">Knowledges</h6>
-                                <div class="v20-field"><label>Academics</label><div class="dot-rating" data-stat="knowledges-academics"><span class="dot" data-val="1">○</span><span class="dot" data-val="2">○</span><span class="dot" data-val="3">○</span><span class="dot" data-val="4">○</span><span class="dot" data-val="5">○</span></div></div>
-<div class="v20-field"><label>Enigmas</label><div class="dot-rating" data-stat="knowledges-enigmas"><span class="dot" data-val="1">○</span><span class="dot" data-val="2">○</span><span class="dot" data-val="3">○</span><span class="dot" data-val="4">○</span><span class="dot" data-val="5">○</span></div></div>
-<div class="v20-field"><label>Hearth Wisdom</label><div class="dot-rating" data-stat="knowledges-hearth_wisdom"><span class="dot" data-val="1">○</span><span class="dot" data-val="2">○</span><span class="dot" data-val="3">○</span><span class="dot" data-val="4">○</span><span class="dot" data-val="5">○</span></div></div>
-<div class="v20-field"><label>Investigation</label><div class="dot-rating" data-stat="knowledges-investigation"><span class="dot" data-val="1">○</span><span class="dot" data-val="2">○</span><span class="dot" data-val="3">○</span><span class="dot" data-val="4">○</span><span class="dot" data-val="5">○</span></div></div>
-<div class="v20-field"><label>Law</label><div class="dot-rating" data-stat="knowledges-law"><span class="dot" data-val="1">○</span><span class="dot" data-val="2">○</span><span class="dot" data-val="3">○</span><span class="dot" data-val="4">○</span><span class="dot" data-val="5">○</span></div></div>
-<div class="v20-field"><label>Medicine</label><div class="dot-rating" data-stat="knowledges-medicine"><span class="dot" data-val="1">○</span><span class="dot" data-val="2">○</span><span class="dot" data-val="3">○</span><span class="dot" data-val="4">○</span><span class="dot" data-val="5">○</span></div></div>
-<div class="v20-field"><label>Occult</label><div class="dot-rating" data-stat="knowledges-occult"><span class="dot" data-val="1">○</span><span class="dot" data-val="2">○</span><span class="dot" data-val="3">○</span><span class="dot" data-val="4">○</span><span class="dot" data-val="5">○</span></div></div>
-<div class="v20-field"><label>Politics</label><div class="dot-rating" data-stat="knowledges-politics"><span class="dot" data-val="1">○</span><span class="dot" data-val="2">○</span><span class="dot" data-val="3">○</span><span class="dot" data-val="4">○</span><span class="dot" data-val="5">○</span></div></div>
-<div class="v20-field"><label>Seneschal</label><div class="dot-rating" data-stat="knowledges-seneschal"><span class="dot" data-val="1">○</span><span class="dot" data-val="2">○</span><span class="dot" data-val="3">○</span><span class="dot" data-val="4">○</span><span class="dot" data-val="5">○</span></div></div>
-<div class="v20-field"><label>Theology</label><div class="dot-rating" data-stat="knowledges-theology"><span class="dot" data-val="1">○</span><span class="dot" data-val="2">○</span><span class="dot" data-val="3">○</span><span class="dot" data-val="4">○</span><span class="dot" data-val="5">○</span></div></div>
-<div class="v20-field"><input type="text" placeholder="Custom" class="knowledges-custom-name" data-index="0"><div class="dot-rating" data-stat="knowledges-custom_0"><span class="dot" data-val="1">○</span><span class="dot" data-val="2">○</span><span class="dot" data-val="3">○</span><span class="dot" data-val="4">○</span><span class="dot" data-val="5">○</span></div></div>
-<div class="v20-field"><input type="text" placeholder="Custom" class="knowledges-custom-name" data-index="1"><div class="dot-rating" data-stat="knowledges-custom_1"><span class="dot" data-val="1">○</span><span class="dot" data-val="2">○</span><span class="dot" data-val="3">○</span><span class="dot" data-val="4">○</span><span class="dot" data-val="5">○</span></div></div>
-<div class="v20-field"><input type="text" placeholder="Custom" class="knowledges-custom-name" data-index="2"><div class="dot-rating" data-stat="knowledges-custom_2"><span class="dot" data-val="1">○</span><span class="dot" data-val="2">○</span><span class="dot" data-val="3">○</span><span class="dot" data-val="4">○</span><span class="dot" data-val="5">○</span></div></div>
+      <!-- VIEW: Sessions (ST Only) -->
+      <div id="view-sessions" class="content-view">
+        <div class="panel-header">
+          <h2 class="view-title">📅 Sessions</h2>
+        </div>
+        <ul id="sessions-list" style="list-style:none; padding:0; display:flex; flex-direction:column; gap: var(--sp-2); margin-bottom: var(--sp-5);"></ul>
+        <form id="create-session-form" class="card" style="max-width:500px;">
+          <h4 class="section-title">New Session</h4>
+          <label style="font-size: var(--text-xs); color: var(--c-text-muted); text-transform:uppercase;">Campaign ID</label>
+          <input type="number" id="sess-campaign-id" class="input" value="1" required>
+          <label style="font-size: var(--text-xs); color: var(--c-text-muted); text-transform:uppercase;">Session Number</label>
+          <input type="number" id="sess-number" class="input" value="1" required>
+          <label style="font-size: var(--text-xs); color: var(--c-text-muted); text-transform:uppercase;">Title</label>
+          <input type="text" id="sess-title" class="input" required>
+          <label style="font-size: var(--text-xs); color: var(--c-text-muted); text-transform:uppercase;">Log</label>
+          <textarea id="sess-log" class="input" required style="min-height:100px;"></textarea>
+          <button type="submit" class="btn btn-primary">Create Session</button>
+        </form>
+      </div><!-- /view-sessions -->
 
-                            </div>
-                        </div>
+      <div id="view-diablerie-log" class="content-view">
+        <div class="panel">
+          <h2>Amaranth / Diablerie Log</h2>
+          <form id="diablerie-form" class="panel glass-panel" style="margin-bottom: var(--sp-4);">
+              <div style="display: flex; gap: var(--sp-3); flex-wrap: wrap;">
+                  <div>
+                      <label>Character ID:</label><br>
+                      <input type="number" name="diablerist_id" required class="input-base">
+                  </div>
+                  <div>
+                      <label>Victim Name:</label><br>
+                      <input type="text" name="victim_name" required class="input-base">
+                  </div>
+                  <div>
+                      <label>Session ID:</label><br>
+                      <input type="number" name="session_id" class="input-base">
+                  </div>
+                  <div>
+                      <label>Gen Gained:</label><br>
+                      <input type="number" name="generation_gained" required class="input-base" value="0">
+                  </div>
+                  <div>
+                      <label>Disciplines Gained:</label><br>
+                      <input type="text" name="disciplines_gained" class="input-base">
+                  </div>
+                  <div style="display: flex; align-items: flex-end;">
+                      <button type="submit" class="btn btn-primary">Add Diablerie</button>
+                  </div>
+              </div>
+          </form>
 
-                        <!-- Disciplines and Backgrounds were moved to their respective tabs -->
+          <table class="data-table" style="width: 100%; border-collapse: collapse;">
+              <thead>
+                  <tr>
+                      <th>Char ID</th>
+                      <th>Diablerist Name</th>
+                      <th>Victim Name</th>
+                      <th>Session #</th>
+                      <th>Gen Gained</th>
+                      <th>Disciplines Gained</th>
+                  </tr>
+              </thead>
+              <tbody id="diableries-tbody">
+                  <!-- Diablerie records inserted here -->
+              </tbody>
+          </table>
+        </div>
+      </div><!-- /view-diablerie-log -->
 
-                            </div>
-                        <!-- Specializations -->
-                        <div class="v20-row" style="margin-top: 15px;">
-                            <div class="v20-col" style="flex: 1;">
-                                <label style="display:block; margin-bottom:5px;">Specializations:</label>
-                                <textarea id="sheet-specializations" class="v20-textarea" style="height: 60px;" placeholder="e.g. Melee (Broadsword), Firearms (Pistols)"></textarea>
-                            </div>
-                        </div>
+      <div id="view-xp-log" class="content-view">
+        <div class="panel">
+          <h2>XP Ledger</h2>
+          <form id="xp-form" class="panel glass-panel" style="margin-bottom: var(--sp-4);">
+              <div style="display: flex; gap: var(--sp-3); flex-wrap: wrap;">
+                  <div>
+                      <label>Character ID:</label><br>
+                      <input type="number" name="character_id" required class="input-base">
+                  </div>
+                  <div>
+                      <label>Session ID:</label><br>
+                      <input type="number" name="session_id" class="input-base">
+                  </div>
+                  <div>
+                      <label>Cost / Amount:</label><br>
+                      <input type="number" name="cost" required class="input-base" value="0">
+                  </div>
+                  <div>
+                      <label>Description:</label><br>
+                      <input type="text" name="description" required class="input-base" style="width: 300px;">
+                  </div>
+                  <div style="display: flex; align-items: flex-end;">
+                      <button type="submit" class="btn btn-primary">Add XP Record</button>
+                  </div>
+              </div>
+          </form>
 
-                        <div class="v20-row" style="margin-top: 15px;">
-                            <div class="v20-col">
-                                <h6 style="border:none; text-transform:none;">Virtues</h6>
-                                <h5>Road</h5>
-                                <div class="v20-field"><label>Road:</label><input type="text" id="sheet-road"></div>
-                                <div style="text-align: center;"><div class="dot-rating" data-stat="road-rating"><span class="dot" data-val="1">○</span><span class="dot" data-val="2">○</span><span class="dot" data-val="3">○</span><span class="dot" data-val="4">○</span><span class="dot" data-val="5">○</span><span class="dot" data-val="6">○</span><span class="dot" data-val="7">○</span><span class="dot" data-val="8">○</span><span class="dot" data-val="9">○</span><span class="dot" data-val="10">○</span></div></div>
-                                <div class="v20-field" style="margin-top:10px;"><label>Aura:</label><input type="text" id="sheet-aura"></div>
-                                
-                                <h5>Willpower</h5>
-                                <div style="text-align: center;"><div class="dot-rating" data-stat="willpower-max"><span class="dot" data-val="1">○</span><span class="dot" data-val="2">○</span><span class="dot" data-val="3">○</span><span class="dot" data-val="4">○</span><span class="dot" data-val="5">○</span><span class="dot" data-val="6">○</span><span class="dot" data-val="7">○</span><span class="dot" data-val="8">○</span><span class="dot" data-val="9">○</span><span class="dot" data-val="10">○</span></div></div>
-                                <div class="v20-field" style="margin-top:10px;"><label>Current:</label><input type="number" id="willpower-current" style="border:1px solid #ccc;"></div>
-                                
-                                <h5>Blood Pool</h5>
-                                <div class="v20-field"><label>Points / Turn:</label><input type="number" id="blood-pool-pts"></div>
-                                <div class="v20-field"><label>Max Blood:</label><input type="number" id="blood-pool-max" value="10"></div>
-                                <div class="v20-field"><label>Current:</label><input type="number" id="blood-pool-current"></div>
-                            </div>
-                            <div class="v20-col">
-                                <h5>Health</h5>
-                                <div class="health-track">
-                                    <div class="health-level"><label>Bruised</label><input type="checkbox" id="hp-bruised"></div>
-                                    <div class="health-level"><label>Hurt</label><span>-1</span><input type="checkbox" id="hp-hurt"></div>
-                                    <div class="health-level"><label>Injured</label><span>-1</span><input type="checkbox" id="hp-injured"></div>
-                                    <div class="health-level"><label>Wounded</label><span>-2</span><input type="checkbox" id="hp-wounded"></div>
-                                    <div class="health-level"><label>Mauled</label><span>-2</span><input type="checkbox" id="hp-mauled"></div>
-                                    <div class="health-level"><label>Crippled</label><span>-5</span><input type="checkbox" id="hp-crippled"></div>
-                                    <div class="health-level"><label>Incapacitated</label><input type="checkbox" id="hp-incapacitated"></div>
-                                </div>
-                            </div>
-                        </div>
+          <table class="data-table" style="width: 100%; border-collapse: collapse;">
+              <thead>
+                  <tr>
+                      <th>Char ID</th>
+                      <th>Character Name</th>
+                      <th>Session #</th>
+                      <th>Cost</th>
+                      <th>Description</th>
+                  </tr>
+              </thead>
+              <tbody id="xp-tbody">
+                  <!-- XP records inserted here -->
+              </tbody>
+          </table>
+        </div>
+      </div><!-- /view-xp-log -->
 
-                        <div style="text-align: center; margin-top: 20px;">
-                            <button id="save-character-sheet-btn" style="padding: 10px 20px; font-size: 1.1em; cursor: pointer;">Save Character</button>
-                            <button id="close-sheet-btn" style="padding: 10px 20px; font-size: 1.1em; cursor: pointer; margin-left: 10px;">Close</button>
-                        </div>
-                        <div id="suggested-actions" style="margin-top: 1rem; color: #555;"></div>
-                    </div>
-                </div>
 
-            </section>
-
-            <section id="combat-panel" class="hidden">
-                <h3>Combat Tracker</h3>
-                <div id="combat-state-info" style="margin-bottom: 1rem; color: #ff4d4f; font-weight: bold;">No active encounter.</div>
-                
-                <button id="start-new-combat-btn" style="margin-bottom: 1rem;">Start New Combat</button>
-
-                <!-- Setup Phase -->
-                <div id="setup-phase" class="hidden" style="margin-bottom: 1rem; border: 1px solid #333; padding: 1rem;">
-                    <h4 style="color: #ff4d4f; margin-top: 0;">Setup Phase</h4>
-                    
-                    <form id="add-character-form" style="margin-bottom: 1rem;">
-                        <label for="setup-character-select">Add Existing Character:</label>
-                        <select id="setup-character-select" required></select>
-                        <button type="submit">Add</button>
-                    </form>
-
-                    <form id="generate-npc-form" style="margin-bottom: 1rem;">
-                        <label for="npc-name-input">Generate NPC Name:</label>
-                        <input type="text" id="npc-name-input" required placeholder="e.g. Brujah Thug 1">
-                        <label for="npc-concept-input">Concept:</label>
-                        <input type="text" id="npc-concept-input" required placeholder="e.g. A tough brujah brawler">
-                        <button type="submit">Generate LLM NPC</button>
-                    </form>
-
-                    <h5>Combatants in Encounter:</h5>
-                    <ul id="combatants-list" style="margin-bottom: 1rem; list-style: none; padding-left: 0;"></ul>
-
-                    <button id="roll-initiatives-btn">Move to Initiative Phase</button>
-                </div>
-
-                <!-- Initiative Phase -->
-                <div id="initiative-phase" class="hidden" style="margin-bottom: 1rem; border: 1px solid #333; padding: 1rem;">
-                    <h4 style="color: #ff4d4f; margin-top: 0;">Initiative Phase</h4>
-                    <p style="font-size: 0.9em; color: #aaa;">Roll initiative for all combatants below.</p>
-                    <ul id="initiative-combatants-list" style="list-style: none; padding-left: 0;"></ul>
-                    <button id="start-round-btn" style="margin-top: 1rem;">Start Active Combat</button>
-                </div>
-
-                <!-- Active Combat Phase -->
-                <div id="active-phase" class="hidden" style="margin-bottom: 1rem; border: 1px solid #333; padding: 1rem;">
-                    <h4 style="color: #ff4d4f; margin-top: 0;">Active Combat</h4>
-                    <ul id="active-combatants-list" style="list-style: none; padding-left: 0; margin-bottom: 1rem;"></ul>
-                    <div style="display: flex; gap: 0.5rem;">
-                        <button id="next-turn-btn">Next Turn</button>
-                        <button id="end-combat-btn" style="background: #8b0000;">End Combat</button>
-                    </div>
-                </div>
-            </section>
-
-            <section id="rules-panel" class="hidden">
-                <h3>Rules Panel</h3>
-                <input type="text" id="rules-query" placeholder="Search for rules...">
-                <button id="search-rules-btn">Search</button>
-                <div id="rules-results"></div>
-            </section>
-
-            <section id="sessions-panel" class="hidden">
-                <h3 id="sessions-heading">Sessions</h3>
-                <ul id="sessions-list"></ul>
-                <form id="create-session-form">
-                    <label for="sess-campaign-id">Season (Campaign ID):</label><input type="number" id="sess-campaign-id" value="1" required>
-                    <label for="sess-number">Session Number:</label><input type="number" id="sess-number" value="1" required>
-                    <label for="sess-title">Title:</label><input type="text" id="sess-title" required>
-                    <label for="sess-log">Log:</label><textarea id="sess-log" required></textarea>
-                    <button type="submit">Create Session</button>
-                </form>
-            </section>
-
-            <section id="vtt-panel" class="hidden">
-                <h3>Virtual Tabletop</h3>
-                <div id="vtt-toolbar" style="margin-bottom: 0.5rem;">
-                    <button id="add-token-btn">Add Token</button>
-                    <button id="set-bg-btn" style="margin-left: 0.5rem;">Set Background</button>
-                </div>
-                <canvas id="vtt-canvas" width="800" height="600" style="border: 1px solid #3a1a1a; background: #1a1a1f;"></canvas>
-            </section>
-
-            <section id="lore-panel" class="hidden">
-                <h3>Storyteller Lore</h3>
-                <textarea id="lore-input" placeholder="Enter lore here..." style="width: 100%; height: 150px;"></textarea>
-                <button id="ingest-lore-btn" style="margin-top: 0.5rem;">Ingest Lore</button>
-            </section>
-
-            <section id="brain-panel" class="hidden">
-                <h3>🧠 NotebookLM Brain</h3>
-                <div id="brain-chat-history" style="height: 300px; overflow-y: auto; background: #1a1a1f; border: 1px solid #3a1a1a; border-radius: 8px; padding: 1rem; margin-bottom: 1rem;"></div>
-                <div style="display: flex; gap: 0.5rem;">
-                    <input type="text" id="brain-chat-input" placeholder="Ask the brain..." style="flex: 1;">
-                    <select id="brain-domain-select">
-                        <option value="rules">Rules</option>
-                        <option value="lore">Lore</option>
-                        <option value="campaign">Campaign</option>
-                    </select>
-                    <button id="send-brain-btn">Ask</button>
-                </div>
-            </section>
-
-        <!-- Equipment DB Panel -->
-        <section id="equipment-db-panel" class="hidden panel">
-            <div class="panel-header">
-                <h2><i class="fas fa-shield-alt"></i> Equipment Database</h2>
-                <button id="new-catalog-item-btn" class="btn btn-primary" style="display: none;">+ Add Custom Item</button>
+      <!-- VIEW: ST Dashboard -->
+      <div id="view-st-dashboard" class="content-view">
+        <!-- Legacy id for JS compatibility -->
+        <div id="st-dashboard-panel">
+          <div class="panel-header">
+            <h2 class="view-title" style="color: var(--c-gold-300);">📋 ST Dashboard</h2>
+          </div>
+          <div class="card" style="margin-bottom: var(--sp-4);">
+            <div class="card-header">
+              <h4 class="card-title">Character Tracker</h4>
             </div>
-            
-            <div class="equipment-catalog-list" id="equipment-catalog-list" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 15px; margin-top: 20px;">
-                <!-- Catalog items will be loaded here -->
+            <table id="st-character-table" class="data-table">
+              <thead><tr><th>Name</th><th>Total XP</th><th>Spent XP</th><th>Status/Notes</th></tr></thead>
+              <tbody></tbody>
+            </table>
+          </div>
+          <div class="card" style="margin-bottom: var(--sp-4);">
+            <div class="card-header"><h4 class="card-title">Assign Character to Player</h4></div>
+            <form id="st-assign-character-form" style="display:flex; gap:var(--sp-2);">
+                <select id="st-assign-char-select" class="input" style="flex:1;">
+                    <option value="">Select Character...</option>
+                </select>
+                <select id="st-assign-user-select" class="input" style="flex:1;">
+                    <option value="">Select Player...</option>
+                </select>
+                <button type="submit" class="btn btn-primary">Assign</button>
+            </form>
+          </div>
+          <div class="card">
+            <div class="card-header"><h4 class="card-title">🧠 Brain Status</h4></div>
+            <p style="font-size: var(--text-sm); margin-bottom: var(--sp-3);">Status: <span id="brain-status-text" style="color: var(--c-success);">Checking...</span></p>
+            <button id="rebuild-brain-btn" class="btn btn-secondary btn-sm">Rebuild Context Caches</button>
+          </div>
+        </div>
+      </div><!-- /view-st-dashboard -->
+
+
+      <!-- VIEW: Admin -->
+      <div id="view-admin" class="content-view">
+        <div id="admin-panel">
+          <div class="panel-header">
+            <h2 class="view-title">⚙️ Administration</h2>
+          </div>
+          <!-- Admin panel content (populated by main.js) -->
+          <div id="admin-content">
+          </div>
+        </div>
+      </div><!-- /view-admin -->
+
+
+      <!-- VIEW: Equipment DB -->
+      <div id="view-equipment-db" class="content-view">
+        <div id="equipment-db-panel">
+          <div class="panel-header">
+            <h2 class="view-title">🛡️ Equipment Database</h2>
+            <button id="new-catalog-item-btn" class="btn btn-secondary btn-sm" style="display:none;">+ Add Custom Item</button>
+          </div>
+          <div id="equipment-catalog-list" style="display:grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: var(--sp-4); margin-top: var(--sp-4);"></div>
+        </div>
+      </div><!-- /view-equipment-db -->
+
+      <!-- VIEW: Media Library -->
+      <div id="view-media" class="content-view">
+        <div class="panel-header">
+          <h2 class="view-title">🖼️ Media Library</h2>
+          <div style="display:flex; gap: var(--sp-2);">
+             <label class="btn btn-secondary btn-sm" style="cursor: pointer;">
+               Upload Media
+               <input type="file" id="media-library-upload" accept="image/*" style="display:none;" multiple>
+             </label>
+          </div>
+        </div>
+        <div id="media-gallery" style="display:grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: var(--sp-4); margin-top: var(--sp-4);">
+        </div>
+      </div><!-- /view-media -->
+
+    </div><!-- /primary-pane -->
+
+
+
+
+
+
+
+
+    <!-- ── Side Rail ───────────────────────────────────────────── -->
+    <!-- ── Right Context Sidebar ─────────────────────────────────── -->
+    <aside id="right-sidebar" class="context-sidebar">
+      <div class="context-header" style="display:flex; justify-content:space-between; align-items:center; padding: var(--sp-2) var(--sp-3); border-bottom: 1px solid var(--c-border-subtle); background: var(--c-bg-800);">
+        <h3 id="right-sidebar-title" style="font-size: var(--text-sm); color: var(--c-text-secondary); text-transform:uppercase; letter-spacing:0.08em; margin:0;">Context Panel</h3>
+        <button id="right-sidebar-toggle" class="btn btn-ghost btn-sm" style="padding: 2px 6px;" aria-label="Close Context Panel">▶</button>
+      </div>
+      
+      <!-- ── Dynamic Context Panels ── -->
+      <div id="right-sidebar-content" style="flex:1; overflow-y:auto; display:flex; flex-direction:column;">
+        
+        <!-- Character Context -->
+        <div id="context-character" class="context-panel" style="display:none; padding: var(--sp-3);">
+          <p style="color: var(--c-text-muted); font-size: var(--text-sm); text-align:center; margin-top:var(--sp-4);">
+            <em>Select a character to view quick stats or roll dice.</em>
+          </p>
+        </div>
+
+        <!-- Combat & Tabletop Context -->
+        <div id="context-combat" class="context-panel" style="display:none;">
+          <div class="tracker-header">
+            <h3>Live Feed & Combat</h3>
+            <span id="tracker-round-label" style="font-size: var(--text-xs); color: var(--c-text-muted);"></span>
+          </div>
+          <!-- Turn tracker -->
+          <div id="combatant-list" class="combatant-list"></div>
+
+          <!-- Combat Tracker -->
+          <div id="combat-state-info" style="margin-bottom: var(--sp-4); color: var(--c-red-300); font-weight:600;">No active encounter.</div>
+          <button id="start-new-combat-btn" class="btn btn-danger st-only" style="margin-bottom: var(--sp-4);">⚔️ Start New Combat</button>
+
+          <!-- Setup Phase -->
+          <div id="setup-phase" class="hidden card st-only" style="margin-bottom: var(--sp-4);">
+            <div class="card-header">
+              <h4 class="card-title" style="color: var(--c-red-200);">Setup Phase</h4>
             </div>
-        </section>
+            <form id="add-character-form" style="display:flex; gap: var(--sp-2); margin-bottom: var(--sp-3);">
+              <select id="setup-character-select" class="input" required style="flex:1;"></select>
+              <button type="submit" class="btn btn-secondary btn-sm">Add PC</button>
+            </form>
+            <form id="generate-npc-form" style="display:flex; flex-wrap:wrap; gap: var(--sp-2); margin-bottom: var(--sp-3);">
+              <input type="text" id="npc-name-input" class="input" placeholder="NPC Name" required style="flex:1; min-width:120px;">
+              <input type="text" id="npc-concept-input" class="input" placeholder="Concept (e.g. Brujah guard)" required style="flex:2; min-width:200px;">
+              <button type="submit" class="btn btn-primary btn-sm">🤖 Generate NPC</button>
+            </form>
+            <h5 class="section-title">Combatants:</h5>
+            <ul id="combatants-list" style="list-style:none; padding:0; display:flex; flex-direction:column; gap: var(--sp-2); margin-bottom: var(--sp-3);"></ul>
+            <button id="roll-initiatives-btn" class="btn btn-gold">→ Initiative Phase</button>
+          </div>
 
-            <section id="st-dashboard-panel" class="hidden">
-                <h3 style="color: #a855f7;">Storyteller Dashboard</h3>
-                <div style="background: #1a1a1f; padding: 1rem; border: 1px solid #3a1a1a; border-radius: 8px;">
-                    <h4>Character Tracker (XP, Status, Diablerie)</h4>
-                    <table id="st-character-table" style="width: 100%; text-align: left; margin-top: 1rem; border-collapse: collapse;">
-                        <thead>
-                            <tr style="border-bottom: 1px solid #3a1a1a;">
-                                <th style="padding: 0.5rem;">Name</th>
-                                <th style="padding: 0.5rem;">Total XP</th>
-                                <th style="padding: 0.5rem;">Spent XP</th>
-                                <th style="padding: 0.5rem;">Status/Notes</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <!-- Characters populated here -->
-                        </tbody>
-                    </table>
-                </div>
+          <!-- Initiative Phase -->
+          <div id="initiative-phase" class="hidden card" style="margin-bottom: var(--sp-4);">
+            <div class="card-header">
+              <h4 class="card-title" style="color: var(--c-gold-300);">Initiative Phase</h4>
+            </div>
+            <p style="color: var(--c-text-muted); font-size: var(--text-sm); margin-bottom: var(--sp-3);">Roll initiative for all combatants.</p>
+            <ul id="initiative-combatants-list" style="list-style:none; padding:0; display:flex; flex-direction:column; gap: var(--sp-2); margin-bottom: var(--sp-3);"></ul>
+            <button id="start-round-btn" class="btn btn-danger st-only">⚔️ Start Active Combat</button>
+          </div>
 
-                <div style="margin-top: 1rem; background: #1a1a1f; padding: 1rem; border: 1px solid #3a1a1a; border-radius: 8px;">
-                    <h4>🧠 Brain Management</h4>
-                    <p>Status: <span id="brain-status-text">Checking...</span></p>
-                    <button id="rebuild-brain-btn">Rebuild Context Caches</button>
-                </div>
-            </section>
-        </main>
+          <!-- Active Combat Phase -->
+          <div id="active-phase" class="hidden card">
+            <div class="card-header">
+              <h4 class="card-title" style="color: var(--c-combat-active);">Active Combat</h4>
+            </div>
+            <ul id="active-combatants-list" style="list-style:none; padding:0; margin-bottom: var(--sp-4);"></ul>
+            <div id="action-declaration-ui" class="st-only" style="background: var(--c-bg-600); border-radius: var(--r-md); padding: var(--sp-3); margin-bottom: var(--sp-3);">
+              <h5 class="section-title">Declare Action</h5>
+              <div style="display:flex; gap: var(--sp-2); margin-bottom: var(--sp-2);"><input type="text" id="action-declaration-input" class="input" placeholder="e.g. Attack Vladislav with sword" style="flex:1;"><button id="send-action-btn" class="btn btn-primary btn-sm">Send</button></div>
+              <button id="propose-action-btn" class="btn btn-primary btn-sm" style="width:100%;">Propose Options (Brain)</button>
+              <div id="action-options-container" style="margin-top: var(--sp-3); display:flex; flex-direction:column; gap: var(--sp-2);"></div>
+            </div>
+            <div class="st-only" style="display:flex; gap: var(--sp-2);">
+              <button id="next-turn-btn" class="btn btn-secondary btn-sm">Next Turn →</button>
+              <button id="end-combat-btn" class="btn btn-danger btn-sm">End Combat</button>
+            </div>
+          </div>
+        </div><!-- /context-combat -->
+
+        <!-- Live Feed Global Chat Area (Always available at bottom of right sidebar or in its own view) -->
+        <div id="context-feed" class="context-panel" style="display:flex; flex-direction:column; flex:1;">
+          <div id="global-chat-history" style="flex: 1; overflow-y: auto; padding: var(--sp-4); display: flex; flex-direction: column; gap: var(--sp-3); scrollbar-width: thin; scrollbar-color: var(--c-border-medium) transparent; border-top: 1px solid var(--c-border-strong);">
+          </div>
+          <div style="padding: var(--sp-2) var(--sp-3); border-top:1px solid var(--c-border-subtle); display:flex; flex-direction:column; gap: var(--sp-2); background: var(--c-bg-700);">
+            <div style="display:flex; gap: var(--sp-2);">
+              <input type="text" id="global-chat-input" class="input" placeholder="Type a message or /roll..." style="flex:1; font-size: var(--text-sm);">
+              <button id="global-chat-send" class="btn btn-primary btn-sm">→</button>
+            </div>
+          </div>
+        </div>
+      </div><!-- /right-sidebar-content -->
+    </aside><!-- /right-sidebar -->
+
+  </main><!-- /workspace -->
+
+
+  <!-- ── Mobile Bottom Nav ──────────────────────────────────────── -->
+  <nav id="mobile-nav" aria-label="Mobile navigation">
+    <button class="mobile-nav-tab" data-view="character"><span>🩸</span><span>Sheet</span></button>
+    <button class="mobile-nav-tab" data-view="vtt"><span>📣</span><span>Feed</span></button>
+    <button class="mobile-nav-tab" data-view="agents"><span>🤖</span><span>Agents</span></button>
+    <button class="mobile-nav-tab" data-view="lore"><span>📜</span><span>Lore</span></button>
+    <button class="mobile-nav-tab" id="mobile-menu-tab"><span>☰</span><span>More</span></button>
+  </nav>
+
+</div><!-- /app-shell -->
+
+
+<!-- ════════════════════════════════════════════════════════════
+     OVERLAYS & MODALS
+     ════════════════════════════════════════════════════════════ -->
+
+<!-- Backdrop overlay (mobile sidebar, modals) -->
+<div id="overlay"></div>
+
+<!-- "Your Turn" overlay card (combat) -->
+<div id="your-turn-overlay">
+  <span class="turn-overlay-badge">⚔️ Your Turn</span>
+  <h2 id="combat-turn-title" class="turn-overlay-title">Declare your action!</h2>
+  <div id="combat-turn-options" class="action-cards"></div>
+  <button id="skip-turn-btn" class="btn btn-secondary" style="width:100%; margin-top: var(--sp-3);">Skip Turn / Hold Action</button>
+</div>
+
+<!-- "Waiting" overlay card (combat) -->
+<div id="waiting-overlay" style="display:none; position:fixed; top:20px; left:50%; transform:translateX(-50%); background:var(--c-bg-800); border:1px solid var(--c-border-medium); border-radius:var(--r-md); padding:var(--sp-2) var(--sp-4); z-index:9000; box-shadow:var(--shadow-md);">
+  <span id="waiting-text" style="color:var(--c-text-muted); font-size:var(--text-sm); font-weight:600;">Waiting for someone...</span>
+</div>
+
+<!-- Toast Container -->
+<div id="toast-container" aria-live="polite"></div>
+
+<!-- Global Loading Spinner -->
+<div id="global-loader" class="hidden" style="position:fixed; inset:0; background:rgba(0,0,0,0.7); z-index:9999; display:flex; align-items:center; justify-content:center;">
+  <div style="width:40px; height:40px; border:3px solid var(--c-border-medium); border-top-color: var(--c-red-500); border-radius:50%; animation: spin 0.8s linear infinite;"></div>
+</div>
+
+
+<!-- ════════════════════════════════════════════════════════════
+     FLOATING ACTION BUTTONS
+     ════════════════════════════════════════════════════════════ -->
+<div id="floating-buttons">
+  <!-- Combat: Start (ST only, out of combat) -->
+  <button id="fab-combat" class="fab fab-gold" title="Start Combat" style="display:none;">⚔️</button>
+  <!-- Declare action (player, active turn in combat) -->
+  <button id="fab-declare" class="fab fab-combat" title="Declare Action" style="display:none;">📣</button>
+  <!-- Rules Lookup -->
+  <button id="fab-rules" class="fab fab-neutral" title="Rule Search">📖</button>
+  <!-- Dice Roller -->
+  <button id="fab-dice" class="fab fab-primary" title="Dice Roller">🎲</button>
+</div>
+
+<!-- Dice Roller Popup -->
+<div id="popup-dice" class="popup-panel" style="bottom: calc(var(--sp-6) + 52px + var(--sp-3))">
+  <div class="modal-header" style="margin-bottom: var(--sp-3);">
+    <h3 class="modal-title">🎲 Dice Roller</h3>
+    <button class="modal-close" onclick="document.getElementById('popup-dice').classList.remove('open')">×</button>
+  </div>
+  <div style="display:flex; gap: var(--sp-2); flex-wrap:wrap; margin-bottom: var(--sp-2);">
+    <div style="flex:1; min-width:80px;">
+      <label style="font-size:var(--text-xs); color:var(--c-text-muted);">Context</label>
+      <select id="dice-context" class="input">
+        <option value="general">General</option>
+        <option value="combat">Combat</option>
+        <option value="social">Social</option>
+        <option value="mental">Mental</option>
+      </select>
     </div>
+  </div>
+  <div style="display:flex; gap: var(--sp-2); flex-wrap:wrap;">
+    <div style="flex:1; min-width:80px;">
+      <label style="font-size:var(--text-xs); color:var(--c-text-muted);">Base Pool</label>
+      <input type="number" id="pool-size" class="input" value="5" min="1" max="20">
+    </div>
+    <div style="flex:1; min-width:80px;">
+      <label style="font-size:var(--text-xs); color:var(--c-text-muted);">Difficulty</label>
+      <input type="number" id="difficulty" class="input" value="6" min="2" max="10">
+    </div>
+  </div>
+  <div id="dice-modifiers" style="margin: var(--sp-2) 0; font-size: var(--text-xs); color: var(--c-gold-200);"></div>
+  <button id="roll-btn" class="btn btn-danger" style="width:100%;">Roll!</button>
+  <div id="dice-results" class="hidden" style="background: var(--c-bg-600); border: 1px solid var(--c-border-medium); border-radius: var(--r-md); padding: var(--sp-3);"></div>
+</div>
 
-    <script src="app.js"></script>
+<!-- Rule Search Popup -->
+<div id="popup-rules" class="popup-panel">
+  <div class="modal-header" style="margin-bottom: var(--sp-3);">
+    <h3 class="modal-title">📖 Rule Search</h3>
+    <button class="modal-close" onclick="document.getElementById('popup-rules').classList.remove('open')">×</button>
+  </div>
+  <input type="text" id="floating-rule-search" class="input" placeholder="Search V20 rules...">
+  <button id="floating-rule-submit" class="btn btn-primary btn-sm" style="width:100%; margin-top: var(--sp-2);">Search</button>
+  <div id="floating-rule-results" style="margin-top: var(--sp-3); max-height:180px; overflow-y:auto; font-size: var(--text-sm); color: var(--c-text-secondary);"></div>
+</div>
+
+<!-- Combat Setup Popup -->
+<div id="popup-combat-setup" class="popup-panel">
+  <div class="modal-header" style="margin-bottom: var(--sp-3);">
+    <h3 class="modal-title">⚔️ Combat Setup</h3>
+    <button class="modal-close" onclick="document.getElementById('popup-combat-setup').classList.remove('open')">×</button>
+  </div>
+  <p style="color: var(--c-text-secondary); margin-bottom: var(--sp-3);">Choose the initial settings for the new combat encounter.</p>
+  <div style="margin-bottom: var(--sp-3);">
+    <label style="font-size:var(--text-xs); color:var(--c-text-muted);">Rules Arbiter LLM Engine</label>
+    <select id="llm-engine-select" class="input" style="width:100%;">
+      <option value="llama">Local (Qwen 2.5 Coder 14B)</option>
+      <option value="gemini">Cloud (Gemini Pro)</option>
+    </select>
+  </div>
+  <button id="confirm-start-combat-btn" class="btn btn-danger" style="width:100%;">Create Encounter</button>
+</div>
+
+<!-- Add Token Popup -->
+<div id="token-modal" class="popup-panel" style="display:none; position:fixed; top:50%; left:50%; transform:translate(-50%, -50%); z-index:1000; background:var(--c-bg-800); border:1px solid var(--c-border-strong); padding:20px; border-radius:8px;">
+  <div class="modal-header" style="margin-bottom: var(--sp-3);">
+    <h3 class="modal-title">Add Token</h3>
+    <button id="close-token-modal" class="modal-close">×</button>
+  </div>
+  <p style="color: var(--c-text-secondary); margin-bottom: var(--sp-3);">Select character to add a token to the VTT.</p>
+  <select id="token-character-select" class="input" style="width:100%; margin-bottom:10px;">
+    <!-- Will be populated by JS -->
+  </select>
+  <button id="confirm-add-token-btn" class="btn btn-primary" style="width:100%;">Add Token</button>
+</div>
+
+
+<!-- ════════════════════════════════════════════════════════════
+     SCRIPTS
+     Load order: tokens (via CSS), ui_shell, main, vtt_engine
+     ════════════════════════════════════════════════════════════ -->
+<script>
+  /* Spin animation for loader */
+  const spinStyle = document.createElement('style');
+  spinStyle.textContent = '@keyframes spin { to { transform: rotate(360deg); } }';
+  document.head.appendChild(spinStyle);
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/5.3.1/fabric.min.js"></script>
+<script src="src/ui_shell.js?v=11"></script>
+<script src="src/engines/faction_graph.js?v=10"></script>
+<script src="src/engines/media_engine.js?v=10"></script>
+<script src="src/media_ui.js?v=10"></script>
+<script src="src/combat_ui.js?v=11"></script>
+<script src="src/engines/vtt_engine.js?v=10"></script>
+<script src="src/logs_ui.js?v=1"></script>
+<script src="src/main.js?v=11"></script>
+
 </body>
 </html>
